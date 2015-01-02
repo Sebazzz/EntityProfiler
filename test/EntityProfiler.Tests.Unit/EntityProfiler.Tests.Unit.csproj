@@ -74,11 +74,32 @@
     <Compile Include="..\..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Common\Protocol\Serializer\JsonMessageDeserializerTests.cs" />
+    <Compile Include="Common\Protocol\Serializer\JsonMessageSerializerTests.cs" />
+    <Compile Include="Common\Protocol\Serializer\UnitTestMessageTypeResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Superman.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\EntityProfiler.Common\EntityProfiler.Common.csproj">
+      <Project>{ee3d0594-f346-41d9-bacf-4c8f12ae8ae6}</Project>
+      <Name>EntityProfiler.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\EntityProfiler.Interceptor.Reader\EntityProfiler.Interceptor.Reader.csproj">
+      <Project>{c4a86fa8-5eb8-4c2c-9e3b-a197aba743cb}</Project>
+      <Name>EntityProfiler.Interceptor.Reader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\EntityProfiler.Interceptor\EntityProfiler.Interceptor.csproj">
+      <Project>{83990564-b6fe-4d63-9e4e-d1833b2a70f7}</Project>
+      <Name>EntityProfiler.Interceptor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\EntityProfiler.UI\EntityProfiler.UI.csproj">
+      <Project>{98afa9df-5312-4831-97a2-df8cde739c9b}</Project>
+      <Name>EntityProfiler.UI</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
