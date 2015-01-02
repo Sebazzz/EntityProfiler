@@ -62,6 +62,8 @@
     <Compile Include="Events\MessageEvent.cs" />
     <Compile Include="Protocol\Serializer\IMessageDeserializer.cs" />
     <Compile Include="Protocol\Serializer\IMessageSerializer.cs" />
+    <Compile Include="Protocol\Serializer\JsonMessageDeserializer.cs" />
+    <Compile Include="Protocol\Serializer\JsonMessageSerializer.cs" />
     <Compile Include="Protocol\Serializer\MessageException.cs" />
     <Compile Include="Protocol\Serializer\StringMessageSerializer.cs" />
     <Compile Include="Protocol\Serializer\StringMessageDeserializer.cs" />
