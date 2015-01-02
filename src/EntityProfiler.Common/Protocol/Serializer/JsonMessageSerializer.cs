@@ -10,7 +10,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="T:System.Object"/> class.
         /// </summary>
-        public JsonMessageSerializer(TextWriter textWriter, IMessageTypeResolver typeResolver) : base(textWriter) {
+        public JsonMessageSerializer(IMessageTypeResolver typeResolver, TextWriter textWriter) : base(textWriter) {
             this._typeResolver = typeResolver;
         }
 

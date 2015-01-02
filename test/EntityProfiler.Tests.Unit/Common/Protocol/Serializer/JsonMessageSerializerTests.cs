@@ -15,7 +15,7 @@
             // when
             ArgumentNullException exception =
                 Assert.Throws<ArgumentNullException>(
-                    () => new JsonMessageSerializer(textWriter, resolver));
+                    () => new JsonMessageSerializer(resolver, textWriter));
 
             // then
             Assert.That(() => exception.ParamName, Is.EqualTo("typeResolver"));
@@ -30,7 +30,7 @@
             // when
             ArgumentNullException exception =
                 Assert.Throws<ArgumentNullException>(
-                    () => new JsonMessageSerializer(textWriter, resolver));
+                    () => new JsonMessageSerializer(resolver, textWriter));
 
             // then
             Assert.That(() => exception.ParamName, Is.EqualTo("textWriter"));
