@@ -5,13 +5,17 @@ namespace EntityProfiler.Common.Protocol.Serializer {
     /// Deserializer which deserializes messages using <c>SimpleJson</c>
     /// </summary>
     internal class JsonMessageDeserializer : StringMessageDeserializer {
-        protected override Message DeserializeMessage(TextReader textReader) {
-            throw new System.NotImplementedException();
-        }
+        private readonly IMessageTypeResolver _typeResolver;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:System.Object"/> class.
         /// </summary>
-        public JsonMessageDeserializer(TextReader textReader) : base(textReader) {}
+        public JsonMessageDeserializer(IMessageTypeResolver typeResolver, TextReader textReader) : base(textReader) {
+            this._typeResolver = typeResolver;
+        }
+
+        protected override Message DeserializeMessage(TextReader textReader) {
+            throw new System.NotImplementedException();
+        }
     }
 }

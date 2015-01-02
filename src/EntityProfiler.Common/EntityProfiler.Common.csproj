@@ -60,6 +60,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protocol\Message.cs" />
     <Compile Include="Events\MessageEvent.cs" />
+    <Compile Include="Protocol\Serializer\DefaultMessageTypeResolver.cs" />
     <Compile Include="Protocol\Serializer\IMessageDeserializer.cs" />
     <Compile Include="Protocol\Serializer\IMessageSerializer.cs" />
     <Compile Include="Protocol\Serializer\JsonMessageDeserializer.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Protocol\Serializer\StringMessageSerializer.cs" />
     <Compile Include="Protocol\Serializer\StringMessageDeserializer.cs" />
     <Compile Include="Protocol\Serializer\SimpleJson.cs" />
+    <Compile Include="Protocol\Serializer\IMessageTypeResolver.cs" />
     <Compile Include="TinyIoC.cs" />
   </ItemGroup>
   <ItemGroup>

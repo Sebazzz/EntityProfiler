@@ -1,4 +1,6 @@
 ﻿namespace EntityProfiler.Common {
+    using Protocol.Serializer;
+
     /// <summary>
     /// Helper class for registration and getting dependencies
     /// </summary>
@@ -8,7 +10,7 @@
         /// </summary>
         /// <param name="container"></param>
         internal static void Configure(TinyIoC.TinyIoCContainer container) {
-            
+            container.Register<IMessageTypeResolver, DefaultMessageTypeResolver>();
         }
     }
 }
