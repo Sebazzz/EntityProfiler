@@ -59,8 +59,12 @@
             textWriter.Dispose(); // so stringwriter will throw ObjectDisposedException
 
             // when / then
-            Assert.Throws<MessageTransferException>(
-                () => new JsonMessageSerializer(resolver, textWriter).SerializeMessage(new FakeMessage()));
+            MessageTransferException exception =
+                Assert.Throws<MessageTransferException>(
+                    () => new JsonMessageSerializer(resolver, textWriter).SerializeMessage(new FakeMessage()));
+
+            // then
+            Assert.That(() => exception.InnerException, Is.InstanceOf<ObjectDisposedException>());
         }
     }
 }
