@@ -50,5 +50,17 @@
             // then
             Assert.That(() => exception.ParamName, Is.EqualTo("message"));
         }
+
+        [Test]
+        public void JsonMessageSerializer_WhenUnderlyingMediumFails_ThrowsMessageException() {
+            // given
+            IMessageTypeResolver resolver = new UnitTestMessageTypeResolver();
+            TextWriter textWriter = new StringWriter();
+            textWriter.Dispose(); // so stringwriter will throw ObjectDisposedException
+
+            // when / then
+            Assert.Throws<MessageTransferException>(
+                () => new JsonMessageSerializer(resolver, textWriter).SerializeMessage(new FakeMessage()));
+        }
     }
 }
