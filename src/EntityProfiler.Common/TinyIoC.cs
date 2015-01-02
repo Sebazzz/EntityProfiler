@@ -30,6 +30,7 @@
 #define GETPARAMETERS_OPEN_GENERICS         // Platform supports GetParameters on open generics
 #define RESOLVE_OPEN_GENERICS               // Platform supports resolving open generics
 #define READER_WRITER_LOCK_SLIM             // Platform supports ReaderWriterLockSlim
+#define TINYIOC_INTERNAL
 
 //// NETFX_CORE
 //#if NETFX_CORE
