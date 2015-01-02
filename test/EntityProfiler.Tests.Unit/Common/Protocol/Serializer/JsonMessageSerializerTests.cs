@@ -35,5 +35,20 @@
             // then
             Assert.That(() => exception.ParamName, Is.EqualTo("textWriter"));
         }
+
+        [Test]
+        public void JsonMessageSerializer_WhenGivenNullMessage_ThrowsArgumentNullException() {
+            // given
+            IMessageTypeResolver resolver = new UnitTestMessageTypeResolver();
+            TextWriter textWriter = new StringWriter();
+
+            // when
+            ArgumentNullException exception =
+                Assert.Throws<ArgumentNullException>(
+                    () => new JsonMessageSerializer(resolver, textWriter).SerializeMessage(null));
+
+            // then
+            Assert.That(() => exception.ParamName, Is.EqualTo("message"));
+        }
     }
 }
