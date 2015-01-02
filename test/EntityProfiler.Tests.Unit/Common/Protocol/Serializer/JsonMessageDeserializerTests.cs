@@ -7,7 +7,7 @@ namespace EntityProfiler.Tests.Unit.Common.Protocol.Serializer {
     [TestFixture]
     public class JsonMessageDeserializerTests {
         [Test]
-        public void JsonMessageDeerializer_WhenGivenNullTypeResolver_ThrowsArgumentNullException() {
+        public void JsonMessageDeserializer_WhenGivenNullTypeResolver_ThrowsArgumentNullException() {
             // given
             IMessageTypeResolver resolver = null;
             TextReader textReader = new StringReader(String.Empty);
