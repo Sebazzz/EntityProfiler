@@ -33,7 +33,7 @@ namespace EntityProfiler.Tests.Unit.Common.Protocol.Serializer {
                     () => new JsonMessageDeserializer(resolver, textReader));
 
             // then
-            Assert.That(() => exception.ParamName, Is.EqualTo("textWriter"));
+            Assert.That(() => exception.ParamName, Is.EqualTo("textReader"));
         }
     }
 }
