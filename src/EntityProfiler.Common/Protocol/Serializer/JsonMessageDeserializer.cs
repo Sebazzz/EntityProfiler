@@ -6,6 +6,9 @@ namespace EntityProfiler.Common.Protocol.Serializer {
     /// <summary>
     /// Deserializer which deserializes messages using <c>SimpleJson</c>
     /// </summary>
+    /// <remarks>
+    /// For the message format used, see doc at <see cref="JsonMessageSerializer"/>.
+    /// </remarks>
     internal class JsonMessageDeserializer : StringMessageDeserializer {
         private readonly IMessageTypeResolver _typeResolver;
 
