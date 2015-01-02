@@ -65,6 +65,7 @@
     <Compile Include="Protocol\Serializer\MessageException.cs" />
     <Compile Include="Protocol\Serializer\StringMessageSerializer.cs" />
     <Compile Include="Protocol\Serializer\StringMessageDeserializer.cs" />
+    <Compile Include="Protocol\Serializer\SimpleJson.cs" />
     <Compile Include="TinyIoC.cs" />
   </ItemGroup>
   <ItemGroup>
