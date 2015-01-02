@@ -1,5 +1,7 @@
 namespace EntityProfiler.Common.Protocol.Serializer {
+    using System;
     using System.IO;
+    using Annotations;
 
     /// <summary>
     /// Deserializer which deserializes messages using <c>SimpleJson</c>
@@ -10,7 +12,11 @@ namespace EntityProfiler.Common.Protocol.Serializer {
         /// <summary>
         /// Initializes a new instance of the <see cref="T:System.Object"/> class.
         /// </summary>
-        public JsonMessageDeserializer(IMessageTypeResolver typeResolver, TextReader textReader) : base(textReader) {
+        public JsonMessageDeserializer([NotNull] IMessageTypeResolver typeResolver, TextReader textReader) : base(textReader) {
+            if (typeResolver == null) {
+                throw new ArgumentNullException("typeResolver");
+            }
+
             this._typeResolver = typeResolver;
         }
 

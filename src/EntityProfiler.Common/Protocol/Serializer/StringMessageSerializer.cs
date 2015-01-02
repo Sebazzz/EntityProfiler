@@ -1,6 +1,7 @@
 ﻿namespace EntityProfiler.Common.Protocol.Serializer {
     using System;
     using System.IO;
+    using Annotations;
 
     /// <summary>
     /// Represents a serializer for <see cref="Message"/> to a string
@@ -11,7 +12,11 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="T:System.Object"/> class.
         /// </summary>
-        protected StringMessageSerializer(TextWriter textWriter) {
+        protected StringMessageSerializer([NotNull] TextWriter textWriter) {
+            if (textWriter == null) {
+                throw new ArgumentNullException("textWriter");
+            }
+
             this._textWriter = textWriter;
         }
 
