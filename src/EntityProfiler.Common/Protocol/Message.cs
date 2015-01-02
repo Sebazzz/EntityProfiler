@@ -1,4 +1,4 @@
-﻿namespace EntityProfiler.Common.Protocol.Objects {
+﻿namespace EntityProfiler.Common.Protocol {
     using System;
 
     /// <summary>

@@ -54,20 +54,24 @@
     <Compile Include="..\..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Dependency.cs" />
     <Compile Include="Events\IMessageEventSubscriber.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Protocol\Objects\Message.cs" />
+    <Compile Include="Protocol\Message.cs" />
     <Compile Include="Events\MessageEvent.cs" />
+    <Compile Include="Protocol\Serializer\IMessageDeserializer.cs" />
+    <Compile Include="Protocol\Serializer\IMessageSerializer.cs" />
+    <Compile Include="Protocol\Serializer\MessageException.cs" />
+    <Compile Include="Protocol\Serializer\StringMessageSerializer.cs" />
+    <Compile Include="Protocol\Serializer\StringMessageDeserializer.cs" />
     <Compile Include="TinyIoC.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Superman.snk" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Protocol\Serialization\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

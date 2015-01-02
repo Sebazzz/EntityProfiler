@@ -1,6 +1,6 @@
 ﻿namespace EntityProfiler.Common.Events {
     using System.Diagnostics;
-    using Protocol.Objects;
+    using Protocol;
 
     /// <summary>
     /// Represents event data for when a message is received
