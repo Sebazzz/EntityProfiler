@@ -74,7 +74,9 @@
     <Compile Include="..\..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Common\Protocol\Serializer\FakeMessage.cs" />
     <Compile Include="Common\Protocol\Serializer\JsonMessageDeserializerTests.cs" />
+    <Compile Include="Common\Protocol\Serializer\JsonMessageSerializerRoundTripTests.cs" />
     <Compile Include="Common\Protocol\Serializer\JsonMessageSerializerTests.cs" />
     <Compile Include="Common\Protocol\Serializer\UnitTestMessageTypeResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
