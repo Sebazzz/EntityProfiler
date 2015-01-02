@@ -66,6 +66,7 @@
     <Compile Include="Protocol\Serializer\JsonMessageDeserializer.cs" />
     <Compile Include="Protocol\Serializer\JsonMessageSerializer.cs" />
     <Compile Include="Protocol\Serializer\MessageException.cs" />
+    <Compile Include="Protocol\Serializer\SingleAssemblyMessageTypeResolver.cs" />
     <Compile Include="Protocol\Serializer\StringMessageSerializer.cs" />
     <Compile Include="Protocol\Serializer\StringMessageDeserializer.cs" />
     <Compile Include="Protocol\Serializer\SimpleJson.cs" />

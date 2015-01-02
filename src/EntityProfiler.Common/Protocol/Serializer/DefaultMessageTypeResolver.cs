@@ -1,11 +1,10 @@
 ﻿namespace EntityProfiler.Common.Protocol.Serializer {
-    using System;
     using System.Reflection;
 
     /// <summary>
     /// Represents the default message type resolver, which resolves type using the Common assembly
     /// </summary>
-    internal sealed class DefaultMessageTypeResolver : IMessageTypeResolver {
+    internal sealed class DefaultMessageTypeResolver : SingleAssemblyMessageTypeResolver {
         private readonly Assembly _targetAssembly;
 
         /// <summary>
@@ -15,12 +14,8 @@
             this._targetAssembly = this.GetType().Assembly;
         }
 
-        public Type ResolveType(string simpleTypeName) {
-            return this._targetAssembly.GetType(simpleTypeName, true);
-        }
-
-        public string CreateTypeRef(Type type) {
-            return type.FullName;
+        protected override Assembly TargetAssembly {
+            get {return this._targetAssembly;}
         }
     }
 }
