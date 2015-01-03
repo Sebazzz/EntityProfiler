@@ -11,6 +11,9 @@
         /// <param name="container"></param>
         internal static void Configure(TinyIoC.TinyIoCContainer container) {
             container.Register<IMessageTypeResolver, DefaultMessageTypeResolver>();
+
+            container.Register<IMessageSerializer, JsonMessageSerializer>();
+            container.Register<IMessageDeserializer, JsonMessageDeserializer>();
         }
     }
 }
