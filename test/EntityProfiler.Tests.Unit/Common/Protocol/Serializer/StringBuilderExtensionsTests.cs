@@ -8,7 +8,7 @@
     public sealed class StringBuilderExtensionsTests {
         [TestCase("`END``", "`END`")]
         [TestCase("", " ")]
-        public void StringBuilderExtensionEndsWidth_OnCase_ReturnsFalse(string sbText, string test) {
+        public void StringBuilderExtensionEndsWith_OnCase_ReturnsFalse(string sbText, string test) {
             // given
             StringBuilder sb = new StringBuilder(sbText);
 
@@ -22,7 +22,7 @@
         [TestCase("`END`", "`END`")]
         [TestCase("efwfhsdofhosijdfoijsAABBC", "ABBC")]
         [TestCase("", "")]
-        public void StringBuilderExtensionEndsWidth_OnCase_ReturnsTrue(string sbText, string test) {
+        public void StringBuilderExtensionEndsWith_OnCase_ReturnsTrue(string sbText, string test) {
             // given
             StringBuilder sb = new StringBuilder(sbText);
 
@@ -34,7 +34,7 @@
         }
 
         [Test]
-        public void StringBuilderExtensionEndsWidth_ThrowsArgumentNullException_OnNullStringBuilder() {
+        public void StringBuilderExtensionEndsWith_ThrowsArgumentNullException_OnNullStringBuilder() {
             // given
             StringBuilder sb = null;
 
@@ -48,7 +48,7 @@
         }
 
         [Test]
-        public void StringBuilderExtensionEndsWidth_ThrowsArgumentNullException_OnNullArg() {
+        public void StringBuilderExtensionEndsWith_ThrowsArgumentNullException_OnNullArg() {
             // given
             StringBuilder sb = new StringBuilder();
 
