@@ -1,4 +1,5 @@
 ﻿namespace EntityProfiler.Interceptor {
+    using System;
     using Common;
     using Protocol;
     using TinyIoC;
@@ -7,6 +8,8 @@
     /// Dependency container 
     /// </summary>
     internal class DependencyFactory {
+        private static TinyIoCContainer _Container;
+        
         /// <summary>
         /// Configures dependencies into the dependency container
         /// </summary>
@@ -17,11 +20,27 @@
 
             Dependency.Configure(container);
         }
-
-
         public static void Configure() {
-            TinyIoC.TinyIoCContainer container = new TinyIoCContainer();
-            Configure(container);
+            _Container = new TinyIoCContainer();
+
+            Configure(_Container);
+        }
+
+        /// <summary>
+        /// Gets the service of the specified type
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        public T GetService<T>() where T:class {
+            EnsureContainerInitialized<T>();
+
+            return _Container.Resolve<T>();
+        }
+
+        private static void EnsureContainerInitialized<T>() where T : class {
+            if (_Container == null) {
+                throw new InvalidOperationException("Dependency container not initialized");
+            }
         }
     }
 }
