@@ -52,7 +52,12 @@
     <Compile Include="..\..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="DependencyFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Protocol\IMessageListener.cs" />
+    <Compile Include="Protocol\ITcpClientFactory.cs" />
+    <Compile Include="Protocol\TcpClientFactory.cs" />
+    <Compile Include="Protocol\TcpMessageListener.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EntityProfiler.Common\EntityProfiler.Common.csproj">

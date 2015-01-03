@@ -13,7 +13,7 @@
         internal static void Configure(TinyIoC.TinyIoCContainer container) {
             container.Register<IMessageTypeResolver, DefaultMessageTypeResolver>();
 
-            container.Register<MessageEventDispatcher>();
+            container.Register<MessageEventDispatcher>().AsSingleton();
 
             container.Register<IMessageSerializerFactory, JsonMessageSerializerFactory>();
             container.Register<IMessageDeserializerFactory, JsonMessageDeserializerFactory>();

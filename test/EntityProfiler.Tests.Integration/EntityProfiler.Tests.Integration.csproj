@@ -75,10 +75,28 @@
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Protocol\DelegateMessageEventSubscriber.cs" />
+    <Compile Include="Protocol\FakeMessage.cs" />
+    <Compile Include="Protocol\MessageRoundTripTests.cs" />
+    <Compile Include="Protocol\UnitTestMessageTypeResolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Superman.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\EntityProfiler.Common\EntityProfiler.Common.csproj">
+      <Project>{EE3D0594-F346-41D9-BACF-4C8F12AE8AE6}</Project>
+      <Name>EntityProfiler.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\EntityProfiler.Interceptor.Reader\EntityProfiler.Interceptor.Reader.csproj">
+      <Project>{c4a86fa8-5eb8-4c2c-9e3b-a197aba743cb}</Project>
+      <Name>EntityProfiler.Interceptor.Reader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\EntityProfiler.Interceptor\EntityProfiler.Interceptor.csproj">
+      <Project>{83990564-b6fe-4d63-9e4e-d1833b2a70f7}</Project>
+      <Name>EntityProfiler.Interceptor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

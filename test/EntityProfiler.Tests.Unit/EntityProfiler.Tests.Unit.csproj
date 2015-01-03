@@ -105,6 +105,10 @@
       <Name>EntityProfiler.UI</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Interceptor.Reader\" />
+    <Folder Include="Interceptor\" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

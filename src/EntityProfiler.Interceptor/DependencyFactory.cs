@@ -1,6 +1,7 @@
 ﻿namespace EntityProfiler.Interceptor {
     using Common;
     using Protocol;
+    using TinyIoC;
 
     /// <summary>
     /// Dependency container 
@@ -15,6 +16,12 @@
             container.Register<IMessageSink, TcpMessageSink>().AsSingleton();
 
             Dependency.Configure(container);
+        }
+
+
+        public static void Configure() {
+            TinyIoC.TinyIoCContainer container = new TinyIoCContainer();
+            Configure(container);
         }
     }
 }
