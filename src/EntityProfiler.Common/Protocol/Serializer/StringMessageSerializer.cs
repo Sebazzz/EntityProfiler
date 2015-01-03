@@ -20,7 +20,11 @@
             this._textWriter = textWriter;
         }
 
-        public void SerializeMessage(Message message) {
+        public void SerializeMessage([NotNull] Message message) {
+            if (message == null) {
+                throw new ArgumentNullException("message");
+            }
+
             try {
                 this.SerializeMessage(message, this._textWriter);
             } catch (Exception ex) {

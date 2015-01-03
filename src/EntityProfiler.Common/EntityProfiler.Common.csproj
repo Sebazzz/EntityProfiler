@@ -63,12 +63,15 @@
     <Compile Include="Protocol\Serializer\IMessageSerializer.cs" />
     <Compile Include="Protocol\Serializer\JsonMessageDeserializer.cs" />
     <Compile Include="Protocol\Serializer\JsonMessageSerializer.cs" />
-    <Compile Include="Protocol\Serializer\MessageException.cs" />
+    <Compile Include="Protocol\Serializer\MessageFormatException.cs" />
+    <Compile Include="Protocol\Serializer\MessageTransferException.cs" />
     <Compile Include="Protocol\Serializer\SingleAssemblyMessageTypeResolver.cs" />
+    <Compile Include="Protocol\Serializer\StringBuilderExtensions.cs" />
     <Compile Include="Protocol\Serializer\StringMessageSerializer.cs" />
     <Compile Include="Protocol\Serializer\StringMessageDeserializer.cs" />
     <Compile Include="Protocol\Serializer\SimpleJson.cs" />
     <Compile Include="Protocol\Serializer\IMessageTypeResolver.cs" />
+    <Compile Include="Protocol\Serializer\TextReaderUtils.cs" />
     <Compile Include="TinyIoC.cs" />
   </ItemGroup>
   <ItemGroup>
