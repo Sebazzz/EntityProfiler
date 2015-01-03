@@ -5,7 +5,7 @@
     /// <summary>
     /// Represents event data for when a message is received
     /// </summary>
-    internal class MessageEvent {
+    internal struct MessageEvent {
         private readonly Message _message;
 
         /// <summary>

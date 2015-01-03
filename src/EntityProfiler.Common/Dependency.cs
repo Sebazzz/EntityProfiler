@@ -1,4 +1,5 @@
 ﻿namespace EntityProfiler.Common {
+    using Events;
     using Protocol.Serializer;
 
     /// <summary>
@@ -12,8 +13,10 @@
         internal static void Configure(TinyIoC.TinyIoCContainer container) {
             container.Register<IMessageTypeResolver, DefaultMessageTypeResolver>();
 
-            container.Register<IMessageSerializer, JsonMessageSerializer>();
-            container.Register<IMessageDeserializer, JsonMessageDeserializer>();
+            container.Register<MessageEventDispatcher>();
+
+            container.Register<IMessageSerializerFactory, JsonMessageSerializerFactory>();
+            container.Register<IMessageDeserializerFactory, JsonMessageDeserializerFactory>();
         }
     }
 }

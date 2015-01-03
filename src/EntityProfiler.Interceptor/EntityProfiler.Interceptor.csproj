@@ -53,6 +53,10 @@
     </Compile>
     <Compile Include="DependencyFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Protocol\IMessageSink.cs" />
+    <Compile Include="Protocol\TcpMessageSink.cs" />
+    <Compile Include="Protocol\TcpListenerFactory.cs" />
+    <Compile Include="Protocol\TcpMessageSinkClientConnection.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Superman.snk" />
