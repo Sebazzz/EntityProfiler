@@ -44,7 +44,15 @@ namespace EntityProfiler.Interceptor.Protocol {
         }
 
         private void DispatchMessageInternal(object state) {
-            DispatchMessageInternal((Message) state, this._messageSerializer.Value);
+            try {
+                DispatchMessageInternal((Message) state, this._messageSerializer.Value);
+            }
+            catch (SocketException) {
+                // socket was closed - ignore
+            }
+            catch (IOException) {
+                // random I/O error - ignore
+            }
         }
 
         private static void DispatchMessageInternal(Message message, IMessageSerializer messageSerializer) {
