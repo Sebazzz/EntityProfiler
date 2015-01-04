@@ -58,8 +58,25 @@
     <Compile Include="..\..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="Core\DbCommandInterceptor.cs" />
-    <Compile Include="Core\DbCommandMessageFactory.cs" />
+    <Compile Include="Core\DbContextExecutionContextConstructor.cs" />
+    <Compile Include="Core\DbReaderCommandInterceptionData.cs" />
+    <Compile Include="Core\ExecutionContextFactory.cs" />
+    <Compile Include="Core\HttpContextExecutionContextConstructor.cs" />
+    <Compile Include="Core\IExecutionContextConstructor.cs" />
+    <Compile Include="Core\IExecutionContextFactory.cs" />
+    <Compile Include="Core\IInterceptionData.cs" />
+    <Compile Include="Core\InterceptorLog.cs" />
+    <Compile Include="Core\IQueryDataFactory.cs" />
+    <Compile Include="Core\IStackTraceFactory.cs" />
+    <Compile Include="Core\IStackTraceFilter.cs" />
+    <Compile Include="Core\NonQueryCommandInterceptionData.cs" />
+    <Compile Include="Core\ProfilingInterceptor.cs" />
+    <Compile Include="Core\ProxiedProfilingInterceptor.cs" />
+    <Compile Include="Core\QueryDataFactory.cs" />
+    <Compile Include="Core\ScalarCommandInterceptionData.cs" />
+    <Compile Include="Core\StackTraceFactory.cs" />
+    <Compile Include="Core\StackTraceFilter.cs" />
+    <Compile Include="Core\ThreadExecutionContextConstructor.cs" />
     <Compile Include="DependencyFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protocol\IMessageSink.cs" />

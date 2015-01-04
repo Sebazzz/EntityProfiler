@@ -58,8 +58,15 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protocol\Constants.cs" />
+    <Compile Include="Protocol\DbReaderQueryMessage.cs" />
+    <Compile Include="Protocol\ExecutionContext.cs" />
     <Compile Include="Protocol\Message.cs" />
     <Compile Include="Events\MessageEvent.cs" />
+    <Compile Include="Protocol\NonQueryMessage.cs" />
+    <Compile Include="Protocol\PerformanceData.cs" />
+    <Compile Include="Protocol\Query.cs" />
+    <Compile Include="Protocol\QueryMessage.cs" />
+    <Compile Include="Protocol\ScalarQueryMessage.cs" />
     <Compile Include="Protocol\Serializer\DefaultMessageTypeResolver.cs" />
     <Compile Include="Protocol\Serializer\IMessageDeserializerFactory.cs" />
     <Compile Include="Protocol\Serializer\IMessageDeserializer.cs" />
@@ -78,6 +85,8 @@
     <Compile Include="Protocol\Serializer\SimpleJson.cs" />
     <Compile Include="Protocol\Serializer\IMessageTypeResolver.cs" />
     <Compile Include="Protocol\Serializer\TextReaderUtils.cs" />
+    <Compile Include="Protocol\StackFrame.cs" />
+    <Compile Include="Protocol\StackTrace.cs" />
     <Compile Include="TinyIoC.cs" />
   </ItemGroup>
   <ItemGroup>
