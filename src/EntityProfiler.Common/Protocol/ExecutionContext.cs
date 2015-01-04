@@ -1,10 +1,12 @@
 ﻿namespace EntityProfiler.Common.Protocol {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     /// <summary>
     /// Represents a generic container for an execution context - a execution context may be a thread, HttpContext, ActiveForm
     /// </summary>
+    [DebuggerDisplay("{Description} @ {Timestamp,nq}")]
     public class ExecutionContext {
         /// <summary>
         /// Gets a general text that provides a descriptive value for the execution context

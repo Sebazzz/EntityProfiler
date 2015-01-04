@@ -1,9 +1,11 @@
 namespace EntityProfiler.Common.Protocol {
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     /// <summary>
     /// Represents a query that has been executed
     /// </summary>
+    [DebuggerDisplay("{CommandText,nq}")]
     public sealed class Query {
         /// <summary>
         /// Gets the command text of the executed query
