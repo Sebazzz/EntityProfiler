@@ -1,13 +1,14 @@
 ﻿namespace EntityProfiler.Interceptor {
     using System;
     using Common;
+    using Core;
     using Protocol;
     using TinyIoC;
 
     /// <summary>
     /// Dependency container 
     /// </summary>
-    internal class DependencyFactory {
+    internal static class DependencyFactory {
         private static TinyIoCContainer _Container;
         
         /// <summary>
@@ -17,6 +18,8 @@
         private static void Configure(TinyIoC.TinyIoCContainer container) {
             container.Register<ITcpListenerFactory, TcpListenerFactory>();
             container.Register<IMessageSink, TcpMessageSink>().AsSingleton();
+
+            container.Register<IDbCommandMessageFactory, DbCommandMessageFactory>().AsSingleton();
 
             Dependency.Configure(container);
         }
@@ -31,7 +34,7 @@
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public T GetService<T>() where T:class {
+        public static T GetService<T>() where T:class {
             EnsureContainerInitialized<T>();
 
             return _Container.Resolve<T>();
