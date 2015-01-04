@@ -63,7 +63,7 @@ namespace EntityProfiler.Tests.Integration.Protocol {
             }
         }
 
-        public void AssertNoMessagesReceived() {
+        public void AssertNoFurtherMessagesReceived() {
             Assert.IsTrue(this._receivedMessageEvents.IsEmpty, "Expected the message event queue to be empty");
         }
 

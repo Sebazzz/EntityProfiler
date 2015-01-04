@@ -58,7 +58,7 @@
             Assert.That(() => receivedMessage.Prop1, Is.EqualTo(sentMessage.Prop1));
             Assert.That(() => receivedMessage.Prop2, Is.EqualTo(sentMessage.Prop2));
 
-            this._eventSubscriber.AssertNoMessagesReceived();
+            this._eventSubscriber.AssertNoFurtherMessagesReceived();
         }
     }
 }

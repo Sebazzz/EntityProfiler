@@ -31,7 +31,8 @@
             string name = GetPrimaryAssemblyReference(assembly);
 
             return name.StartsWith("EntityFramework", StringComparison.OrdinalIgnoreCase) ||
-                   name.StartsWith("EntityProfiler", StringComparison.OrdinalIgnoreCase);
+                   name.StartsWith("EntityProfiler.Interceptor", StringComparison.OrdinalIgnoreCase) ||
+                   name.StartsWith("EntityProfiler.Common", StringComparison.OrdinalIgnoreCase);
         }
 
         private static string GetPrimaryAssemblyReference(Assembly assembly) {

@@ -40,7 +40,11 @@ namespace EntityProfiler.Interceptor.Core {
                 }
             }
 
-            throw new InvalidOperationException("Unable to determine the execution context - internal error");
+            if (ec == null) {
+                throw new InvalidOperationException("Unable to determine the execution context - internal error");
+            }
+
+            return ec;
         }
     }
 }

@@ -11,11 +11,13 @@
     /// Represents a target for dispatching <see cref="Message"/> to
     /// </summary>
     internal class TcpMessageSink : IMessageSink {
+        private readonly object _syncRoot = new object();
         private readonly TcpListener _tcpListener;
         private readonly MessageEventDispatcher _messageEventDispatcher;
         private readonly List<TcpMessageSinkClientConnection> _connections;
         private readonly IMessageSerializerFactory _messageSerializerFactory;
         private bool _isDisposed;
+        private bool _isStarted;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:System.Object"/> class.
@@ -33,8 +35,15 @@
         public void Start() {
             this.EnsureNotDisposed();
 
-            this._tcpListener.Start();
-            this.ListenForConnectionAsync();
+            lock (this._syncRoot) {
+                if (this._isStarted) {
+                    return;
+                }
+
+                this._tcpListener.Start();
+                this.ListenForConnectionAsync();
+                this._isStarted = true;
+            }
         }
 
         /// <summary>
@@ -83,7 +92,15 @@
         /// </summary>
         /// <param name="ar"></param>
         private void OnIncomingConnection(IAsyncResult ar) {
-            TcpClient tcpClient = this._tcpListener.EndAcceptTcpClient(ar);
+            TcpClient tcpClient;
+
+            try {
+                tcpClient = this._tcpListener.EndAcceptTcpClient(ar);
+            }
+            catch (ObjectDisposedException) {
+                // we are in process of being disposed
+                return;
+            }
 
             this.AcceptClient(tcpClient);
 

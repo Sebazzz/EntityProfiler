@@ -34,6 +34,8 @@
         /// </summary>
         public InterceptorLog(IMessageSink messageSink, IExecutionContextFactory executionContextFactory, IQueryDataFactory queryDataFactory) {
             this._messageSink = messageSink;
+            this._messageSink.Start();
+
             this._executionContextFactory = executionContextFactory;
             this._queryDataFactory = queryDataFactory;
 
