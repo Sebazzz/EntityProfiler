@@ -1,4 +1,5 @@
 ﻿namespace EntityProfiler.Common.Protocol {
+    using System;
     using System.Collections.Generic;
 
     /// <summary>
@@ -21,14 +22,22 @@
         public Dictionary<string, object> Values { get; set; }
 
         /// <summary>
+        /// Timestamp of query execution
+        /// </summary>
+        public DateTime Timestamp { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="T:System.Object"/> class.
         /// </summary>
-        public ExecutionContext() {}
+        public ExecutionContext() {
+            this.Timestamp = DateTime.UtcNow;
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:System.Object"/> class.
         /// </summary>
         public ExecutionContext(string description) {
+            this.Timestamp = DateTime.UtcNow;
             this.Description = description;
             this.Values = new Dictionary<string, object>();
         }
