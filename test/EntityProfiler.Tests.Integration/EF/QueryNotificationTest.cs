@@ -1,4 +1,5 @@
 ﻿namespace EntityProfiler.Tests.Integration.EF {
+    using System;
     using System.Linq;
     using Common.Events;
     using Common.Protocol;
@@ -10,7 +11,7 @@
     using Support;
 
     [TestFixture]
-    [Timeout(10000)]
+    //[Timeout(10000)]
     public sealed class QueryNotificationTest {
         private IMessageListener _messageListener;
         private DelegateMessageEventSubscriber _eventSubscriber;
@@ -56,6 +57,47 @@
             
             Assert.IsNull(ev.Exception, "Connection error occurred");
             Assert.That(() => msg, Is.InstanceOf<DbReaderQueryMessage>());
+
+            this._eventSubscriber.AssertNoFurtherMessagesReceived();
+        }
+
+        [Test]
+        public void QueryNotification_InsertQueryTest() {
+            // given
+            this._messageListener.Start();
+
+            TestDbContext dbContext = new TestDbContext();
+
+            // when
+            dbContext.TestEntities.Add(SomeEntity.CreateNew());
+            dbContext.SaveChanges();
+
+            // then
+            MessageEvent ev = this._eventSubscriber.GetReceivedMessage(5000);
+            Message msg = ev.Message;
+            
+            Assert.IsNull(ev.Exception, "Connection error occurred");
+            Assert.That(() => msg, Is.InstanceOf<DbReaderQueryMessage>(), "We expected DbReaderQueryMessage to be returned");
+
+            this._eventSubscriber.AssertNoFurtherMessagesReceived();
+        }
+
+        [Test]
+        public void QueryNotification_CountQueryTest() {
+            // given
+            this._messageListener.Start();
+
+            TestDbContext dbContext = new TestDbContext();
+
+            // when
+            int count = dbContext.TestEntities.Count();
+
+            // then
+            MessageEvent ev = this._eventSubscriber.GetReceivedMessage(5000);
+            Message msg = ev.Message;
+            
+            Assert.IsNull(ev.Exception, "Connection error occurred");
+            Assert.That(() => msg, Is.InstanceOf<DbReaderQueryMessage>(), "We expected DbReaderQueryMessage to be returned");
 
             this._eventSubscriber.AssertNoFurtherMessagesReceived();
         }
