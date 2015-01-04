@@ -54,7 +54,10 @@
     <Compile Include="Annotations\Annotations.cs" />
     <Compile Include="Dependency.cs" />
     <Compile Include="Events\IMessageEventSubscriber.cs" />
+    <Compile Include="Events\IMessageEventSubscriptionManager.cs" />
     <Compile Include="Events\MessageEventDispatcher.cs" />
+    <Compile Include="Events\SynchronizedReferenceMessageSubscriber.cs" />
+    <Compile Include="Events\WeakReferenceMessageSubscriber.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protocol\Constants.cs" />

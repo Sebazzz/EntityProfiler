@@ -58,6 +58,7 @@
     <Compile Include="Protocol\ITcpClientFactory.cs" />
     <Compile Include="Protocol\TcpClientFactory.cs" />
     <Compile Include="Protocol\TcpMessageListener.cs" />
+    <Compile Include="SynchronizedMessageEventSubscriber.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EntityProfiler.Common\EntityProfiler.Common.csproj">
