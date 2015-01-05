@@ -3,7 +3,7 @@ namespace EntityProfiler.Interceptor.Core {
     using ExecutionContext = Common.Protocol.ExecutionContext;
 
     /// <summary>
-    /// Defines the interface for a class that can potentially create an execution context
+    /// Defines the interface for a class that can potentially create an execution context. Implementors must be thread-safe.
     /// </summary>
     internal interface IExecutionContextConstructor {
         /// <summary>

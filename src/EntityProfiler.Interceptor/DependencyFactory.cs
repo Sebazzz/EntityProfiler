@@ -34,9 +34,9 @@
             container.RegisterMultiple<IExecutionContextConstructor>(new [] { 
                 // note, the order matters! if one execution context strategy cannot handle 
                 // the creation it gets delegated to the next
-                typeof(ThreadExecutionContextConstructor),                                              
-                //typeof(HttpContextExecutionContextConstructor),
+                typeof(HttpContextExecutionContextConstructor),
                 typeof(DbContextExecutionContextConstructor),
+                typeof(ThreadExecutionContextConstructor),                                              
             });
 
             Dependency.Configure(container);
