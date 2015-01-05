@@ -20,7 +20,6 @@
                 new TcpListenerFactory(),
                 this._messageEventDispatcher,
                 new JsonMessageSerializerFactory(new UnitTestMessageTypeResolver()));
-            this._messageSink.Start();
         }
 
         [TestFixtureTearDown]
@@ -30,6 +29,7 @@
 
         [SetUp]
         public void TestSetup() {
+            this._messageSink.Start();
             this._messageListener = new TcpMessageListener(
                 new TcpClientFactory(), new JsonMessageDeserializerFactory(new UnitTestMessageTypeResolver()), this._messageEventDispatcher);
         }
