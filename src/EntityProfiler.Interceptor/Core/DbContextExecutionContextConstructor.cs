@@ -6,7 +6,6 @@ namespace EntityProfiler.Interceptor.Core {
     using System.Data.Entity;
     using System.Data.SqlClient;
     using System.Threading;
-    using Common.Annotations;
     using ExecutionContext = Common.Protocol.ExecutionContext;
 
     /// <summary>
@@ -35,7 +34,7 @@ namespace EntityProfiler.Interceptor.Core {
 
             int contextId = this.GetContextNumber(dbContext);
 
-            ExecutionContext ctx = new ExecutionContext("DbContext instance #" + contextId);
+            ExecutionContext ctx = new ExecutionContext(contextId, "DbContext instance #" + contextId);
             ctx.Values["ConnectionId"] = GetConnectionId(dbContext.Database.Connection);
             ctx.Values["ConnectionString"] = dbContext.Database.Connection.ConnectionString;
 

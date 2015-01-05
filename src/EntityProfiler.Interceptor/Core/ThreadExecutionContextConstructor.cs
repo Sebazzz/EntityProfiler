@@ -20,7 +20,10 @@ namespace EntityProfiler.Interceptor.Core {
                 description += " '" + currentThread.Name +"'";
             }
 
-            return new ExecutionContext(description);
+            return new ExecutionContext(
+                currentThread.ManagedThreadId /* while this isn't sequential ID we have no other option here 
+                                                 because if we came here the DbContext was NULL */, 
+                description);
         }
 
         /// <summary>
