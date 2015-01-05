@@ -1,5 +1,4 @@
 namespace EntityProfiler.Interceptor.Core {
-    using System.Data.Common;
     using System.Data.Entity;
     using System.Threading;
     using ExecutionContext = Common.Protocol.ExecutionContext;
@@ -16,7 +15,12 @@ namespace EntityProfiler.Interceptor.Core {
         public ExecutionContext CreateExecutionContext(DbContext dbContext) {
             Thread currentThread = Thread.CurrentThread;
 
-            return new ExecutionContext("Thread #" + currentThread.ManagedThreadId);
+            string description = "Thread #" + currentThread.ManagedThreadId;
+            if (currentThread.Name != null) {
+                description += " '" + currentThread.Name +"'";
+            }
+
+            return new ExecutionContext(description);
         }
 
         /// <summary>
@@ -27,6 +31,7 @@ namespace EntityProfiler.Interceptor.Core {
         public void ModifyExistingExecutionContext(DbContext dbContext, ExecutionContext executionContext) {
             Thread currentThread = Thread.CurrentThread;
             executionContext.Values["ThreadId"] = currentThread.ManagedThreadId;
+            executionContext.Values["ThreadName"] = currentThread.Name;
         }
     }
 }
