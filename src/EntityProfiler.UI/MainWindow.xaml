@@ -2,7 +2,14 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
-        Title="Entity Profiler" Height="350" Width="525">
+        Title="Entity Profiler" Height="500" Width="800"
+        SaveWindowPosition="True"
+        
+        BorderBrush="{DynamicResource AccentColorBrush}"
+        BorderThickness="1"
+                   
+        ResizeMode="CanResizeWithGrip"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         
     </Grid>
