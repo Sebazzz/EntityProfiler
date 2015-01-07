@@ -2,7 +2,7 @@ namespace EntityProfiler.Common.Events {
     /// <summary>
     /// Defines the interface message event listeners should implement
     /// </summary>
-    internal interface IMessageEventSubscriber {
+    public interface IMessageEventSubscriber {
         /// <summary>
         /// Occurs when a message is received
         /// </summary>

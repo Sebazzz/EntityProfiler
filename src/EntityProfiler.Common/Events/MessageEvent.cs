@@ -6,7 +6,7 @@
     /// <summary>
     /// Represents event data for when a message is received
     /// </summary>
-    internal struct MessageEvent {
+    public struct MessageEvent {
         private readonly Message _message;
         private readonly Exception _exception;
 
@@ -31,6 +31,9 @@
             this._message = message;
         }
 
+        /// <summary>
+        /// Gets the message if <see cref="Exception"/> is not <c>null</c>.
+        /// </summary>
         public Message Message {
             [DebuggerStepThrough] get { return this._message; }
         }
