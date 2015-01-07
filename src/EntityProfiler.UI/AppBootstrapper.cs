@@ -11,14 +11,14 @@
     using Services;
 
     public class AppBootstrapper : BootstrapperBase {
-        private CompositionContainer container;
+        private CompositionContainer _container;
 
         public AppBootstrapper() {
             this.Initialize();
         }
 
         protected override void BuildUp(object instance) {
-            this.container.SatisfyImportsOnce(instance);
+            this._container.SatisfyImportsOnce(instance);
         }
 
         /// <summary>
@@ -29,25 +29,25 @@
                 new AggregateCatalog(
                     AssemblySource.Instance.Select(x => new AssemblyCatalog(x)).OfType<ComposablePartCatalog>());
 
-            this.container = new CompositionContainer(catalog);
+            this._container = new CompositionContainer(catalog);
 
             var batch = new CompositionBatch();
 
             batch.AddExportedValue<IWindowManager>(new WindowManager());
             batch.AddExportedValue<IEventAggregator>(new EventAggregator());
-            batch.AddExportedValue(this.container);
+            batch.AddExportedValue(this._container);
             batch.AddExportedValue(catalog);
 
-            this.container.Compose(batch);
+            this._container.Compose(batch);
         }
 
         protected override IEnumerable<object> GetAllInstances(Type serviceType) {
-            return this.container.GetExportedValues<object>(AttributedModelServices.GetContractName(serviceType));
+            return this._container.GetExportedValues<object>(AttributedModelServices.GetContractName(serviceType));
         }
 
         protected override object GetInstance(Type serviceType, string key) {
             var contract = string.IsNullOrEmpty(key) ? AttributedModelServices.GetContractName(serviceType) : key;
-            var exports = this.container.GetExportedValues<object>(contract);
+            var exports = this._container.GetExportedValues<object>(contract);
 
             var export = exports.FirstOrDefault();
             if (export != null) {
