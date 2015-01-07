@@ -1,0 +1,8 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls">
+    <Style TargetType="metro:MetroWindow">
+        <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+    </Style>
+</ResourceDictionary>
