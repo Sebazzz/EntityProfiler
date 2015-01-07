@@ -6,11 +6,11 @@
     [Export(typeof(IThemeManager))]
     public class ThemeManager : IThemeManager
     {
-        private readonly ResourceDictionary themeResources;
+        private readonly ResourceDictionary _themeResources;
 
         public ThemeManager()
         {
-            this.themeResources = new ResourceDictionary
+            this._themeResources = new ResourceDictionary
                                   {
                                       Source =
                                           new Uri("pack://application:,,,/Resources/DefaultTheme.xaml")
@@ -19,7 +19,7 @@
 
         public ResourceDictionary GetThemeResources()
         {
-            return this.themeResources;
+            return this._themeResources;
         }
     }
 }
