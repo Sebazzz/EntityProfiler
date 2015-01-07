@@ -8,7 +8,7 @@
         xmlns:vm="clr-namespace:EntityProfiler.UI.ViewModels"
 
         Title="[Unbound]" 
-        Height="500" Width="800"
+        Height="600" Width="1200"
         SaveWindowPosition="True"
         
         BorderBrush="{DynamicResource AccentColorBrush}"
@@ -22,7 +22,7 @@
         cal:Bind.AtDesignTime="True">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition MinWidth="150" MaxWidth="250" Width="0.1*"/>
+            <ColumnDefinition MinWidth="200" MaxWidth="250" Width="0.5*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
