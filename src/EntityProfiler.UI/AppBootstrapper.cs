@@ -7,7 +7,6 @@
     using System.Linq;
     using System.Windows;
     using Caliburn.Micro;
-    using Controls;
     using Services;
 
     public class AppBootstrapper : BootstrapperBase {
