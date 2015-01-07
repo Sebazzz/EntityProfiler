@@ -9,8 +9,9 @@
     using Caliburn.Micro;
     using Services;
 
-    public class AppBootstrapper : BootstrapperBase {
+    public sealed class AppBootstrapper : BootstrapperBase, IDisposable {
         private CompositionContainer _container;
+        private bool _isDisposed;
 
         public AppBootstrapper() {
             this.Initialize();
@@ -64,6 +65,21 @@
             startupTasks.Apply(s => s());
 
             this.DisplayRootViewFor<IShell>();
+        }
+
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose() {
+            if (!this._isDisposed) {
+                if (this._container != null) {
+                    this._container.Dispose();
+                }
+
+                this._container = null;
+
+                this._isDisposed = true;
+            }
         }
     }
 }
