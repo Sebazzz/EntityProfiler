@@ -1,6 +1,5 @@
 ﻿namespace EntityProfiler.UI.ViewModels {
     using System;
-    using System.Windows.Threading;
     using Caliburn.Micro;
     using Common.Events;
     using Common.Protocol;
@@ -59,9 +58,8 @@
             base.OnInitialize();
 
             this.DisplayName = "Entity Profiler";
-            this.StatusBar = "Loading?";
 
-            this._messageListener.Start();
+            this.TryConnect();
         }
 
         /// <summary>
@@ -76,8 +74,11 @@
             this.StatusBar = "Connected to v" + connectedMessage.Version;
         }
 
+        private OneTimeAction _connectAttempt;
         private void HandleError(Exception exception) {
-            this.StatusBar = exception.GetType().FullName;
+            this.StatusBar = "Connecting error... [" + exception.GetType().FullName + "] retrying...";
+
+            this._connectAttempt = OneTimeAction.Execute(1000, this.TryConnect).CancelExisting(this._connectAttempt);
         }
 
         private OneTimeAction _resetStatusBarAction;
@@ -85,6 +86,11 @@
             this.StatusBar = queryMessage.Query.CommandText;
 
             this._resetStatusBarAction = OneTimeAction.Execute(750, () => this.StatusBar = "Ready").CancelExisting(this._resetStatusBarAction);
+        }
+
+        private void TryConnect() {
+            this.StatusBar = "Connecting...";
+            this._messageListener.Start();
         }
     }
 }
