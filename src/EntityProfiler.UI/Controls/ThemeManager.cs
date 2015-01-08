@@ -1,9 +1,7 @@
 ﻿namespace EntityProfiler.UI.Controls {
     using System;
-    using System.ComponentModel.Composition;
     using System.Windows;
 
-    [Export(typeof(IThemeManager))]
     public class ThemeManager : IThemeManager
     {
         private readonly ResourceDictionary _themeResources;

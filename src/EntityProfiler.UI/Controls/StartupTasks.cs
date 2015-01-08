@@ -1,26 +1,21 @@
-namespace EntityProfiler.UI.Services {
+namespace EntityProfiler.UI.Controls {
     using System.Collections.Generic;
-    using System.ComponentModel.Composition;
     using System.Linq;
     using System.Reflection;
     using System.Windows;
     using Caliburn.Micro;
-    using Controls;
     using MahApps.Metro.Controls;
-    using ViewLocator = Caliburn.Micro.ViewLocator;
+    using Services;
 
-    public delegate void StartupTask();
     public class StartupTasks
     {
         private readonly IServiceLocator _serviceLocator;
 
-        [ImportingConstructor]
         public StartupTasks(IServiceLocator serviceLocator)
         {
             this._serviceLocator = serviceLocator;
         }
 
-        [Export(typeof(StartupTask))]
         public void ApplyBindingScopeOverride()
         {
             var getNamedElements = BindingScope.GetNamedElements;
@@ -47,11 +42,16 @@ namespace EntityProfiler.UI.Services {
                                             };
         }
 
-        [Export(typeof(StartupTask))]
         public void ApplyViewLocatorOverride()
         {
             var viewLocator = this._serviceLocator.GetInstance<IViewLocator>();
-            ViewLocator.GetOrCreateViewType = viewLocator.GetOrCreateViewType;
+            Caliburn.Micro.ViewLocator.GetOrCreateViewType = viewLocator.GetOrCreateViewType;
+        }
+
+
+        public void Execute() {
+            this.ApplyBindingScopeOverride();
+            this.ApplyViewLocatorOverride();
         }
     }
 }

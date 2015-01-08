@@ -4,7 +4,7 @@
     /// <summary>
     /// Dependency container 
     /// </summary>
-    internal class Dependency {
+    internal class DependencyFactory {
         /// <summary>
         /// Configures dependencies into the dependency container
         /// </summary>

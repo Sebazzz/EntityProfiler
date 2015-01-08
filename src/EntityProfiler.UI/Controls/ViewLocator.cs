@@ -1,16 +1,13 @@
 ﻿namespace EntityProfiler.UI.Controls {
     using System;
-    using System.ComponentModel.Composition;
     using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
     using Caliburn.Micro;
 
-    [Export(typeof (IViewLocator))]
     public class ViewLocator : IViewLocator {
         private readonly IThemeManager _themeManager;
 
-        [ImportingConstructor]
         public ViewLocator(IThemeManager themeManager) {
             this._themeManager = themeManager;
         }

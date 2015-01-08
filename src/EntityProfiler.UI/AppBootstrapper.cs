@@ -1,16 +1,17 @@
 ﻿namespace EntityProfiler.UI {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-    using System.ComponentModel.Composition.Hosting;
-    using System.ComponentModel.Composition.Primitives;
-    using System.Linq;
     using System.Windows;
     using Caliburn.Micro;
+    using Controls;
+    using Interceptor.Reader;
+    using Interceptor.Reader.Protocol;
     using Services;
+    using TinyIoC;
+    using ViewModels;
 
     public sealed class AppBootstrapper : BootstrapperBase, IDisposable {
-        private CompositionContainer _container;
+        private TinyIoCContainer _container;
         private bool _isDisposed;
 
         public AppBootstrapper() {
@@ -18,51 +19,40 @@
         }
 
         protected override void BuildUp(object instance) {
-            this._container.SatisfyImportsOnce(instance);
+            this._container.BuildUp(instance);
         }
 
         /// <summary>
         ///     By default, we are configured to use MEF
         /// </summary>
         protected override void Configure() {
-            var catalog =
-                new AggregateCatalog(
-                    AssemblySource.Instance.Select(x => new AssemblyCatalog(x)).OfType<ComposablePartCatalog>());
+            this._container = new TinyIoCContainer();
 
-            this._container = new CompositionContainer(catalog);
+            this._container.Register<IWindowManager>(new WindowManager());
+            this._container.Register<IEventAggregator>(new EventAggregator());
+            this._container.Register<IViewLocator, Controls.ViewLocator>();
+            this._container.Register<IThemeManager, Controls.ThemeManager>();
 
-            var batch = new CompositionBatch();
+            this._container.Register<IServiceLocator>(new TinyServiceLocator(this._container));
 
-            batch.AddExportedValue<IWindowManager>(new WindowManager());
-            batch.AddExportedValue<IEventAggregator>(new EventAggregator());
-            batch.AddExportedValue(this._container);
-            batch.AddExportedValue(catalog);
+            // register view models
+            this._container.AutoRegister(t => String.Equals(t.Namespace, typeof(ShellViewModel).Namespace, StringComparison.Ordinal));
+            this._container.Register((c, o) => new ShellViewModel(this._container.Resolve<IMessageListener>()));
+            this._container.Register<IShell, ShellViewModel>();
 
-            this._container.Compose(batch);
+            DependencyFactory.Configure(this._container);
         }
 
         protected override IEnumerable<object> GetAllInstances(Type serviceType) {
-            return this._container.GetExportedValues<object>(AttributedModelServices.GetContractName(serviceType));
+            return this._container.ResolveAll(serviceType);
         }
 
         protected override object GetInstance(Type serviceType, string key) {
-            var contract = string.IsNullOrEmpty(key) ? AttributedModelServices.GetContractName(serviceType) : key;
-            var exports = this._container.GetExportedValues<object>(contract);
-
-            var export = exports.FirstOrDefault();
-            if (export != null) {
-                return export;
-            }
-
-            throw new Exception(string.Format("Could not locate any instances of contract {0}.", contract));
+            return this._container.Resolve(serviceType);
         }
 
         protected override void OnStartup(object sender, StartupEventArgs e) {
-            var startupTasks = this.GetAllInstances(typeof (StartupTask))
-                .Cast<ExportedDelegate>()
-                .Select(exportedDelegate => (StartupTask) exportedDelegate.CreateDelegate(typeof (StartupTask)));
-
-            startupTasks.Apply(s => s());
+            new StartupTasks(this._container.Resolve<IServiceLocator>()).Execute();
 
             this.DisplayRootViewFor<IShell>();
         }

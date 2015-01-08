@@ -63,7 +63,6 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Caliburn.Micro.2.0.1\lib\net45\System.Windows.Interactivity.dll</HintPath>
@@ -92,7 +91,8 @@
     <Compile Include="Controls\ViewLocator.cs" />
     <Compile Include="IShell.cs" />
     <Compile Include="Services\IServiceLocator.cs" />
-    <Compile Include="Services\MefServiceLocator.cs" />
+    <Compile Include="Services\TinyExtensions.cs" />
+    <Compile Include="Services\TinyServiceLocator.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Page Include="Resources\Blend\Styles\Accents\BaseDark.xaml">
       <Generator>MSBuild:Compile</Generator>
