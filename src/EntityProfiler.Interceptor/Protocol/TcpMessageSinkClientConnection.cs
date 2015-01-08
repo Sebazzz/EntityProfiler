@@ -25,6 +25,10 @@ namespace EntityProfiler.Interceptor.Protocol {
             this._messageSerializer = new Lazy<IMessageSerializer>(this.CreateSerializer, true);
         }
 
+        public void SayHello() {
+            this.DispatchMessage(new ConnectedMessage(Common.Protocol.Version.FromCurrentAssembly()));
+        }
+
         private IMessageSerializer CreateSerializer() {
             lock (this._tcpClient) {
                 return this._messageSerializerFactory.CreateSerializer(new StreamWriter(this._tcpClient.GetStream()));
@@ -45,7 +49,9 @@ namespace EntityProfiler.Interceptor.Protocol {
 
         private void DispatchMessageInternal(object state) {
             try {
-                DispatchMessageInternal((Message) state, this._messageSerializer.Value);
+                lock (this._tcpClient) {
+                    DispatchMessageInternal((Message) state, this._messageSerializer.Value);
+                }
             }
             catch (SocketException) {
                 // socket was closed - ignore

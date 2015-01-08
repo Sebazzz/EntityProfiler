@@ -52,7 +52,7 @@
             Assert.NotNull(dbContext.TestEntities.ToList());
 
             // then
-            MessageEvent ev = this._eventSubscriber.GetReceivedMessage(5000);
+            MessageEvent ev = this.GetMessageEvent();
             Message msg = ev.Message;
             
             Assert.IsNull(ev.Exception, "Connection error occurred");
@@ -73,7 +73,7 @@
             dbContext.SaveChanges();
 
             // then
-            MessageEvent ev = this._eventSubscriber.GetReceivedMessage(5000);
+            MessageEvent ev = this.GetMessageEvent();
             Message msg = ev.Message;
             
             Assert.IsNull(ev.Exception, "Connection error occurred");
@@ -93,13 +93,23 @@
             int count = dbContext.TestEntities.Count();
 
             // then
-            MessageEvent ev = this._eventSubscriber.GetReceivedMessage(5000);
+            MessageEvent ev = this.GetMessageEvent();
             Message msg = ev.Message;
             
             Assert.IsNull(ev.Exception, "Connection error occurred");
             Assert.That(() => msg, Is.InstanceOf<DbReaderQueryMessage>(), "We expected DbReaderQueryMessage to be returned");
 
             this._eventSubscriber.AssertNoFurtherMessagesReceived();
+        }
+
+        private MessageEvent GetMessageEvent() {
+            MessageEvent ev = default(MessageEvent);
+
+            while (ev.Message == null || ev.Message is ConnectedMessage) {
+                ev = this._eventSubscriber.GetReceivedMessage(5000);
+            }
+
+            return ev;
         }
     }
 }

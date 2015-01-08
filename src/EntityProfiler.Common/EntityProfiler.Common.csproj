@@ -60,6 +60,7 @@
     <Compile Include="Events\WeakReferenceMessageSubscriber.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Protocol\ConnectedMessage.cs" />
     <Compile Include="Protocol\Constants.cs" />
     <Compile Include="Protocol\DbReaderQueryMessage.cs" />
     <Compile Include="Protocol\ExecutionContext.cs" />

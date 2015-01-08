@@ -5,6 +5,7 @@ namespace EntityProfiler.Tests.Integration.Protocol {
     using System.Threading;
     using NUnit.Framework;
     using Common.Events;
+    using Common.Protocol;
 
     internal class DelegateMessageEventSubscriber : IMessageEventSubscriber {
         private readonly ConcurrentQueue<MessageEvent> _receivedMessageEvents;
@@ -23,6 +24,7 @@ namespace EntityProfiler.Tests.Integration.Protocol {
         /// </summary>
         /// <param name="event"></param>
         public void OnReceived(MessageEvent @event) {
+            Debug.WriteLine("Received: {0}", @event.Message == null ? @event.Exception.GetType().FullName : @event.Message.GetType().FullName, "");
             this._receivedMessageEvents.Enqueue(@event);
         }
 
@@ -31,7 +33,8 @@ namespace EntityProfiler.Tests.Integration.Protocol {
         /// </summary>
         /// <param name="event"></param>
         public void OnSending(MessageEvent @event) {
-            this._receivedMessageEvents.Enqueue(@event);
+            Debug.WriteLine("Send: {0}", @event.Message == null ? @event.Exception.GetType().FullName : @event.Message.GetType().FullName, "");
+            this._sentMessageEvents.Enqueue(@event);
         }
 
         public MessageEvent GetReceivedMessage(int timeout) {
@@ -40,6 +43,16 @@ namespace EntityProfiler.Tests.Integration.Protocol {
 
         public MessageEvent GetSendingMessage(int timeout) {
             return GetFromQueue(this._sentMessageEvents, timeout);
+        }
+
+        public void AssertReceivedConnectMessage() {
+            AssertConnectMessage(this._receivedMessageEvents);
+        }
+
+        private static void AssertConnectMessage(ConcurrentQueue<MessageEvent> queue) {
+            MessageEvent ev = GetFromQueue(queue, 100);
+
+            Assert.That(ev.Message, Is.InstanceOf<ConnectedMessage>());
         }
 
         private static MessageEvent GetFromQueue(ConcurrentQueue<MessageEvent> queue, int timeout) {

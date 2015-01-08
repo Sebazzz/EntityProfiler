@@ -29,6 +29,8 @@
 
             this.DisplayName = "Entity Profiler";
             this.StatusBar = "Loading?";
+
+            this._messageListener.Start();
         }
 
         /// <summary>
@@ -61,6 +63,15 @@
             if (queryMessage != null) {
                 this.HandleQueryMessage(queryMessage);
             }
+
+            ConnectedMessage connectedMessage = @event.Message as ConnectedMessage;
+            if (connectedMessage != null) {
+                this.HandleConnectedMessage(connectedMessage);
+            }
+        }
+
+        private void HandleConnectedMessage(ConnectedMessage connectedMessage) {
+            this.StatusBar = "Connected";
         }
 
         private void HandleError(Exception exception) {
@@ -69,7 +80,7 @@
 
         private int _msgCount = 0;
         private void HandleQueryMessage(QueryMessage queryMessage) {
-            this.StatusBar = this._msgCount++.ToString() + " messages received";
+            this.StatusBar = this._msgCount++ + " messages received (" + queryMessage.GetType().FullName + ")";
         }
     }
 }

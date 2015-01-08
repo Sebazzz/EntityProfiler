@@ -4,6 +4,7 @@
     using System.Net.Sockets;
     using System.Threading;
     using Common.Events;
+    using Common.Protocol;
     using Common.Protocol.Serializer;
 
     internal class TcpMessageListener : IMessageListener {
@@ -52,9 +53,9 @@
 
         private bool DispatchIncomingMessage(IMessageDeserializer messageDeserializer) {
             try {
-                this._messageDispatcher.DispatchReceived(
-                    new MessageEvent(
-                        messageDeserializer.DeserializeMessage()));
+                Message msg = messageDeserializer.DeserializeMessage();
+
+                this._messageDispatcher.DispatchReceived(new MessageEvent(msg));
             }
             catch (Exception ex) {
                 this.DispatchError(ex);

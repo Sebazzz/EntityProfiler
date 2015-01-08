@@ -1,5 +1,7 @@
 ﻿namespace EntityProfiler.Tests.Integration.Protocol {
+    using System.Threading;
     using Common.Events;
+    using Common.Protocol;
     using Common.Protocol.Serializer;
     using Interceptor.Protocol;
     using Interceptor.Reader.Protocol;
@@ -19,7 +21,11 @@
             this._messageSink = new TcpMessageSink(
                 new TcpListenerFactory(),
                 this._messageEventDispatcher,
-                new JsonMessageSerializerFactory(new UnitTestMessageTypeResolver()));
+                new JsonMessageSerializerFactory(CreateTypeResolver()));
+        }
+
+        private static UnitTestMessageTypeResolver CreateTypeResolver() {
+            return new UnitTestMessageTypeResolver(typeof(FakeMessage), typeof(ConnectedMessage));
         }
 
         [TestFixtureTearDown]
@@ -31,7 +37,7 @@
         public void TestSetup() {
             this._messageSink.Start();
             this._messageListener = new TcpMessageListener(
-                new TcpClientFactory(), new JsonMessageDeserializerFactory(new UnitTestMessageTypeResolver()), this._messageEventDispatcher);
+                new TcpClientFactory(), new JsonMessageDeserializerFactory(CreateTypeResolver()), this._messageEventDispatcher);
         }
 
         [TearDown]
@@ -50,6 +56,8 @@
             this._messageSink.DispatchMessage(sentMessage);
 
             // then
+            this._eventSubscriber.AssertReceivedConnectMessage();
+
             MessageEvent messageEvent = this._eventSubscriber.GetReceivedMessage(100);
 
             Assert.IsNull(messageEvent.Exception, "Exception occurred during receiving of messages");

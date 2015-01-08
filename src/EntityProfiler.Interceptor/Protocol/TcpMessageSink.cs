@@ -112,6 +112,8 @@
             TcpMessageSinkClientConnection clientConnection = 
                 new TcpMessageSinkClientConnection(tcpClient, this._messageSerializerFactory);
 
+            clientConnection.SayHello();
+
             lock (this._connections) this._connections.Add(clientConnection);
         }
 

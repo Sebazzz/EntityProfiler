@@ -81,6 +81,7 @@
     <Compile Include="Common\Protocol\Serializer\StringBuilderExtensionsTests.cs" />
     <Compile Include="Common\Protocol\Serializer\TextReaderUtilsTests.cs" />
     <Compile Include="Common\Protocol\Serializer\UnitTestMessageTypeResolver.cs" />
+    <Compile Include="Common\Protocol\VersionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
