@@ -27,6 +27,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityProfiler.UI", "src\En
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityProfiler.Interceptor.Reader", "src\EntityProfiler.Interceptor.Reader\EntityProfiler.Interceptor.Reader.csproj", "{C4A86FA8-5EB8-4C2C-9E3B-A197ABA743CB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{1C788679-A3F2-40C0-95AA-FACE5BE0AEAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityProfiler.Tools.MessageGenerator", "tools\EntityProfiler.Tools.MessageGenerator\EntityProfiler.Tools.MessageGenerator.csproj", "{83775F7C-15A1-40A7-B089-AB81A8E5225E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +61,10 @@ Global
 		{C4A86FA8-5EB8-4C2C-9E3B-A197ABA743CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4A86FA8-5EB8-4C2C-9E3B-A197ABA743CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C4A86FA8-5EB8-4C2C-9E3B-A197ABA743CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83775F7C-15A1-40A7-B089-AB81A8E5225E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83775F7C-15A1-40A7-B089-AB81A8E5225E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83775F7C-15A1-40A7-B089-AB81A8E5225E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83775F7C-15A1-40A7-B089-AB81A8E5225E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,5 +76,6 @@ Global
 		{83990564-B6FE-4D63-9E4E-D1833B2A70F7} = {AA89ECBA-C448-46A6-BA11-A94276ED0D62}
 		{98AFA9DF-5312-4831-97A2-DF8CDE739C9B} = {AA89ECBA-C448-46A6-BA11-A94276ED0D62}
 		{C4A86FA8-5EB8-4C2C-9E3B-A197ABA743CB} = {AA89ECBA-C448-46A6-BA11-A94276ED0D62}
+		{83775F7C-15A1-40A7-B089-AB81A8E5225E} = {1C788679-A3F2-40C0-95AA-FACE5BE0AEAF}
 	EndGlobalSection
 EndGlobal
