@@ -1,12 +1,19 @@
 ﻿namespace EntityProfiler.UI.ViewModels {
     using System;
-    using System.ComponentModel.Composition;
     using Caliburn.Micro;
+    using Interceptor.Reader.Protocol;
     using PropertyChanged;
 
-    [Export(typeof (IShell))]
     [ImplementPropertyChanged]
     public class ShellViewModel : Screen, IShell {
+        private readonly IMessageListener _messageListener;
+
+        /// <summary>
+        /// Creates an instance of the screen.
+        /// </summary>
+        public ShellViewModel(IMessageListener messageListener) {
+            this._messageListener = messageListener;
+        }
 
         public string StatusBar { get; set; }
 
@@ -25,7 +32,15 @@
         /// </summary>
         [Obsolete("This is a design-time only constructor")]
         public ShellViewModel() {
-            this.StatusBar = "XX";
+            this.StatusBar = "Connected";
+        }
+
+        /// <summary>
+        /// Notifies subscribers of the property change.
+        /// </summary>
+        /// <param name="propertyName">Name of the property.</param>
+        public sealed override void NotifyOfPropertyChange(string propertyName = null) {
+            base.NotifyOfPropertyChange(propertyName);
         }
     }
 }
