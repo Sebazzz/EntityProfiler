@@ -30,6 +30,14 @@
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
         
+        <!-- List of queries -->
+        <ListBox x:Name="Queries" Grid.Column="0" Grid.Row="0" Background="Transparent">
+            <ListBox.ItemTemplate>
+                <DataTemplate >
+                    <TextBlock Text="QQQ" Foreground="Wheat"/>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
         
         <!-- Status bar -->
         <TextBlock x:Name="StatusBar" Grid.Row="1" Padding="3,3,3,3" Text="[Unbound]" Grid.ColumnSpan="2" Background="{DynamicResource AccentColorBrush}"/>

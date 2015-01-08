@@ -93,6 +93,7 @@
     <Compile Include="Services\EventMessageListener.cs" />
     <Compile Include="Services\IServiceLocator.cs" />
     <Compile Include="Services\OneTimeAction.cs" />
+    <Compile Include="Services\SeedData.cs" />
     <Compile Include="Services\TinyExtensions.cs" />
     <Compile Include="Services\TinyServiceLocator.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />

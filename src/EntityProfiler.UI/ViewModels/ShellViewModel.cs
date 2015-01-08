@@ -1,5 +1,6 @@
 ﻿namespace EntityProfiler.UI.ViewModels {
     using System;
+    using System.Diagnostics;
     using Caliburn.Micro;
     using Common.Events;
     using Common.Protocol;
@@ -10,12 +11,14 @@
     [ImplementPropertyChanged]
     public class ShellViewModel : Screen, IShell, IHandle<MessageEvent> {
         private readonly IRestartableMessageListener _messageListener;
+        private readonly IObservableCollection<QueryMessage> _queries;
 
         /// <summary>
         ///     Creates an instance of the screen.
         /// </summary>
         public ShellViewModel(IRestartableMessageListener messageListener, IEventAggregator eventAggregator) {
             this._messageListener = messageListener;
+            this._queries = new BindableCollection<QueryMessage>();
 
             eventAggregator.Subscribe(this);
         }
@@ -26,9 +29,16 @@
         [Obsolete("This is a design-time only constructor")]
         public ShellViewModel() {
             this.StatusBar = "Connected";
+
+            this._queries = new BindableCollection<QueryMessage>();
+            this._queries.AddRange(SeedData.Queries());
         }
 
         public string StatusBar { get; set; }
+
+        public IObservableCollection<QueryMessage> Queries {
+            [DebuggerStepThrough] get { return this._queries; }
+        }
 
         /// <summary>
         ///     Handles the message.
@@ -85,7 +95,9 @@
         private void HandleQueryMessage(QueryMessage queryMessage) {
             this.StatusBar = queryMessage.Query.CommandText;
 
-            this._resetStatusBarAction = OneTimeAction.Execute(750, () => this.StatusBar = "Ready").CancelExisting(this._resetStatusBarAction);
+            this._resetStatusBarAction = OneTimeAction.Execute(1750, () => this.StatusBar = "Ready").CancelExisting(this._resetStatusBarAction);
+
+            this._queries.Add(queryMessage);
         }
 
         private void TryConnect() {
