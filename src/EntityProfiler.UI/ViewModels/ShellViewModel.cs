@@ -40,6 +40,9 @@
             [DebuggerStepThrough] get { return this._queries; }
         }
 
+
+        public QueryMessage SelectedQuery { get; set; }
+
         /// <summary>
         ///     Handles the message.
         /// </summary>
