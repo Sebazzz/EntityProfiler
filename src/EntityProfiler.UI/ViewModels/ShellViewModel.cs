@@ -71,7 +71,7 @@
         }
 
         private void HandleConnectedMessage(ConnectedMessage connectedMessage) {
-            this.StatusBar = "Connected";
+            this.StatusBar = "Connected to v" + connectedMessage.Version;
         }
 
         private void HandleError(Exception exception) {

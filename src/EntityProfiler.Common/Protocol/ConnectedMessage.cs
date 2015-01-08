@@ -164,5 +164,15 @@
         public static bool operator <(Version left, Version right) {
             return Comparer<Version>.Default.Compare(left, right) < 0;
         }
+
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>
+        /// A string that represents the current object.
+        /// </returns>
+        public override string ToString() {
+            return String.Format("{0}.{1}", this.Major, this.Minor);
+        }
     }
 }
