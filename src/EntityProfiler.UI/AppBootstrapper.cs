@@ -35,7 +35,7 @@
             this._container.Register<IThemeManager, Controls.ThemeManager>();
 
             this._container.Register<IServiceLocator>(new TinyServiceLocator(this._container));
-            this._container.Register<IMessageEventSubscriber, EventMessageListener>().AsSingleton();
+            this._container.RegisterMultiple<IMessageEventSubscriber>(new[] {typeof (EventMessageListener)}).AsSingleton();
 
             // register view models
             this._container.AutoRegister(t => String.Equals(t.Namespace, typeof(ShellViewModel).Namespace, StringComparison.Ordinal));
