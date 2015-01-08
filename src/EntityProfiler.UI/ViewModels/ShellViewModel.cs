@@ -9,12 +9,12 @@
 
     [ImplementPropertyChanged]
     public class ShellViewModel : Screen, IShell, IHandle<MessageEvent> {
-        private readonly IMessageListener _messageListener;
+        private readonly IRestartableMessageListener _messageListener;
 
         /// <summary>
         ///     Creates an instance of the screen.
         /// </summary>
-        public ShellViewModel(IMessageListener messageListener, IEventAggregator eventAggregator) {
+        public ShellViewModel(IRestartableMessageListener messageListener, IEventAggregator eventAggregator) {
             this._messageListener = messageListener;
 
             eventAggregator.Subscribe(this);
@@ -90,7 +90,7 @@
 
         private void TryConnect() {
             this.StatusBar = "Connecting...";
-            this._messageListener.Start();
+            this._messageListener.Restart();
         }
     }
 }

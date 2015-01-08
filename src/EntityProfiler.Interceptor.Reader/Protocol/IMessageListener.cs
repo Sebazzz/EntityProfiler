@@ -15,5 +15,10 @@ namespace EntityProfiler.Interceptor.Reader.Protocol {
         /// Stops listening for messages
         /// </summary>
         void Stop();
+
+        /// <summary>
+        /// Creates a new instance based on the current
+        /// </summary>
+        IMessageListener Clone();
     }
 }

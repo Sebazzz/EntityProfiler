@@ -87,6 +87,16 @@
             this.Dispose();
         }
 
+        /// <summary>
+        /// Creates a new instance based on the current
+        /// </summary>
+        public IMessageListener Clone() {
+            return new TcpMessageListener(
+                this._tcpClientFactory,
+                this._messageDeserializerFactory,
+                this._messageDispatcher);
+        }
+
         private void EnsureNotDisposed() {
             if (this._isDisposed) {
                 throw new ObjectDisposedException(this.GetType().FullName);

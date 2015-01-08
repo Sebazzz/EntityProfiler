@@ -12,6 +12,7 @@
         public static void Configure(TinyIoC.TinyIoCContainer container) {
             container.Register<ITcpClientFactory, TcpClientFactory>();
             container.Register<IMessageListener, TcpMessageListener>();
+            container.Register<IRestartableMessageListener, RestartableMessageListener>();
 
             Common.Dependency.Configure(container);
         }
