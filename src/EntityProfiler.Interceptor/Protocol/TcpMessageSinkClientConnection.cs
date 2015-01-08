@@ -59,6 +59,9 @@ namespace EntityProfiler.Interceptor.Protocol {
             catch (IOException) {
                 // random I/O error - ignore
             }
+            catch (MessageTransferException) {
+                // wrapper exception of the above - ignore
+            }
         }
 
         private static void DispatchMessageInternal(Message message, IMessageSerializer messageSerializer) {
