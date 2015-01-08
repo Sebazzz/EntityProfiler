@@ -46,9 +46,16 @@
             </ListBox.ItemTemplate>
         </ListBox>
         
-        <StackPanel Grid.Column="1" Grid.Row="0">
-            <TextBox Text="{Binding Path=SelectedQuery.Query.CommandText}"/>
-        </StackPanel>
+        <Canvas Grid.Column="1" Grid.Row="0" Margin="5,5,5,5">
+            <avalonEdit:TextEditor xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
+                FontFamily="Consolas"
+                FontSize="10pt"
+                Foreground="White"
+                IsReadOnly="True"
+                Loaded="OnAvalonLoaded" 
+                MaxHeight="400"/>
+
+        </Canvas>
         
         <!-- Status bar -->
         <TextBlock x:Name="StatusBar" Grid.Row="1" Padding="3,3,3,3" Text="[Unbound]" Grid.ColumnSpan="2" Background="{DynamicResource AccentColorBrush}"/>
