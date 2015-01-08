@@ -4,6 +4,7 @@
     using System.Collections.ObjectModel;
     using System.ComponentModel.DataAnnotations;
     using System.Data.Entity;
+    using System.Diagnostics;
     using System.Linq;
 
     internal class Program {
@@ -12,24 +13,31 @@
 
             Database.SetInitializer(new AppDbContext.Initializer());
 
-            using (new AppDbContext()) {
-                // nop
+            using (AppDbContext dbContext = new AppDbContext()) {
+                // Ef is lazy and really only initializes on first query
+                if (!dbContext.Products.Any()) dbContext.SaveChanges();
             }
 
             Console.WriteLine("Initialized");
             Console.WriteLine();
 
             while (true) {
-                Console.WriteLine("[S]elect / Select [N]+1 / [A]dd / [D]elete");
+                Console.Write("[S]elect / Select [N]+1 / [C]ount / [A]dd / [D]elete: _\b");
 
-                var k = Console.ReadKey().KeyChar;
-                switch (Char.ToLower(k)) {
+                var k = Char.ToLower(Console.ReadKey().KeyChar);
+                Console.WriteLine();
+
+                switch (k) {
                     case 's':
                         Select();
                         break;
 
                     case 'n':
                         SelectN1();
+                        break;
+
+                    case 'c':
+                        SelectCount();
                         break;
 
                     case 'a':
@@ -44,12 +52,21 @@
                 if (k == 'q') {
                     break;
                 }
+
+                Console.WriteLine();
+            }
+        }
+
+        private static void SelectCount() {
+            using (AppDbContext dbContext = new AppDbContext()) {
+                Console.WriteLine(dbContext.Products.Count());
             }
         }
 
         private static void Delete() {
             using (AppDbContext dbContext = new AppDbContext()) {
                 dbContext.Products.RemoveRange(dbContext.Products.Take(10).AsEnumerable());
+                dbContext.SaveChanges();
             }
         }
 
@@ -61,11 +78,12 @@
 
         private static void SelectN1() {
             using (AppDbContext dbContext = new AppDbContext()) {
-                foreach (Product product in dbContext.Products) {
+                foreach (Product product in dbContext.Products.ToList()) {
                     Console.Write("p");
 
                     foreach (Price price in product.Prices) {
                         Console.Write(".");
+                        Trace.Write(price.Value);
                     }
                 }
             }
@@ -81,6 +99,7 @@
 
                     foreach (Price price in product.Prices) {
                         Console.Write(".");
+                        Trace.Write(price.Value);
                     }
                 }
             }
@@ -90,10 +109,21 @@
     }
 
 
-    internal sealed class AppDbContext : DbContext {
+    public sealed class AppDbContext : DbContext {
 
         public DbSet<Product> Products { get; set; } 
-        public DbSet<Price> Prices { get; set; } 
+        public DbSet<Price> Prices { get; set; }
+
+        /// <summary>
+        /// Constructs a new context instance using conventions to create the name of the database to
+        ///             which a connection will be made.  The by-convention name is the full name (namespace + class name)
+        ///             of the derived context class.
+        ///             See the class remarks for how this is used to create a connection.
+        /// </summary>
+        public AppDbContext() {
+            this.Configuration.LazyLoadingEnabled = true;
+            this.Configuration.ProxyCreationEnabled = true;
+        }
 
         internal sealed class Initializer : DropCreateDatabaseAlways<AppDbContext> {
             /// <summary>
@@ -122,7 +152,7 @@
         }
     }
 
-    internal class Product {
+    public class Product {
         private ICollection<Price> _prices;
 
         public int Id { get; set; }
@@ -142,13 +172,12 @@
         }
     }
 
-    internal class Price {
+    public class Price {
 
         public int Id { get; set; }
 
         [Required]
         public virtual Product Product { get; set; }
-
 
         public decimal Value { get; set; }
 
