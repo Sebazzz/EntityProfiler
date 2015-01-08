@@ -3,9 +3,9 @@
     using System.Collections.Generic;
     using System.Windows;
     using Caliburn.Micro;
+    using Common.Events;
     using Controls;
     using Interceptor.Reader;
-    using Interceptor.Reader.Protocol;
     using Services;
     using TinyIoC;
     using ViewModels;
@@ -28,18 +28,21 @@
         protected override void Configure() {
             this._container = new TinyIoCContainer();
 
+            // framework and infrastructure
             this._container.Register<IWindowManager>(new WindowManager());
             this._container.Register<IEventAggregator>(new EventAggregator());
             this._container.Register<IViewLocator, Controls.ViewLocator>();
             this._container.Register<IThemeManager, Controls.ThemeManager>();
 
             this._container.Register<IServiceLocator>(new TinyServiceLocator(this._container));
+            this._container.Register<IMessageEventSubscriber, EventMessageListener>().AsSingleton();
 
             // register view models
             this._container.AutoRegister(t => String.Equals(t.Namespace, typeof(ShellViewModel).Namespace, StringComparison.Ordinal));
-            this._container.Register((c, o) => new ShellViewModel(this._container.Resolve<IMessageListener>()));
+            this._container.Register<ShellViewModel>().AsSingleton();
             this._container.Register<IShell, ShellViewModel>();
 
+            // register other implementations
             DependencyFactory.Configure(this._container);
         }
 

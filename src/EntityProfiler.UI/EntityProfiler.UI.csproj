@@ -90,6 +90,7 @@
     <Compile Include="Controls\ThemeManager.cs" />
     <Compile Include="Controls\ViewLocator.cs" />
     <Compile Include="IShell.cs" />
+    <Compile Include="Services\EventMessageListener.cs" />
     <Compile Include="Services\IServiceLocator.cs" />
     <Compile Include="Services\TinyExtensions.cs" />
     <Compile Include="Services\TinyServiceLocator.cs" />
