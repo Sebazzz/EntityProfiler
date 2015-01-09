@@ -15,7 +15,7 @@ Install the EntityProfiler.Interceptor NuGet package or install manually:
              <interceptor type="EntityProfiler.Interceptor.Core.ProfilingInterceptor, EntityProfiler.Interceptor"/>
            </interceptors>
         </entityFramework>
-        ```
+        
 3. Run the EntityProfiler.UI application which will automatically connect.
 
 
