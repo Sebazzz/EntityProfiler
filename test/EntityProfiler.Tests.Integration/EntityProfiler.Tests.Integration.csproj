@@ -89,6 +89,7 @@
     <Compile Include="Protocol\FakeMessage.cs" />
     <Compile Include="Protocol\MessageRoundTripTests.cs" />
     <Compile Include="Protocol\UnitTestMessageTypeResolver.cs" />
+    <Compile Include="TcpLockedTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

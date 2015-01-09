@@ -12,7 +12,7 @@
 
     [TestFixture]
     //[Timeout(10000)]
-    public sealed class QueryNotificationTest {
+    public sealed class QueryNotificationTest : TcpLockedTest {
         private IMessageListener _messageListener;
         private DelegateMessageEventSubscriber _eventSubscriber;
         private MessageEventDispatcher _messageEventDispatcher;
