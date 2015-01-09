@@ -7,7 +7,7 @@ Install the EntityProfiler.Interceptor NuGet package or install manually:
 
 1. Add references to EntityProfiler.Common and EntityProfiler.Interceptor to your project.
 2. Register the interceptor in either the `DbConfiguration` or in your web.config file:
-        ```xml
+
         <entityFramework>
            ...
            
