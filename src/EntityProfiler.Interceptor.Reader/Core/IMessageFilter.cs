@@ -14,6 +14,14 @@
         /// <param name="messages"></param>
         /// <returns></returns>
         IEnumerable<Message> Filter(IEnumerable<Message> messages);
+
+        /// <summary>
+        /// Merges a pair of messages together or returns null <c>null</c> if merging is not possible
+        /// </summary>
+        /// <param name="one"></param>
+        /// <param name="two"></param>
+        /// <returns></returns>
+        Message FilterTwo(Message one, Message two);
     }
 
     /// <summary>

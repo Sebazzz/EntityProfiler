@@ -43,6 +43,28 @@
             foreach (var msg in FinalizeGroup(queryMessages)) yield return msg;
         }
 
+        /// <summary>
+        /// Merges a pair of messages together or returns null <c>null</c> if merging is not possible
+        /// </summary>
+        /// <param name="one"></param>
+        /// <param name="two"></param>
+        /// <returns></returns>
+        public Message FilterTwo(Message one, Message two) {
+            QueryMessage firstQueryMessage = one as QueryMessage;
+            QueryMessage secondQueryMessage = two as QueryMessage;
+            if (firstQueryMessage == null || secondQueryMessage == null) {
+                return null;
+            }
+
+            if (!AreQueriesEqual(firstQueryMessage.Query, secondQueryMessage.Query)) {
+                return null;
+            }
+
+            List<QueryMessage> queryMessages = new List<QueryMessage>(new[]{firstQueryMessage, secondQueryMessage});
+            FlattenExistingDuplicateQueryMessages(queryMessages);
+            return CreateGroupQuery(queryMessages);
+        }
+
         private static IEnumerable<Message> FinalizeGroup(List<QueryMessage> queryMessages) {
 // can't group one query (QueryThreshold)
             if (queryMessages.Count <= QueryThreshold) {

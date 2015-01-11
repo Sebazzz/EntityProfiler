@@ -40,7 +40,8 @@
                             <Run Text="{Binding Path=Context.Description}"/>
                         </TextBlock>
 
-                        <TextBlock Text="{Binding Path=Performance.TotalTime, StringFormat='\{0} ms'}" FontSize="8" TextAlignment="Right"/>
+                        <TextBlock Text="{Binding Path=NumberOfQueries}" Foreground="Red" FontWeight="Bold" />
+                        <TextBlock Text="{Binding Path=Performance.TotalTime, StringFormat='\{0} ms'}" FontSize="8" TextAlignment="Right" Margin="0,0,0,-5"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

@@ -4,6 +4,7 @@
     using Caliburn.Micro;
     using Common.Events;
     using Common.Protocol;
+    using Interceptor.Reader.Core;
     using Interceptor.Reader.Protocol;
     using PropertyChanged;
     using Services;
@@ -11,6 +12,7 @@
     [ImplementPropertyChanged]
     public class ShellViewModel : Screen, IShell, IHandle<MessageEvent> {
         private readonly IRestartableMessageListener _messageListener;
+        private readonly IMessageFilter _messageFilter;
         private readonly IObservableCollection<QueryMessage> _queries;
 
         /// <summary>
@@ -19,6 +21,7 @@
         public ShellViewModel(IRestartableMessageListener messageListener, IEventAggregator eventAggregator) {
             this._messageListener = messageListener;
             this._queries = new BindableCollection<QueryMessage>();
+            this._messageFilter = new DuplicateQueryDetectionMessageFilter();
 
             eventAggregator.Subscribe(this);
         }
@@ -100,7 +103,21 @@
 
             this._resetStatusBarAction = OneTimeAction.Execute(1750, () => this.StatusBar = "Ready").CancelExisting(this._resetStatusBarAction);
 
-            this._queries.Add(queryMessage);
+            if (this._queries.Count == 0) {
+                this._queries.Add(queryMessage);
+                return;
+            }
+
+            // try to merge with last
+            QueryMessage lastQueryMessage = this._queries[this._queries.Count - 1];
+            QueryMessage merged = this._messageFilter.FilterTwo(lastQueryMessage, queryMessage) as QueryMessage;
+
+            if (merged == null) {
+                this._queries.Add(queryMessage);
+            }
+            else {
+                this._queries[this._queries.Count - 1] = merged;
+            }
         }
 
         private void TryConnect() {

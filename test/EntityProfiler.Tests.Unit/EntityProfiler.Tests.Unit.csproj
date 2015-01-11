@@ -82,7 +82,8 @@
     <Compile Include="Common\Protocol\Serializer\TextReaderUtilsTests.cs" />
     <Compile Include="Common\Protocol\Serializer\UnitTestMessageTypeResolver.cs" />
     <Compile Include="Common\Protocol\VersionTests.cs" />
-    <Compile Include="Interceptor.Reader\Core\DuplicateQueryDetectionMessageFilterTests.cs" />
+    <Compile Include="Interceptor.Reader\Core\DuplicateQueryDetectionMessageFilterMergeTests.cs" />
+    <Compile Include="Interceptor.Reader\Core\DuplicateQueryDetectionMessageFilterTheoryGroupsAdjecentQueryMessages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
