@@ -9,6 +9,7 @@
     using ViewModels;
 
     partial class ShellView {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2202:Do not dispose objects multiple times")]
         private void OnAvalonLoaded(object sender, RoutedEventArgs e) {
             TextEditor textEditor = (TextEditor) sender;
 

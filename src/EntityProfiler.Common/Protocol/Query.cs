@@ -6,7 +6,7 @@ namespace EntityProfiler.Common.Protocol {
     /// Represents a query that has been executed
     /// </summary>
     [DebuggerDisplay("{CommandText,nq}")]
-    public sealed class Query {
+    public class Query {
         /// <summary>
         /// Gets the command text of the executed query
         /// </summary>

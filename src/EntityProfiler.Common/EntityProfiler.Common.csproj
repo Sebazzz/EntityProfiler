@@ -92,6 +92,7 @@
     <Compile Include="Protocol\StackFrame.cs" />
     <Compile Include="Protocol\StackTrace.cs" />
     <Compile Include="TinyIoC.cs" />
+    <Compile Include="Utils\SmartEnumerable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

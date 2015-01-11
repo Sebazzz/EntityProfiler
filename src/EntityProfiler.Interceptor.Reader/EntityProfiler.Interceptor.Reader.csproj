@@ -52,8 +52,14 @@
     <Compile Include="..\..\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Core\AggregatePerformanceData.cs" />
+    <Compile Include="Core\AggregateQuery.cs" />
+    <Compile Include="Core\DataTable.cs" />
+    <Compile Include="Core\DuplicateQueryDetectionMessageFilter.cs" />
+    <Compile Include="Core\IMessageFilter.cs" />
     <Compile Include="DependencyFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Core\DuplicateQueryMessage.cs" />
     <Compile Include="Protocol\IMessageListener.cs" />
     <Compile Include="Protocol\IRestartableMessageListener.cs" />
     <Compile Include="Protocol\ITcpClientFactory.cs" />
