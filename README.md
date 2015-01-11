@@ -8,13 +8,14 @@ Install the EntityProfiler.Interceptor NuGet package or install manually:
 1. Add references to EntityProfiler.Common and EntityProfiler.Interceptor to your project.
 2. Register the interceptor in either the `DbConfiguration` or in your web.config file:
 
-  <entityFramework>
-    ...
-    <interceptors>
-      <interceptor type="EntityProfiler.Interceptor.Core.ProfilingInterceptor, EntityProfiler.Interceptor"/>
-    </interceptors>
-  </entityFramework>
-
+        <entityFramework>
+           ...
+           
+           <interceptors>
+             <interceptor type="EntityProfiler.Interceptor.Core.ProfilingInterceptor, EntityProfiler.Interceptor"/>
+           </interceptors>
+        </entityFramework>
+        
 3. Run the EntityProfiler.UI application which will automatically connect.
 
 
