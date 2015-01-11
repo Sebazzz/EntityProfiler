@@ -1,6 +1,7 @@
 ﻿namespace EntityProfiler.UI.ViewModels {
     using System;
     using System.Diagnostics;
+    using System.Linq;
     using Caliburn.Micro;
     using Common.Events;
     using Common.Protocol;
@@ -13,14 +14,14 @@
     public class ShellViewModel : Screen, IShell, IHandle<MessageEvent> {
         private readonly IRestartableMessageListener _messageListener;
         private readonly IMessageFilter _messageFilter;
-        private readonly IObservableCollection<QueryMessage> _queries;
+        private readonly IObservableCollection<DataContextViewModel> _dataContexts;
 
         /// <summary>
         ///     Creates an instance of the screen.
         /// </summary>
         public ShellViewModel(IRestartableMessageListener messageListener, IEventAggregator eventAggregator) {
             this._messageListener = messageListener;
-            this._queries = new BindableCollection<QueryMessage>();
+            this._dataContexts = new BindableCollection<DataContextViewModel>();
             this._messageFilter = new DuplicateQueryDetectionMessageFilter();
 
             eventAggregator.Subscribe(this);
@@ -33,18 +34,27 @@
         public ShellViewModel() {
             this.StatusBar = "Connected";
 
-            this._queries = new BindableCollection<QueryMessage>();
-            this._queries.AddRange(SeedData.Queries());
+            this._dataContexts = new BindableCollection<DataContextViewModel>();
+            this._dataContexts.AddRange(SeedData.DataContexts());
+
+            this.SelectedDataContext = this._dataContexts[0];
         }
 
         public string StatusBar { get; set; }
 
-        public IObservableCollection<QueryMessage> Queries {
-            [DebuggerStepThrough] get { return this._queries; }
+        public IObservableCollection<QueryMessageViewModel> Queries {
+            [DebuggerStepThrough] get {
+                return this.SelectedDataContext != null ? this.SelectedDataContext.Queries : new BindableCollection<QueryMessageViewModel>();
+            }
         }
 
+        public IObservableCollection<DataContextViewModel> DataContexts {
+            [DebuggerStepThrough] get { return this._dataContexts; }
+        }
 
-        public QueryMessage SelectedQuery { get; set; }
+        public DataContextViewModel SelectedDataContext { get; set; }
+
+        public QueryMessageViewModel SelectedQuery { get; set; }
 
         /// <summary>
         ///     Handles the message.
@@ -103,21 +113,40 @@
 
             this._resetStatusBarAction = OneTimeAction.Execute(1750, () => this.StatusBar = "Ready").CancelExisting(this._resetStatusBarAction);
 
-            if (this._queries.Count == 0) {
-                this._queries.Add(queryMessage);
+            // find data context
+            DataContextViewModel dataContext = this.GetOrCreateDataContext(queryMessage.Context);
+
+            IObservableCollection<QueryMessageViewModel> queries = dataContext.Queries;
+            if (queries.Count == 0) {
+                queries.Add(queryMessage);
                 return;
             }
 
             // try to merge with last
-            QueryMessage lastQueryMessage = this._queries[this._queries.Count - 1];
+            QueryMessage lastQueryMessage = queries[queries.Count - 1].Model;
             QueryMessage merged = this._messageFilter.FilterTwo(lastQueryMessage, queryMessage) as QueryMessage;
 
             if (merged == null) {
-                this._queries.Add(queryMessage);
+                queries.Add(queryMessage);
+            } else {
+                queries[queries.Count - 1].Model = merged;
             }
-            else {
-                this._queries[this._queries.Count - 1] = merged;
+        }
+
+        private DataContextViewModel GetOrCreateDataContext(ExecutionContext context) {
+            DataContextViewModel result = this._dataContexts.FirstOrDefault(x => x.Identifier == context.Identifier);
+            if (result != null) {
+                return result;
             }
+
+            result = new DataContextViewModel() {
+                Description = context.Description,
+                Identifier = context.Identifier
+            };
+
+            this._dataContexts.Add(result);
+
+            return result;
         }
 
         private void TryConnect() {

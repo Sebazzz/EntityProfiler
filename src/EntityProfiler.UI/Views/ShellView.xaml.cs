@@ -33,7 +33,7 @@
         }
 
         private static void SetTextEditor(ShellViewModel vm, TextEditor textEditor) {
-            textEditor.Text = vm.SelectedQuery != null ? vm.SelectedQuery.Query.CommandText : "";
+            textEditor.Text = vm.SelectedQuery != null ? vm.SelectedQuery.Model.Query.CommandText : "";
         }
     }
 }

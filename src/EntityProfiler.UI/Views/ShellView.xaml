@@ -27,38 +27,72 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
             <RowDefinition Height="20" />
         </Grid.RowDefinitions>
         
-        <!-- List of queries -->
-        <ListBox x:Name="Queries" Grid.Column="0" Grid.Row="0" Background="Transparent" HorizontalContentAlignment="Stretch" SelectedItem="{Binding SelectedQuery, Mode=TwoWay}">
+        <!-- List of data contexts -->
+        <ListBox x:Name="DataContexts" Grid.Column="0" Grid.Row="0" Background="Transparent" HorizontalContentAlignment="Stretch" SelectedItem="{Binding SelectedDataContext, Mode=TwoWay}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
                         <TextBlock TextWrapping="Wrap">
-                            <Run Text="{Binding Path=Context.Identifier, StringFormat='#{0}'}"/>
-                            <Run Text="{Binding Path=Context.Description}"/>
+                            <Run Text="{Binding Path=Identifier, StringFormat='#{0}'}"/>
+                            <Run Text="{Binding Path=Description}"/>
                         </TextBlock>
 
-                        <TextBlock Text="{Binding Path=NumberOfQueries}" Foreground="Red" FontWeight="Bold" />
-                        <TextBlock Text="{Binding Path=Performance.TotalTime, StringFormat='\{0} ms'}" FontSize="8" TextAlignment="Right" Margin="0,0,0,-5"/>
+                        <TextBlock Text="{Binding Path=NumberOfQueries}" FontWeight="Bold" />
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        
-        <Canvas Grid.Column="1" Grid.Row="0" Margin="5,5,5,5">
+
+        <!-- List of queries -->
+        <ListBox x:Name="Queries" Grid.Column="0" Grid.Row="1" Background="Transparent" HorizontalContentAlignment="Stretch" SelectedItem="{Binding SelectedQuery, Mode=TwoWay}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
+                        <TextBlock TextWrapping="Wrap">
+                            <Run Text="{Binding Path=Index, StringFormat='#{0}'}"/>
+                            <Run Text="{Binding Path=Model.Context.Description}"/>
+                        </TextBlock>
+
+                        <Grid>
+                            <TextBlock Text="{Binding Path=Model.NumberOfQueries}" Foreground="Red" FontWeight="Bold" />
+                            <TextBlock Text="{Binding Path=Model.Performance.TotalTime, StringFormat='\{0} ms'}" FontSize="8" TextAlignment="Right" Margin="0,0,0,-5"/>
+                        </Grid>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Margin="5,5,5,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
             <avalonEdit:TextEditor xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
                 FontFamily="Consolas"
                 FontSize="10pt"
-                Foreground="White"
+                Background="White"
                 IsReadOnly="True"
                 Loaded="OnAvalonLoaded" 
-                MaxHeight="400"/>
+                MaxHeight="400"
+                                   
+                Grid.Column="0" Grid.Row="0"/>
 
-        </Canvas>
+            <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="1">
+                <TextBlock FontSize="{DynamicResource SubHeaderFontSize}" Foreground="{DynamicResource TextBrush}" Text="Stack Trace" />
+                <TextBlock Foreground="{DynamicResource TextBrush}" Text="{Binding Path=SelectedQuery.Model.Context.CallStack}" FontFamily="Consolas" FontSize="10" />
+            </StackPanel>
+            
+        </Grid>
         
         <!-- Status bar -->
-        <TextBlock x:Name="StatusBar" Grid.Row="1" Padding="3,3,3,3" Text="[Unbound]" Grid.ColumnSpan="2" Background="{DynamicResource AccentColorBrush}"/>
+        <TextBlock x:Name="StatusBar" Grid.Row="2" Padding="3,3,3,3" Text="[Unbound]" Grid.ColumnSpan="2" Background="{DynamicResource AccentColorBrush}"/>
     </Grid>
 </metro:MetroWindow>

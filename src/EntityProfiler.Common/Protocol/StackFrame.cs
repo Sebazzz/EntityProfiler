@@ -51,7 +51,7 @@
         /// A string that represents the current object.
         /// </returns>
         public override string ToString() {
-            if (!this.HasFileInfo) {
+            if (this.HasFileInfo) {
                 return this.TypeName + "." + this.MethodName + " in " + this.FilePath + " " + this.LineNumber + ":" +
                        this.ColumnNumber;
             }
