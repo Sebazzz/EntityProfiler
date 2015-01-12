@@ -1,5 +1,6 @@
 ﻿namespace EntityProfiler.UI.ViewModels {
     using System;
+    using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Linq;
@@ -70,6 +71,36 @@
         }
 
         public QueryMessage Model { get; set; }
+
+        public IEnumerable<Record> Parameters {
+            get {
+                DuplicateQueryMessage dupQuery = this.Model as DuplicateQueryMessage;
+                if (dupQuery != null) {
+                    return GetQueryParameters(dupQuery.Query.ParameterCollection);
+                }
+
+                return GetQueryParameters(this.Model.Query.Parameters);
+            }
+        }
+
+        private static IEnumerable<Record> GetQueryParameters(Dictionary<string, object> parameters) {
+            return parameters.Select(param => 
+                new Record(
+                    new Property("Name", param.Key),
+                    new Property("Value", param.Value)));
+        }
+
+        private static IEnumerable<Record> GetQueryParameters(DataTable parameters) {
+            return parameters.Select(entry => new Record(GetParameters(entry).ToArray()));
+        }
+
+        private static IEnumerable<Property> GetParameters(DataTable.DataTableEntry entry) {
+            yield return new Property("#", entry.Row);
+
+            foreach (var kvp in entry.Columns) {
+                yield return new Property(kvp.Key, kvp.Value);
+            }
+        }
     }
 
 

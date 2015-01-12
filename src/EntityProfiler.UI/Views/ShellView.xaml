@@ -85,10 +85,21 @@
                                    
                 Grid.Column="0" Grid.Row="0"/>
 
-            <StackPanel Orientation="Vertical" Grid.Column="0" Grid.Row="1">
-                <TextBlock FontSize="{DynamicResource SubHeaderFontSize}" Foreground="{DynamicResource TextBrush}" Text="Stack Trace" />
-                <TextBlock Foreground="{DynamicResource TextBrush}" Text="{Binding Path=SelectedQuery.Model.Context.CallStack}" FontFamily="Consolas" FontSize="10" />
-            </StackPanel>
+            <TabControl Grid.Column="0" Grid.Row="1">
+                <TabControl.Items>
+                    <TabItem Header="Stack Trace">
+                        <StackPanel Orientation="Vertical" >
+                            <TextBlock FontSize="{DynamicResource SubHeaderFontSize}" Foreground="{DynamicResource TextBrush}" Text="Stack Trace" />
+                            <TextBlock Foreground="{DynamicResource TextBrush}" Text="{Binding Path=SelectedQuery.Model.Context.CallStack}" FontFamily="Consolas" FontSize="10" />
+                        </StackPanel>
+                    </TabItem>
+                    
+                    <TabItem Header="Parameters" x:Name="ParametersTab">
+                    </TabItem>
+                </TabControl.Items>
+            </TabControl>
+            
+            
             
         </Grid>
         
