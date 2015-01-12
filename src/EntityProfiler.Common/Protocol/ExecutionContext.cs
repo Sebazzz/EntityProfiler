@@ -38,7 +38,7 @@
         /// </returns>
         /// <param name="other">An object to compare with this object.</param>
         public bool Equals(ContextIdentifier other) {
-            return this.SequenceNumber == other.SequenceNumber && this.AppDomainTimeStamp.Equals(other.AppDomainTimeStamp);
+            return other != null && this.SequenceNumber == other.SequenceNumber && this.AppDomainTimeStamp.Equals(other.AppDomainTimeStamp);
         }
 
         /// <summary>
@@ -67,6 +67,7 @@
             if (ReferenceEquals(null, obj)) {
                 return false;
             }
+
             return obj is ContextIdentifier && this.Equals((ContextIdentifier) obj);
         }
 
@@ -84,11 +85,19 @@
 
         /// <summary/>
         public static bool operator ==(ContextIdentifier left, ContextIdentifier right) {
+            if (ReferenceEquals(left, null) || ReferenceEquals(right, null)) {
+                return false;
+            }
+
             return left.Equals(right);
         }
 
         /// <summary/>
         public static bool operator !=(ContextIdentifier left, ContextIdentifier right) {
+            if (ReferenceEquals(left, null) || ReferenceEquals(right, null)) {
+                return true;
+            }
+
             return !left.Equals(right);
         }
 

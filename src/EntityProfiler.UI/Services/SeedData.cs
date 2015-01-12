@@ -11,14 +11,12 @@
         public static IEnumerable<DataContextViewModel> DataContexts() {
             yield return new DataContextViewModel() {
                 Identifier = new ContextIdentifier(DateTime.UtcNow, 1),
-                Description = "GET /Test/123.aspx",
-                Queries = new BindableCollection<QueryMessageViewModel>(Queries())
+                Description = "GET /Test/123.aspx"
             };
 
             yield return new DataContextViewModel() {
                 Identifier = new ContextIdentifier(DateTime.UtcNow, 2),
-                Description = "POST /Test/123.aspx",
-                Queries = new BindableCollection<QueryMessageViewModel>(Queries())
+                Description = "POST /Test/123.aspx"
             };
         }
 

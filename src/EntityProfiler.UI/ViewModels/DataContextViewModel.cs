@@ -1,18 +1,26 @@
 ﻿namespace EntityProfiler.UI.ViewModels {
+    using System.Collections.Specialized;
+    using System.ComponentModel;
     using System.Linq;
+    using System.Runtime.CompilerServices;
     using Caliburn.Micro;
+    using Common.Annotations;
     using Common.Protocol;
     using Interceptor.Reader.Core;
     using PropertyChanged;
 
-    public class DataContextViewModel {
+    public class DataContextViewModel : INotifyPropertyChanged {
+        private IObservableCollection<QueryMessageViewModel> _queries;
+
         /// <seealso cref="ExecutionContext.Identifier"/>
         public ContextIdentifier Identifier { get; set; }
 
         public string Description { get; set; }
 
         [AlsoNotifyFor("NumberOfQueries")]
-        public IObservableCollection<QueryMessageViewModel> Queries { get; set; }
+        public IObservableCollection<QueryMessageViewModel> Queries {
+            get { return this._queries; }
+        }
 
         public int NumberOfQueries {
             get { return this.CountQueries(); }
@@ -29,7 +37,22 @@
         /// Initializes a new instance of the <see cref="T:System.Object"/> class.
         /// </summary>
         public DataContextViewModel() {
-            this.Queries = new BindableCollection<QueryMessageViewModel>();
+            this._queries = new BindableCollection<QueryMessageViewModel>();
+            this._queries.CollectionChanged += this.OnQueryCollectionChanged;
+        }
+
+        private void OnQueryCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
+            this.OnPropertyChanged("CountQueries");
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) {
+            var handler = this.PropertyChanged;
+            if (handler != null) {
+                handler(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 
