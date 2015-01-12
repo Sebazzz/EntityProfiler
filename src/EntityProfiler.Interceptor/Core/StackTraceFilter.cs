@@ -30,9 +30,10 @@
         private static bool IsAssemblyRelevant(Assembly assembly) {
             string name = GetPrimaryAssemblyReference(assembly);
 
-            return name.StartsWith("EntityFramework", StringComparison.OrdinalIgnoreCase) ||
-                   name.StartsWith("EntityProfiler.Interceptor", StringComparison.OrdinalIgnoreCase) ||
-                   name.StartsWith("EntityProfiler.Common", StringComparison.OrdinalIgnoreCase);
+            return !name.StartsWith("EntityFramework", StringComparison.OrdinalIgnoreCase) && 
+                   !assembly.FullName.StartsWith("System.Data", StringComparison.OrdinalIgnoreCase) && 
+                   !assembly.FullName.StartsWith("EntityProfiler.Interceptor", StringComparison.OrdinalIgnoreCase) && 
+                   !assembly.FullName.StartsWith("EntityProfiler.Common", StringComparison.OrdinalIgnoreCase);
         }
 
         private static string GetPrimaryAssemblyReference(Assembly assembly) {
