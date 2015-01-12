@@ -19,7 +19,6 @@
 
         public string Description { get; set; }
 
-        [AlsoNotifyFor("NumberOfQueries")]
         public IObservableCollection<QueryMessageViewModel> Queries {
             get { return this._queries; }
         }
@@ -59,7 +58,7 @@
     }
 
     [ImplementPropertyChanged]
-    public class QueryMessageViewModel {
+    public class QueryMessageViewModel : INotifyPropertyChanged {
         public int Index { get; set; }
 
         public string QueryPart {
@@ -72,6 +71,7 @@
 
         public QueryMessage Model { get; set; }
 
+        [AlsoNotifyFor("Model")]
         public IEnumerable<Record> Parameters {
             get {
                 DuplicateQueryMessage dupQuery = this.Model as DuplicateQueryMessage;
@@ -99,6 +99,16 @@
 
             foreach (var kvp in entry.Columns) {
                 yield return new Property(kvp.Key, kvp.Value);
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotifyPropertyChangedInvocator]
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null) {
+            var handler = this.PropertyChanged;
+            if (handler != null) {
+                handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
     }
