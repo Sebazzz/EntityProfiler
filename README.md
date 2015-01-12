@@ -2,6 +2,8 @@
 
 An initiative for creating an open-source Entity Framework profiler. 
 
+![EntityProfiler](EntityProfiler.png)
+
 ## How to use it
 Install the EntityProfiler.Interceptor NuGet package or install manually:
 
