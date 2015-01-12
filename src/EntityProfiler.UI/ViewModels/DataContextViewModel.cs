@@ -11,6 +11,7 @@
 
         public string Description { get; set; }
 
+        [AlsoNotifyFor("NumberOfQueries")]
         public IObservableCollection<QueryMessageViewModel> Queries { get; set; }
 
         public int NumberOfQueries {
@@ -18,8 +19,10 @@
         }
 
         private int CountQueries() {
-            return this.Queries.Count(x => !(x.Model is DuplicateQueryMessage)) +
-                   this.Queries.Where(x => x.Model is DuplicateQueryMessage).Sum(x => ((DuplicateQueryMessage)x.Model).NumberOfQueries);
+            int normalQueryCount = this.Queries.Count(x => !(x.Model is DuplicateQueryMessage));
+            int dupQueryCount = this.Queries.Where(x => x.Model is DuplicateQueryMessage).Sum(x => ((DuplicateQueryMessage)x.Model).NumberOfQueries);
+
+            return dupQueryCount + normalQueryCount;
         }
 
         /// <summary>
