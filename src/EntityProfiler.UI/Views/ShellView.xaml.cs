@@ -54,6 +54,8 @@
             DataGrid dataGrid = new DataGrid();
             dataGrid.AutoGenerateColumns = false;
             dataGrid.IsReadOnly = true;
+            dataGrid.CanUserSortColumns = false;
+            dataGrid.CanUserReorderColumns = false;
 
             var columns = first
                 .Properties
