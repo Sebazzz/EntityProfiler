@@ -9,6 +9,7 @@
     internal class StackTraceFactory : IStackTraceFactory {
         private const bool IncludeFileInformation = true;
         private const int MethodsToSkip = 5; // rogue guess
+        private const int MethodsToKeep = 3;
         private readonly IStackTraceFilter _stackTraceFilter;
 
         /// <summary>
@@ -47,7 +48,14 @@
                         continue;
                     }
 
-                    result = new StackFrame[stackFrames.Length - i];
+                    result = new StackFrame[stackFrames.Length + MethodsToKeep - i];
+
+                    // copy last frames to stack
+                    for (int j = i-MethodsToKeep; j < i; j++) {
+                        result[resultIndex] = StackFrame.Create(stackFrames[j]);
+                        resultIndex++;
+                    }
+
                 }
 
                 result[resultIndex] = StackFrame.Create(stackFrames[i]);
