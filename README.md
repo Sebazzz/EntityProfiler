@@ -23,3 +23,6 @@ Install the EntityProfiler.Interceptor NuGet package or install manually:
 
 ## Current limitations
 Only one profiling application instance is allowed. Currently the interceptor opens a TCP socket on a fixed port on localhost and no configuration is yet possible.
+
+## Contributions
+This project accepts contributions. Please put an issue in the issue track first to prevent confusion.
