@@ -63,6 +63,10 @@
                 if (ex.InnerException is IOException) {
                     return true;
                 }
+
+                if (ex.InnerException is ObjectDisposedException) {
+                    return true;
+                }
             }
 
             return false;
