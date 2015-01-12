@@ -10,7 +10,7 @@
                 <efc:DesignResourceDictionary Source="/Resources/Blend/Styles/Fonts.xaml" />
                 <efc:DesignResourceDictionary Source="/Resources/Blend/Styles/Colors.xaml" />
                 <efc:DesignResourceDictionary Source="/Resources/Blend/Styles/Accents/Purple.xaml" />
-                <efc:DesignResourceDictionary Source="/Resources/Blend/Styles/Accents/BaseDark.xaml" />
+                <efc:DesignResourceDictionary Source="/Resources/Blend/Styles/Accents/BaseLight.xaml" />
                 <efc:DesignResourceDictionary Source="/Resources/Blend/Styles/DefaultTheme.xaml" />
 
                 <ResourceDictionary>
