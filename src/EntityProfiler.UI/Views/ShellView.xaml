@@ -54,7 +54,7 @@
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch">
                         <TextBlock TextWrapping="Wrap">
                             <Run Text="{Binding Path=Index, StringFormat='#{0}'}"/>
-                            <Run Text="{Binding Path=Model.Context.Description}"/>
+                            <Run Text="{Binding Path=QueryPart, Mode=OneWay}"/>
                         </TextBlock>
 
                         <Grid>

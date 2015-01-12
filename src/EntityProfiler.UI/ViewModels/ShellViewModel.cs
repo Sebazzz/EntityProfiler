@@ -134,6 +134,11 @@
             } else {
                 queries[queries.Count - 1].Model = merged;
             }
+
+            // auto-select if no data context has been selected
+            if (this.SelectedDataContext == null) {
+                this.SelectedDataContext = dataContext;
+            }
         }
 
         private DataContextViewModel GetOrCreateDataContext(ExecutionContext context) {
@@ -147,11 +152,7 @@
                 Identifier = context.Identifier
             };
 
-            // auto-select if no data context has been selected
             this._dataContexts.Insert(0, result);
-            if (this.SelectedDataContext == null) {
-                this.SelectedDataContext = result;
-            }
 
             return result;
         }

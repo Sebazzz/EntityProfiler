@@ -1,4 +1,5 @@
 ﻿namespace EntityProfiler.UI.ViewModels {
+    using System;
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Linq;
@@ -42,7 +43,7 @@
         }
 
         private void OnQueryCollectionChanged(object sender, NotifyCollectionChangedEventArgs e) {
-            this.OnPropertyChanged("CountQueries");
+            this.OnPropertyChanged("NumberOfQueries");
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -58,8 +59,15 @@
 
     [ImplementPropertyChanged]
     public class QueryMessageViewModel {
-        
         public int Index { get; set; }
+
+        public string QueryPart {
+            get {
+                // try to get table
+                string query = this.Model.Query.CommandText.Replace(Environment.NewLine, "");
+                return query.Substring(0, Math.Min(25, query.Length));
+            }
+        }
 
         public QueryMessage Model { get; set; }
     }
