@@ -1,5 +1,6 @@
 ﻿namespace EntityProfiler.UI.ViewModels {
     using System;
+    using System.ComponentModel;
     using System.Diagnostics;
     using System.Linq;
     using Caliburn.Micro;
@@ -23,8 +24,10 @@
             this._messageListener = messageListener;
             this._dataContexts = new BindableCollection<DataContextViewModel>();
             this._messageFilter = new DuplicateQueryDetectionMessageFilter();
+            this.PropertyChanged += this.OnPropertyChanged;
 
             eventAggregator.Subscribe(this);
+
         }
 
         /// <summary>
@@ -144,7 +147,11 @@
                 Identifier = context.Identifier
             };
 
-            this._dataContexts.Add(result);
+            // auto-select if no data context has been selected
+            this._dataContexts.Insert(0, result);
+            if (this.SelectedDataContext == null) {
+                this.SelectedDataContext = result;
+            }
 
             return result;
         }
@@ -152,6 +159,15 @@
         private void TryConnect() {
             this.StatusBar = "Connecting...";
             this._messageListener.Restart();
+        }
+
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e) {
+            switch (e.PropertyName) {
+                case "SelectedDataContext":
+                    // select the last query
+                    this.SelectedQuery = this.SelectedDataContext != null ? this.SelectedDataContext.Queries.Last() : null;
+                    break;
+            }
         }
     }
 }
