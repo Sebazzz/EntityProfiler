@@ -1,4 +1,5 @@
 ﻿namespace EntityProfiler.Tests.Unit.Interceptor.Reader.Core {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using EntityProfiler.Common.Protocol;
@@ -50,7 +51,7 @@
 
         private static Message MakeQueryMessage(string queryText) {
             return new DbReaderQueryMessage() {
-                Context = new ExecutionContext(0),
+                Context = new ExecutionContext(new ContextIdentifier(DateTime.UtcNow, 1)),
                 Performance = new PerformanceData(),
                 Query = new Query() {
                     CommandText = queryText,

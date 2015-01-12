@@ -115,7 +115,7 @@
 
             // if we yank the TcpConnection out of the client thread the client thread will stop eventually
             if (this._tcpClient != null) this._tcpClient.Close();
-            if (this._clientThread.IsAlive) this._clientThread.Join();
+            if (this._clientThread.IsAlive) this._clientThread.Join(1000);
 
             this._isDisposed = true;
         }

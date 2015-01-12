@@ -7,7 +7,7 @@
 
     public class DataContextViewModel {
         /// <seealso cref="ExecutionContext.Identifier"/>
-        public int Identifier { get; set; }
+        public ContextIdentifier Identifier { get; set; }
 
         public string Description { get; set; }
 

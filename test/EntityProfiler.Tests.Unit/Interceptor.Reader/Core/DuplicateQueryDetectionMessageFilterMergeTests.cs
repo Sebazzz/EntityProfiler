@@ -1,4 +1,5 @@
 ﻿namespace EntityProfiler.Tests.Unit.Interceptor.Reader.Core {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
@@ -54,7 +55,7 @@
             Debug.Assert(count > 1);
 
             return new DuplicateQueryMessage() {
-                Context = new ExecutionContext(0),
+                Context = new ExecutionContext(new ContextIdentifier(DateTime.UtcNow, 0)),
                 Performance = new AggregatePerformanceData() { Times = new long[count]},
                 Query = new AggregateQuery() {
                     CommandText = queryText,
@@ -68,7 +69,7 @@
 
         private static QueryMessage MakeQueryMessage(string queryText) {
             return new DbReaderQueryMessage() {
-                Context = new ExecutionContext(0),
+                Context = new ExecutionContext(new ContextIdentifier(DateTime.UtcNow, 0)),
                 Performance = new PerformanceData(),
                 Query = new Query() {
                     CommandText = queryText,

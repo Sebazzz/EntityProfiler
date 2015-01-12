@@ -7,6 +7,7 @@ namespace EntityProfiler.Interceptor.Core {
     using System.Reflection;
     using System.Runtime.Remoting.Messaging;
     using System.Threading;
+    using Common.Protocol;
     using ExecutionContext = Common.Protocol.ExecutionContext;
 
     /// <summary>
@@ -42,7 +43,7 @@ namespace EntityProfiler.Interceptor.Core {
             HttpContextWrapper ctx = this.GetHttpContext();
             if (!ctx.IsAvailable) return null;
 
-            int id = ctx.Id();
+            ContextIdentifier id = ctx.Id();
             string url = ctx.Url();
 
             string description = String.Format("#{0} {1}", id, url);
@@ -80,7 +81,6 @@ namespace EntityProfiler.Interceptor.Core {
         }
 
         private struct HttpContextWrapper {
-            private static int _IdCounter = 0;
             private static readonly object Unavailable = new object();
             private readonly object _httpContext;
             private object _httpRequest;
@@ -100,15 +100,15 @@ namespace EntityProfiler.Interceptor.Core {
             /// Gets the unique request id, assigns an id to the request if required
             /// </summary>
             /// <returns></returns>
-            public int Id() {
+            public ContextIdentifier Id() {
                 string key = this.GetType().FullName + "-RequestId";
                 IDictionary dict = this.GetItemsDictionary();
                 object boxedId = dict[key];
-                if (boxedId != null && boxedId is Int32) {
-                    return (int) boxedId;
+                if (boxedId != null && boxedId is ContextIdentifier) {
+                    return (ContextIdentifier) boxedId;
                 }
 
-                int id = Interlocked.Increment(ref _IdCounter);
+                ContextIdentifier id = ContextIdentifierFactory.Create();
                 dict[key] = id;
 
                 return id;

@@ -1,4 +1,5 @@
 ﻿namespace EntityProfiler.UI.Services {
+    using System;
     using System.Collections.Generic;
     using Caliburn.Micro;
     using Common.Protocol;
@@ -9,13 +10,13 @@
     internal static class SeedData {
         public static IEnumerable<DataContextViewModel> DataContexts() {
             yield return new DataContextViewModel() {
-                Identifier = 1,
+                Identifier = new ContextIdentifier(DateTime.UtcNow, 1),
                 Description = "GET /Test/123.aspx",
                 Queries = new BindableCollection<QueryMessageViewModel>(Queries())
             };
 
             yield return new DataContextViewModel() {
-                Identifier = 2,
+                Identifier = new ContextIdentifier(DateTime.UtcNow, 2),
                 Description = "POST /Test/123.aspx",
                 Queries = new BindableCollection<QueryMessageViewModel>(Queries())
             };
@@ -31,36 +32,38 @@
         }
 
         private static IEnumerable<QueryMessage> QueriesInternal() {
+            ContextIdentifier ctx = new ContextIdentifier(DateTime.UtcNow, 1);
+
             yield return new DbReaderQueryMessage() {
-                Context = new ExecutionContext(1, "GET /test.aspx"),
+                Context = new ExecutionContext(ctx, "GET /test.aspx"),
                 Performance = new PerformanceData() {TotalTime = 10},
                 Query = new Query() {CommandText = "SELECT ..."},
                 RecordCount = 10
             };
 
             yield return new DbReaderQueryMessage() {
-                Context = new ExecutionContext(1, "GET /test.aspx"),
+                Context = new ExecutionContext(ctx, "GET /test.aspx"),
                 Performance = new PerformanceData() {TotalTime = 10},
                 Query = new Query() {CommandText = "SELECT ..."},
                 RecordCount = 10
             };
 
             yield return new DbReaderQueryMessage() {
-                Context = new ExecutionContext(1, "GET /test.aspx"),
+                Context = new ExecutionContext(ctx, "GET /test.aspx"),
                 Performance = new PerformanceData() {TotalTime = 10},
                 Query = new Query() {CommandText = "SELECT ..."},
                 RecordCount = 10
             };
 
             yield return new DuplicateQueryMessage {
-                Context = new ExecutionContext(1, "GET /test.aspx"),
+                Context = new ExecutionContext(ctx, "GET /test.aspx"),
                 Performance = new AggregatePerformanceData {TotalTime = 10},
                 Query = new AggregateQuery() {CommandText = "SELECT ..."},
                 NumberOfQueries = 6
             };
 
              yield return new DbReaderQueryMessage() {
-                Context = new ExecutionContext(1, "GET /test.aspx"),
+                Context = new ExecutionContext(ctx, "GET /test.aspx"),
                 Performance = new PerformanceData() {TotalTime = 10},
                 Query = new Query() {CommandText = "SELECT ..."},
                 RecordCount = 10

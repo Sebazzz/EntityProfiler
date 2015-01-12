@@ -6,6 +6,7 @@ namespace EntityProfiler.Interceptor.Core {
     using System.Data.Entity;
     using System.Data.SqlClient;
     using System.Threading;
+    using Common.Protocol;
     using ExecutionContext = Common.Protocol.ExecutionContext;
 
     /// <summary>
@@ -13,7 +14,6 @@ namespace EntityProfiler.Interceptor.Core {
     /// </summary>
     internal sealed class DbContextExecutionContextConstructor : IExecutionContextConstructor {
         private readonly ConcurrentDictionary<Guid, List<DbContextWrapper>> _dbContexts;
-        private int _contextInstanceCount;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:System.Object"/> class.
@@ -32,7 +32,7 @@ namespace EntityProfiler.Interceptor.Core {
                 return null;
             }
 
-            int contextId = this.GetContextNumber(dbContext);
+            ContextIdentifier contextId = this.GetContextNumber(dbContext);
 
             ExecutionContext ctx = new ExecutionContext(contextId, "DbContext instance #" + contextId);
             ctx.Values["ConnectionId"] = GetConnectionId(dbContext.Database.Connection);
@@ -56,24 +56,24 @@ namespace EntityProfiler.Interceptor.Core {
             ctx.Values["ContextId"] = this.GetContextNumber(dbContext);
         }
 
-        private int GetContextNumber(DbContext dbContext) {
+        private ContextIdentifier GetContextNumber(DbContext dbContext) {
             Guid connectionId = GetConnectionId(dbContext.Database.Connection);
             List<DbContextWrapper> contextsForConnection =
                 this._dbContexts.GetOrAdd(connectionId, _ => new List<DbContextWrapper>());
 
             lock (contextsForConnection) {
-                return this.TryAddContext(dbContext, contextsForConnection);
+                return TryAddContext(dbContext, contextsForConnection);
             }
         }
 
-        private int TryAddContext(DbContext context, List<DbContextWrapper> contextList) {
+        private static ContextIdentifier TryAddContext(DbContext context, List<DbContextWrapper> contextList) {
             foreach (DbContextWrapper wrapper in contextList) {
                 if (wrapper.ContainsContext(context)) {
                     return wrapper.Id;
                 }
             }
 
-            int id = Interlocked.Increment(ref this._contextInstanceCount);
+            var id = ContextIdentifierFactory.Create();
             contextList.Add(new DbContextWrapper(id, context));
 
             return id;
@@ -92,12 +92,12 @@ namespace EntityProfiler.Interceptor.Core {
         private struct DbContextWrapper {
             private readonly WeakReference<DbContext> _instance;
 
-            public int Id { get; private set; }
+            public ContextIdentifier Id { get; private set; }
 
             /// <summary>
             /// Initializes a new instance of the <see cref="T:System.Object"/> class.
             /// </summary>
-            public DbContextWrapper(int id, DbContext context) : this() {
+            public DbContextWrapper(ContextIdentifier id, DbContext context) : this() {
                 this.Id = id;
                 this._instance = new WeakReference<DbContext>(context); 
             }

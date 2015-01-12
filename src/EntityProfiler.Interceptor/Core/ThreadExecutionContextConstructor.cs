@@ -21,8 +21,7 @@ namespace EntityProfiler.Interceptor.Core {
             }
 
             return new ExecutionContext(
-                currentThread.ManagedThreadId /* while this isn't sequential ID we have no other option here 
-                                                 because if we came here the DbContext was NULL */, 
+                ContextIdentifierFactory.Create(), 
                 description);
         }
 
