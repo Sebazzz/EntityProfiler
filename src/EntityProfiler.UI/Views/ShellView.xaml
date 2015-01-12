@@ -88,10 +88,9 @@
             <TabControl Grid.Column="0" Grid.Row="1">
                 <TabControl.Items>
                     <TabItem Header="Stack Trace">
-                        <StackPanel Orientation="Vertical" >
-                            <TextBlock FontSize="{DynamicResource SubHeaderFontSize}" Foreground="{DynamicResource TextBrush}" Text="Stack Trace" />
-                            <TextBlock Foreground="{DynamicResource TextBrush}" Text="{Binding Path=SelectedQuery.Model.Context.CallStack}" FontFamily="Consolas" FontSize="10" />
-                        </StackPanel>
+                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                            <TextBlock Foreground="{DynamicResource TextBrush}" Text="{Binding Path=SelectedQuery.Model.Context.CallStack}" Margin="2" FontFamily="Consolas" FontSize="11" />
+                        </ScrollViewer>
                     </TabItem>
                     
                     <TabItem Header="Parameters" x:Name="ParametersTab">
@@ -104,6 +103,6 @@
         </Grid>
         
         <!-- Status bar -->
-        <TextBlock x:Name="StatusBar" Grid.Row="2" Padding="3,3,3,3" Text="[Unbound]" Grid.ColumnSpan="2" Background="{DynamicResource AccentColorBrush}"/>
+        <TextBlock x:Name="StatusBar" Grid.Column="0" Grid.Row="2" Padding="3,3,3,3" Text="[Unbound]" Grid.ColumnSpan="2" Background="{DynamicResource AccentColorBrush}"/>
     </Grid>
 </metro:MetroWindow>
