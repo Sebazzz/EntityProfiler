@@ -52,8 +52,16 @@
         /// </returns>
         public override string ToString() {
             if (this.HasFileInfo) {
-                return this.TypeName + "." + this.MethodName + " in " + this.FilePath + " " + this.LineNumber + ":" +
+                return this.CreateFullyQualifiedMethod() + " in " + this.FilePath + " " + this.LineNumber + ":" +
                        this.ColumnNumber;
+            }
+
+            return this.CreateFullyQualifiedMethod();
+        }
+
+        private string CreateFullyQualifiedMethod() {
+            if (this.TypeName == null) {
+                return this.MethodName;
             }
 
             return this.TypeName + "." + this.MethodName;
@@ -70,8 +78,8 @@
         /// <returns></returns>
         public static StackFrame Create(System.Diagnostics.StackFrame stackFrame) {
             MethodBase method = stackFrame.GetMethod();
-            Type declaringType = method.DeclaringType;
-            Debug.Assert(declaringType != null);
+            Type declaringType = method.DeclaringType; // can be null for auto-generated expression trees
+            string fullName = declaringType != null ? declaringType.FullName : null;
 
             return new StackFrame {
                                       ColumnNumber = stackFrame.GetFileColumnNumber(),
@@ -79,7 +87,7 @@
                                       LineNumber = stackFrame.GetFileLineNumber(),
                                       ILOffset = stackFrame.GetILOffset(),
                                       MethodName = method.ToString(),
-                                      TypeName = declaringType.FullName
+                                      TypeName = fullName
                                   };
         }
 
