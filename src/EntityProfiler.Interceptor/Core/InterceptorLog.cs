@@ -116,7 +116,7 @@
 
             // create query message
             DbReaderQueryMessage qm = new DbReaderQueryMessage();
-            qm.RecordCount = data.Result.RecordsAffected;
+            qm.RecordCount = data.Result != null ? data.Result.RecordsAffected : -1;
 
             this.FillUp(context, qm);
             this.PostMessage(qm);
