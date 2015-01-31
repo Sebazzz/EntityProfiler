@@ -137,7 +137,7 @@ namespace EntityProfiler.Interceptor.Core {
                 object httpRequest = this.GetHttpRequest();
 
                 if (httpRequest != null) {
-                    return GetProperty<Uri>(httpRequest, "Uri").ToString();
+                    return GetProperty<Uri>(httpRequest, "Url").ToString();
                 }
 
                 return null;
