@@ -22,7 +22,14 @@ namespace EntityProfiler.Interceptor.Core {
         /// </summary>
         public HttpContextExecutionContextConstructor() {
             this._isSystemWebLoaded = new Lazy<bool>(DetermineSystemWebLoaded, LazyThreadSafetyMode.PublicationOnly);
-            this._httpContextType = new Lazy<Type>(() => Type.GetType("System.Web.HttpContext, System.Web", true), LazyThreadSafetyMode.PublicationOnly);
+            this._httpContextType = new Lazy<Type>(GetSystemWebHttpContext, LazyThreadSafetyMode.PublicationOnly);
+        }
+
+        private static Type GetSystemWebHttpContext() {
+            Assembly[] loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+
+            Assembly systemWeb = loadedAssemblies.First(x => x.FullName.StartsWith("System.Web,", StringComparison.Ordinal));
+            return systemWeb.GetType("System.Web.HttpContext", true, false);
         }
 
         /// <summary>
@@ -32,7 +39,7 @@ namespace EntityProfiler.Interceptor.Core {
         private static bool DetermineSystemWebLoaded() {
             Assembly[] loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies();
 
-            return loadedAssemblies.Any(x => x.FullName.StartsWith("System.Web", StringComparison.Ordinal));
+            return loadedAssemblies.Any(x => x.FullName.StartsWith("System.Web,", StringComparison.Ordinal));
         }
 
         /// <summary>
@@ -73,7 +80,15 @@ namespace EntityProfiler.Interceptor.Core {
             // in ASP.NET the host context is the HttpContext
             object context = CallContext.HostContext;
 
-            if (context == null || context.GetType() != this._httpContextType.Value) {
+            try {
+                Type httpContextType = this._httpContextType.Value;
+
+                if (context == null || context.GetType() != httpContextType) {
+                    return default(HttpContextWrapper);
+                }
+            }
+            catch (Exception any) {
+                Debug.Write(any);
                 return default(HttpContextWrapper);
             }
 
