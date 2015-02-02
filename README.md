@@ -4,6 +4,11 @@ An initiative for creating an open-source Entity Framework profiler.
 
 ![EntityProfiler](EntityProfiler.png)
 
+## Features
+- View syntax highlighted queries.
+- Context-aware: Knows about HttpContext when using ASP.NET.
+- Duplicate or SELECT 1+N detectiom query detection, shows the number of duplicated queries.
+
 ## How to use it
 Install the EntityProfiler.Interceptor NuGet package or install manually:
 
