@@ -7,14 +7,15 @@ An initiative for creating an open-source Entity Framework profiler.
 ## Features
 - View syntax highlighted queries and their source, including the stack trace.
 - Context-aware: Knows about HttpContext when using ASP.NET.
-- Duplicate or SELECT 1+N detectiom query detection: shows the number of duplicated queries.
+- Duplicate or SELECT 1+N query detection: shows the number of duplicated queries.
 - Stack Trace reduction: removes confusing and unneccesary frames from Entity Framework from the top of the call stack.
+- Works with ASP.NET and desktop apps.
 
 ## How to use it
 Install the EntityProfiler.Interceptor NuGet package or install manually:
 
 1. Add references to EntityProfiler.Common and EntityProfiler.Interceptor to your project.
-2. Register the interceptor in either the `DbConfiguration` or in your web.config file:
+2. Register the interceptor in either the `DbConfiguration` or in your web.config/app.config file:
 
         <entityFramework>
            ...
