@@ -1,70 +1,126 @@
-﻿namespace EntityProfiler.Interceptor.Reader.Protocol {
-    using System;
-    using System.IO;
-    using System.Net.Sockets;
-    using System.Threading;
-    using Common.Events;
-    using Common.Protocol;
-    using Common.Protocol.Serializer;
+﻿using System;
+using System.IO;
+using System.Net.Sockets;
+using System.Threading;
+using EntityProfiler.Common.Events;
+using EntityProfiler.Common.Protocol.Serializer;
 
-    internal class TcpMessageListener : IMessageListener {
-        private TcpClient _tcpClient;
-        private readonly ITcpClientFactory _tcpClientFactory;
+namespace EntityProfiler.Interceptor.Reader.Protocol
+{
+    internal class TcpMessageListener : IMessageListener
+    {
+        private readonly Thread _clientThread;
         private readonly IMessageDeserializerFactory _messageDeserializerFactory;
         private readonly MessageEventDispatcher _messageDispatcher;
-        private readonly Thread _clientThread;
-
-        private volatile bool _isStopping;
+        private readonly ITcpClientFactory _tcpClientFactory;
         private bool _isDisposed;
+        private volatile bool _isStopping;
+        private TcpClient _tcpClient;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:System.Object"/> class.
+        ///     Initializes a new instance of the <see cref="T:System.Object" /> class.
         /// </summary>
-        public TcpMessageListener(ITcpClientFactory tcpClientFactory, IMessageDeserializerFactory messageDeserializerFactory, MessageEventDispatcher messageDispatcher) {
-            this._tcpClientFactory = tcpClientFactory;
-            this._messageDeserializerFactory = messageDeserializerFactory;
-            this._messageDispatcher = messageDispatcher;
+        public TcpMessageListener(ITcpClientFactory tcpClientFactory,
+            IMessageDeserializerFactory messageDeserializerFactory, MessageEventDispatcher messageDispatcher)
+        {
+            _tcpClientFactory = tcpClientFactory;
+            _messageDeserializerFactory = messageDeserializerFactory;
+            _messageDispatcher = messageDispatcher;
 
-            this._clientThread = new Thread(this.ClientThread);
-            this._clientThread.IsBackground = true;
+            _clientThread = new Thread(ClientThread) {IsBackground = true};
+        }
+
+        public void Start()
+        {
+            EnsureNotDisposed();
+            if (_clientThread.IsAlive)
+            {
+                throw new InvalidOperationException("This TcpInterceptorClient has already been started");
+            }
+
+            _clientThread.Start();
+        }
+
+        public void Stop()
+        {
+            Dispose();
         }
 
         /// <summary>
-        /// Method in which the client thread runs
+        ///     Creates a new instance based on the current
         /// </summary>
-        private void ClientThread() {
-            try {
-                this._tcpClient = this._tcpClientFactory.CreateTcpClient();
-            }
-            catch (Exception ex) {
-                this.DispatchError(ex);
+        public IMessageListener Clone()
+        {
+            return new TcpMessageListener(
+                _tcpClientFactory,
+                _messageDeserializerFactory,
+                _messageDispatcher);
+        }
+
+        /// <summary>
+        ///     Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        public void Dispose()
+        {
+            if (_isDisposed)
+            {
                 return;
             }
 
-            IMessageDeserializer messageDeserializer =
-                this._messageDeserializerFactory.CreateDeserializer(
-                    new StreamReader(this._tcpClient.GetStream()));
+            _isStopping = true;
 
-            bool connectionError = false;
-            while (!connectionError) {
-                connectionError = this.DispatchIncomingMessage(messageDeserializer);
+            // if we yank the TcpConnection out of the client thread the client thread will stop eventually
+            if (_tcpClient != null) _tcpClient.Close();
+            if (_clientThread.IsAlive) _clientThread.Join(1000);
+
+            _isDisposed = true;
+        }
+
+        /// <summary>
+        ///     Method in which the client thread runs
+        /// </summary>
+        private void ClientThread()
+        {
+            try
+            {
+                _tcpClient = _tcpClientFactory.CreateTcpClient();
+            }
+            catch (Exception ex)
+            {
+                DispatchError(ex);
+                return;
+            }
+
+            var messageDeserializer =
+                _messageDeserializerFactory.CreateDeserializer(
+                    new StreamReader(_tcpClient.GetStream()));
+
+            var connectionError = false;
+            while (!connectionError)
+            {
+                connectionError = DispatchIncomingMessage(messageDeserializer);
             }
         }
 
-        private bool DispatchIncomingMessage(IMessageDeserializer messageDeserializer) {
-            try {
-                Message msg = messageDeserializer.DeserializeMessage();
+        private bool DispatchIncomingMessage(IMessageDeserializer messageDeserializer)
+        {
+            try
+            {
+                var msg = messageDeserializer.DeserializeMessage();
 
-                this._messageDispatcher.DispatchReceived(new MessageEvent(msg));
+                _messageDispatcher.DispatchReceived(new MessageEvent(msg));
             }
-            catch (Exception ex) {
-                this.DispatchError(ex);
+            catch (Exception ex)
+            {
+                DispatchError(ex);
 
-                if (ex.InnerException is IOException) {
+                if (ex.InnerException is IOException)
+                {
                     return true;
                 }
 
-                if (ex.InnerException is ObjectDisposedException) {
+                if (ex.InnerException is ObjectDisposedException)
+                {
                     return true;
                 }
             }
@@ -72,56 +128,20 @@
             return false;
         }
 
-        private void DispatchError(Exception ex) {
-            if (!this._isStopping) {
-                 this._messageDispatcher.DispatchReceived(new MessageEvent(ex));
+        private void DispatchError(Exception ex)
+        {
+            if (!_isStopping)
+            {
+                _messageDispatcher.DispatchReceived(new MessageEvent(ex));
             }
         }
 
-        public void Start() {
-            this.EnsureNotDisposed();
-            if (this._clientThread.IsAlive) {
-                throw new InvalidOperationException("This TcpInterceptorClient has already been started");
+        private void EnsureNotDisposed()
+        {
+            if (_isDisposed)
+            {
+                throw new ObjectDisposedException(GetType().FullName);
             }
-
-            this._clientThread.Start();
-        }
-
-        public void Stop() {
-            this.Dispose();
-        }
-
-        /// <summary>
-        /// Creates a new instance based on the current
-        /// </summary>
-        public IMessageListener Clone() {
-            return new TcpMessageListener(
-                this._tcpClientFactory,
-                this._messageDeserializerFactory,
-                this._messageDispatcher);
-        }
-
-        private void EnsureNotDisposed() {
-            if (this._isDisposed) {
-                throw new ObjectDisposedException(this.GetType().FullName);
-            }
-        }
-
-        /// <summary>
-        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
-        /// </summary>
-        public void Dispose() {
-            if (this._isDisposed) {
-                return;
-            }
-
-            this._isStopping = true;
-
-            // if we yank the TcpConnection out of the client thread the client thread will stop eventually
-            if (this._tcpClient != null) this._tcpClient.Close();
-            if (this._clientThread.IsAlive) this._clientThread.Join(1000);
-
-            this._isDisposed = true;
         }
     }
 }

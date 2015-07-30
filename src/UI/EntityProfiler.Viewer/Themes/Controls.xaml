@@ -1,0 +1,264 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:EntityProfiler.Viewer.Modules.ContextDetail.Controls"
+                    xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"
+                    xmlns:controls1="clr-namespace:EntityProfiler.Viewer.Modules.CodeEditor.Controls"
+                    xmlns:controls2="clr-namespace:EntityProfiler.Viewer.PresentationCore.Controls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Gemini;component/Themes/VS2013/Controls/ListBox.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+    
+    <Style TargetType="{x:Type ListBox}">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Background" Value="Transparent" />
+    </Style>
+
+    <Style TargetType="{x:Type GridSplitter}">
+        <Setter Property="Background" Value="{DynamicResource DefaultBackgroundColorBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DocumentElementBorder}" />
+    </Style>
+
+    <Style x:Key="DefaultTextBox" TargetType="{x:Type TextBox}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="CaretBrush" Value="{DynamicResource DefaultForegroundColorBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForegroundColorBrush}" />
+    </Style>
+    
+    <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource DefaultTextBox}"/>
+    
+    <ContextMenu x:Key="TextBoxContextMenu">
+        <MenuItem Command="ApplicationCommands.Cut">
+            <MenuItem.Icon>
+                <Image Source="../Resources/images/Cut_6523.png" Height="16"/>
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem Command="ApplicationCommands.Copy">
+            <MenuItem.Icon>
+                <Image Source="../Resources/images/Copy_6524.png" Height="16"/>
+            </MenuItem.Icon>
+        </MenuItem>
+        
+        <MenuItem Command="ApplicationCommands.Paste">
+            <MenuItem.Icon>
+                <Image Source="../Resources/images/Paste_6520.png" Height="16"/>
+            </MenuItem.Icon>
+        </MenuItem>
+    </ContextMenu>
+
+    <Style TargetType="{x:Type controls:HighlightTextBlock}">
+        <!--<Setter Property="Foreground" Value="{DynamicResource DefaultForegroundColorBrush}" />-->
+    </Style>
+
+    <Style x:Key="LinkButton" TargetType="Button">
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <TextBlock Name="TB">
+                        <ContentPresenter/>
+                    </TextBlock>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="TB" Property="TextDecorations" Value="Underline" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Foreground" Value="{DynamicResource Hyperlink}" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{DynamicResource HyperlinkHover}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Foreground" Value="{DynamicResource HyperlinkDisabled}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type TabControl}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="{DynamicResource DocumentElementBorder}" />
+    </Style>
+
+    <Style TargetType="TabItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabItem">
+                    <Grid Name="Panel">
+                        <ContentPresenter x:Name="ContentSite"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Center"
+                                          ContentSource="Header"
+                                          Margin="10,3" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Panel" Property="Background"
+                                    Value="{DynamicResource AvalonDockThemeVs2013DocumentWellTabSelectedActiveBackground}" />
+                            <Setter TargetName="ContentSite" Property="TextBlock.Foreground"
+                                    Value="{DynamicResource AvalonDockThemeVs2013DocumentWellTabSelectedActiveText}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="False">
+                            <Setter TargetName="Panel" Property="Background"
+                                    Value="{DynamicResource AvalonDockThemeVs2013DocumentWellTabUnselectedBackground}" />
+                            <Setter TargetName="ContentSite" Property="TextBlock.Foreground"
+                                    Value="{DynamicResource AvalonDockThemeVs2013DocumentWellTabUnselectedText}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="QueryListBoxItem" TargetType="ListBoxItem" BasedOn="{StaticResource FlatListBoxItem}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource ItemText}" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBoxItem">
+                    <Border Name="Bd"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}"
+                            SnapsToDevicePixels="true">
+                        <ContentPresenter Name="Cp"  
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="Bd" Property="Background" Value="{DynamicResource ItemBackgroundHover}" />
+                            <Setter Property="Foreground" Value="{DynamicResource ItemTextHover}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="true">
+                            <Setter TargetName="Bd" Property="Background"
+                                    Value="#323F3F46" />
+                            <!--<Setter TargetName="Cp" Property="TextElement.Foreground" Value="{DynamicResource DefaultForegroundColorBrush}"/>-->
+                            <!--<Setter TargetName="Cp" Property="TextElement.FontWeight" Value="Bold"/>-->
+                            <!--<Setter TargetName="Cp" Property="Foreground" Value="{DynamicResource DefaultForegroundColorBrush}" />-->
+                            <!--<Setter TargetName="Cp" Property="FontWeight" Value="Bold" />-->
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="{DynamicResource ItemTextDisabled}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="QueryListBox" TargetType="ListBox">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
+        <Setter Property="ItemContainerStyle" Value="{StaticResource QueryListBoxItem}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBox">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Padding="{TemplateBinding Padding}">
+                        <ScrollViewer Padding="{TemplateBinding Padding}" Focusable="false">
+                            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ContextMenu x:Key="TextEditorContextMenu" x:Shared="False">
+        <MenuItem Command="Cut" Header="Cut">
+            <MenuItem.Icon>
+                <Image Source="../Resources/images/Cut_6523.png" Height="16"/>
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem Command="Copy" Header="Copy">
+            <MenuItem.Icon>
+                <Image Source="../Resources/images/Copy_6524.png" Height="16"/>
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem Command="Paste" Header="Paste">
+            <MenuItem.Icon>
+                <Image Source="../Resources/images/Paste_6520.png" Height="16"/>
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem Command="Delete" Header="Delete">
+            <MenuItem.Icon>
+                <Image Source="../Resources/images/action_Cancel_16xLG.png" Height="16"/>
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem Command="SelectAll" Header="Select All"/>
+        <Separator />
+
+        <MenuItem Command="Undo" Header="Undo">
+            <MenuItem.Icon>
+                <Image Source="../Resources/images/Undo_16x.png" Height="16"/>
+            </MenuItem.Icon>
+        </MenuItem>
+        <MenuItem Command="Redo" Header="Redo">
+            <MenuItem.Icon>
+                <Image Source="../Resources/images/Redo_16x.png" Height="16"/>
+            </MenuItem.Icon>
+        </MenuItem>
+    </ContextMenu>
+
+    <Style TargetType="{x:Type controls1:CodeEditor}">
+        <Setter Property="ContextMenu" Value="{StaticResource TextEditorContextMenu}"/>
+    </Style>
+
+    <!--Source: https://github.com/icsharpcode/SharpDevelop/blob/master/src/Libraries/AvalonEdit/ICSharpCode.AvalonEdit/TextEditor.xaml-->
+    <Style TargetType="{x:Type controls1:SqlEditor}">
+        <Setter Property="Background" Value="{DynamicResource TextEditorBackgroundColorBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextEditorForegroundColorBrush}" />
+        <Setter Property="CurrentLineBackground" Value="{DynamicResource TextEditorCurrentLineBackgroundBrush}"/>
+        <Setter Property="CurrentLineBorder" Value="{DynamicResource TextEditorCurrentLineBorderPen}"/>
+        <Setter Property="FlowDirection" Value="LeftToRight"/>
+        <Setter Property="ContextMenu" Value="{StaticResource TextEditorContextMenu}"/>
+        <!-- AvalonEdit does not support RTL, so ensure we use LTR by default -->
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls1:SqlEditor}">
+                    <Border Background="{TemplateBinding Background}">
+                        <ScrollViewer
+						    Focusable="False"
+						    Name="PART_ScrollViewer"
+						    CanContentScroll="True"
+						    VerticalScrollBarVisibility="{TemplateBinding VerticalScrollBarVisibility}"
+						    HorizontalScrollBarVisibility="{TemplateBinding HorizontalScrollBarVisibility}"
+						    Content="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TextArea}"
+						    VerticalContentAlignment="Top"
+						    HorizontalContentAlignment="Left"
+						    Background="{TemplateBinding Background}"
+						    Padding="{TemplateBinding Padding}"
+						    BorderBrush="{TemplateBinding BorderBrush}"
+						    BorderThickness="{TemplateBinding BorderThickness}"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="WordWrap"
+						         Value="True">
+                            <Setter TargetName="PART_ScrollViewer"
+							        Property="HorizontalScrollBarVisibility"
+							        Value="Disabled" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls2:ExceptionViewer">
+        <Setter Property="Foreground" Value="{DynamicResource DefaultForegroundColorBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource DefaultBackgroundColorBrush}"/>
+        <Setter Property="ControlsBorderBrush" Value="{DynamicResource DocumentElementBorder}"/>
+    </Style>
+
+</ResourceDictionary>

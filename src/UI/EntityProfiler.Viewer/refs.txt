@@ -1,0 +1,23 @@
+﻿Visual Studio Image Library
+
+https://www.microsoft.com/en-us/download/details.aspx?id=35825
+
+
+Extended WPF Toolkit™ Community Edition
+http://wpftoolkit.codeplex.com/
+
+
+Reduce debugging time using the .NET StackTrace class
+http://www.codeproject.com/Articles/286265/Reduce-debugging-time-using-the-NET-StackTrace-cla
+
+
+Database Lookup
+http://dblookup.codeplex.com/
+
+
+SQL Server Connection Tools
+http://sqlserverconnectiontools.codeplex.com/
+
+
+WPF ExceptionViewer
+http://www.codeproject.com/Tips/469452/WPF-ExceptionViewer

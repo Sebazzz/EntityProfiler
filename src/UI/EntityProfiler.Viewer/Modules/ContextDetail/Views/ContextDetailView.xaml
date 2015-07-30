@@ -1,0 +1,236 @@
+﻿<UserControl x:Class="EntityProfiler.Viewer.Modules.ContextDetail.ContextDetailView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:connection="clr-namespace:EntityProfiler.Viewer.Modules.Connection"
+             xmlns:controls="clr-namespace:EntityProfiler.Viewer.Modules.ContextDetail.Controls"
+             xmlns:presentationCore="clr-namespace:EntityProfiler.Viewer.PresentationCore"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:cal="http://www.caliburnproject.org"
+             xmlns:controls1="clr-namespace:EntityProfiler.Viewer.Modules.CodeEditor.Controls"
+             xmlns:gemini="clr-namespace:Gemini.Modules.ToolBars.Controls;assembly=Gemini"
+             mc:Ignorable="d"
+             d:DesignHeight="400" d:DesignWidth="600"
+             Background="{DynamicResource DefaultBackgroundColorBrush}">
+    <UserControl.Resources>
+        <connection:SessionData x:Key="SessionData" />
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <presentationCore:BooleanToGridLengthConverter x:Key="BooleanToGridLengthConverter" TrueValue="*"
+                                                       FalseValue="0" />
+        <presentationCore:BooleanToOpacityConverter x:Key="TooltipOpenToOpacityConverter" TrueValue=".25"
+                                                    FalseValue="1" />
+        <presentationCore:ConnectionStringSecurityConverter x:Key="ConnectionStringSecurityConverter" />
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="{DynamicResource DefaultForegroundColorBrush}" />
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <!--header-->
+            <RowDefinition Height="Auto" />
+            <!--Top content-->
+            <RowDefinition Height="*" />
+            <!--GridSplitter-->
+            <RowDefinition Height="8" />
+            <!--Bottom content-->
+            <RowDefinition Height="1.33*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!--header-->
+        <Grid Grid.Row="0" />
+
+        <!--Top content-->
+        <Grid Grid.Row="1">
+            <!-- List of queries -->
+            <ListBox x:Name="Queries"
+                     HorizontalContentAlignment="Stretch"
+                     ItemsSource="{Binding Current.Queries, Source={StaticResource SessionData}}"
+                     SelectedItem="{Binding Current.SelectedQuery, Mode=TwoWay, Source={StaticResource SessionData}}"
+                     IsSynchronizedWithCurrentItem="True"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     Style="{StaticResource QueryListBox}"
+                     VirtualizingStackPanel.VirtualizationMode="Recycling">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="2,4" ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                            <Grid.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Margin" Value="4,2" />
+                                </Style>
+                            </Grid.Resources>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" MinWidth="35" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Path=Index, StringFormat='#{0}', Mode=OneWay}" FontWeight="Bold"
+                                       VerticalAlignment="Top" />
+                            <controls:HighlightTextBlock Grid.Column="1" Margin="2,2,4,2"
+                                                         HighlightText="{Binding Path=QueryPart}"
+                                                         TextTrimming="CharacterEllipsis" TextWrapping="Wrap"
+                                                         VerticalAlignment="Top" MaxHeight="36"
+                                                         ToolTipService.Placement="RelativePoint"
+                                                         ToolTipService.HorizontalOffset="-6"
+                                                         ToolTipService.VerticalOffset="-6"
+                                                         ToolTipService.HasDropShadow="False"
+                                                         ToolTipService.ShowDuration="{x:Static Member=System:Int32.MaxValue}"
+                                                         Opacity="{Binding ElementName=QueryToolTip, Path=IsOpen, Converter={StaticResource TooltipOpenToOpacityConverter}}">
+                                <controls:HighlightTextBlock.ToolTip>
+                                    <ToolTip x:Name="QueryToolTip" StaysOpen="True">
+                                        <VirtualizingStackPanel VirtualizationMode="Recycling" IsVirtualizing="True">
+                                            <controls:HighlightTextBlock Margin="2,2,4,2"
+                                                                         HighlightText="{Binding Path=Model.Query.CommandText}"
+                                                                         TextTrimming="CharacterEllipsis"
+                                                                         TextWrapping="Wrap"
+                                                                         VerticalAlignment="Top" />
+                                        </VirtualizingStackPanel>
+                                    </ToolTip>
+                                </controls:HighlightTextBlock.ToolTip>
+                            </controls:HighlightTextBlock>
+                            <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Top">
+                                <TextBlock Text="{Binding Path=Model.NumberOfQueries, Mode=OneWay}" FontWeight="Bold" />
+                                <TextBlock Text="|" Opacity="0.4" />
+                                <TextBlock
+                                    Text="{Binding Path=Model.Performance.TotalTime, StringFormat='\{0:0.#### ms}', Mode=OneWay}" />
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+        <GridSplitter Grid.Row="2" Height="8" ResizeDirection="Rows" HorizontalAlignment="Stretch"
+                      BorderThickness="0,0,0,1" />
+        <!--Bottom content-->
+        <Grid Grid.Row="3">
+            <TabControl BorderThickness="0,1,0,0">
+                <TabControl.Resources>
+                    <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
+                        <Setter Property="MinWidth" Value="80" />
+                    </Style>
+                </TabControl.Resources>
+                <TabItem Header="SQL">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.66*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition
+                                Width="{Binding HasParameters, Converter={StaticResource BooleanToGridLengthConverter}}" />
+                        </Grid.ColumnDefinitions>
+                        <gemini:ToolPaneToolBar Background="Transparent">
+                            <Button x:Name="OpenInQueryRunner" ToolTip="Open to execute">
+                                <Image Source="../../../Resources/images/QueryResultsNewRow.png"/>
+                            </Button>
+                        </gemini:ToolPaneToolBar>
+                        <controls1:SqlEditor x:Name="SqlEditor"
+                                             Grid.Row="1" Grid.Column="0" Padding="0,1,0,0" 
+                                             CommandText="{Binding CommandText, Mode=OneWay}"
+                                             CommandParameters="{Binding SelectedRecordLookup}" />
+                        <GridSplitter Grid.Row="1" Grid.Column="1" Width="8" ResizeDirection="Columns"
+                                      HorizontalAlignment="Stretch"
+                                      BorderThickness="0,0,1,0" Margin="0,-2"
+                                      Visibility="{Binding HasParameters, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                        <Grid Grid.Row="1" Grid.Column="2"
+                              Visibility="{Binding HasParameters, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <DataGrid x:Name="ParametersDataGrid"
+                                      SelectedItem="{Binding SelectedParametersRecord}"
+                                      AutoGenerateColumns="False"
+                                      CanUserReorderColumns="False" CanUserSortColumns="False"
+                                      HeadersVisibility="Column" BorderThickness="0" Margin="0,0,0,-2"
+                                      IsSynchronizedWithCurrentItem="True" SelectionMode="Single"
+                                      RowDetailsVisibilityMode="Collapsed" EnableColumnVirtualization="True"
+                                      IsReadOnly="True" />
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Call Stack">
+                    <TabControl BorderThickness="0,0,0,1" Padding="0" Margin="-2,0"
+                                TabStripPlacement="Bottom">
+                        <TabItem Header="Sources">
+                            <DataGrid x:Name="InCodeCallStack" IsReadOnly="True" HeadersVisibility="Column"
+                                      AutoGenerateColumns="False" CanUserReorderColumns="False"
+                                      ItemsSource="{Binding Current.SelectedQuery.CallStackModel.InCodeStackFrames, Source={StaticResource SessionData}}">
+                                <DataGrid.Resources>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="TextWrapping" Value="NoWrap" />
+                                        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                                    </Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource LinkButton}">
+                                        <Style.Triggers>
+                                            <DataTrigger
+                                                Binding="{Binding IsSelected, RelativeSource={RelativeSource AncestorType=DataGridRow}}"
+                                                Value="True">
+                                                <Setter Property="Foreground"
+                                                        Value="{DynamicResource DataGridCellForegroundSelected}" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGrid.Resources>
+                                <DataGrid.Columns>
+                                    <DataGridTemplateColumn Header="Code">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Button Content="View"
+                                                        cal:Message.Attach="[Event Click] = [Action OpenStackFrame($dataContext)];" />
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                    <DataGridTextColumn Header="Method" Width="*" CanUserSort="False">
+                                        <DataGridTextColumn.Binding>
+                                            <MultiBinding StringFormat="{}{0}{1}">
+                                                <Binding Path="TypeName" />
+                                                <Binding Path="MethodName" />
+                                            </MultiBinding>
+                                        </DataGridTextColumn.Binding>
+                                    </DataGridTextColumn>
+                                    <DataGridTextColumn Header="File" Width="*" Binding="{Binding FilePath}" />
+                                    <DataGridTextColumn Header="Line" Binding="{Binding LineNumber}" />
+                                    <DataGridTextColumn Header="Column" Binding="{Binding ColumnNumber}" />
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </TabItem>
+                        <TabItem Header="Raw">
+                            <TextBox
+                                IsReadOnly="True"
+                                IsReadOnlyCaretVisible="True"
+                                TextWrapping="Wrap"
+                                VerticalAlignment="Stretch"
+                                HorizontalAlignment="Stretch"
+                                AcceptsReturn="True"
+                                FontFamily="Consolas"
+                                BorderThickness="0"
+                                HorizontalScrollBarVisibility="Disabled"
+                                VerticalScrollBarVisibility="Auto"
+                                Text="{Binding Current.SelectedQuery.Model.Context.CallStack, Source={StaticResource SessionData}, Mode=OneWay}"
+                                ContextMenu="{StaticResource TextBoxContextMenu}" />
+                        </TabItem>
+                    </TabControl>
+                </TabItem>
+            </TabControl>
+        </Grid>
+
+        <!--Fotter content-->
+        <Border Grid.Row="4" BorderThickness="0,1,0,0" Padding="6,3"
+                BorderBrush="{DynamicResource DocumentElementBorder}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                    Text="{Binding ConnectionString, Converter={StaticResource ConnectionStringSecurityConverter}}"
+                    VerticalAlignment="Center" Opacity="0.6" />
+                <Button Grid.Column="1" x:Name="CopyConnectionString" Content="Copy"
+                        VerticalAlignment="Center" Style="{StaticResource LinkButton}" BorderThickness="0" Margin="2,0" />
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
