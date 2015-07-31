@@ -138,11 +138,7 @@
                         </Trigger>
                         <Trigger Property="IsSelected" Value="true">
                             <Setter TargetName="Bd" Property="Background"
-                                    Value="#323F3F46" />
-                            <!--<Setter TargetName="Cp" Property="TextElement.Foreground" Value="{DynamicResource DefaultForegroundColorBrush}"/>-->
-                            <!--<Setter TargetName="Cp" Property="TextElement.FontWeight" Value="Bold"/>-->
-                            <!--<Setter TargetName="Cp" Property="Foreground" Value="{DynamicResource DefaultForegroundColorBrush}" />-->
-                            <!--<Setter TargetName="Cp" Property="FontWeight" Value="Bold" />-->
+                                    Value="#3F3F3F46" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Foreground" Value="{DynamicResource ItemTextDisabled}" />

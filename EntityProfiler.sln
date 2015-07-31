@@ -49,6 +49,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{612AC3
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityProfiler.UI", "src\EntityProfiler.UI\EntityProfiler.UI.csproj", "{98AFA9DF-5312-4831-97A2-DF8CDE739C9B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +93,10 @@ Global
 		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98AFA9DF-5312-4831-97A2-DF8CDE739C9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98AFA9DF-5312-4831-97A2-DF8CDE739C9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98AFA9DF-5312-4831-97A2-DF8CDE739C9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98AFA9DF-5312-4831-97A2-DF8CDE739C9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -107,6 +113,7 @@ Global
 		{ADD809B6-0C61-4767-8B97-A0E7E4BD1595} = {AA89ECBA-C448-46A6-BA11-A94276ED0D62}
 		{A26DB36B-967C-4BA6-B4B5-D767F651477E} = {11DCF2F2-938C-4BF1-BD24-DA99475FB03F}
 		{13DBFC87-C152-4A86-94B0-D9944BEEF647} = {11DCF2F2-938C-4BF1-BD24-DA99475FB03F}
+		{98AFA9DF-5312-4831-97A2-DF8CDE739C9B} = {ADD809B6-0C61-4767-8B97-A0E7E4BD1595}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		VD_Solution = <?xml version="1.0" encoding="utf-16"?>|§r|§n<DocumentsSolution xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">|§r|§n  <m_persistedPinnedDocumentGroupLabels />|§r|§n</DocumentsSolution>

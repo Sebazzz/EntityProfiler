@@ -190,8 +190,8 @@ namespace EntityProfiler.Viewer.Modules.Connection.ViewModels
             get
             {
                 // try to get table
-                var query = Model.Query.CommandText.Replace(Environment.NewLine, " ").ToSingleWordsSpace();
-                return query;
+                var shortQuery = Model.Query.CommandText.Replace(Environment.NewLine, " ").PostfixLongLiteral();
+                return shortQuery;
             }
         }
 

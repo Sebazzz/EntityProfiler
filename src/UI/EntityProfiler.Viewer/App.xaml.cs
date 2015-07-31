@@ -81,10 +81,7 @@ namespace EntityProfiler.Viewer
 
             if (string.IsNullOrEmpty(message))
                 message = "There was an error in the application, see more details in the log file.";
-            message += "\n You want reset the settings to try to solve the problem?";
-            var messageBoxResult = MessageBox.Show(message, "Application error", MessageBoxButton.YesNo);
-            if (messageBoxResult == MessageBoxResult.Yes)
-                Settings.Default.Reset();
+            MessageBox.Show(message, "Application error");
         }
     }
 }

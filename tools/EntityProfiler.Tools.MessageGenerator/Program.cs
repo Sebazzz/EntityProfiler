@@ -9,9 +9,7 @@
     internal class Program {
         private static void Main() {
             Console.WriteLine("Initializing...");
-
-            HibernatingRhinos.Profiler.Appender.EntityFramework.EntityFrameworkProfiler.Initialize();
-
+            
             Database.SetInitializer(new AppDbContext.Initializer());
 
             using (AppDbContext dbContext = new AppDbContext()) {

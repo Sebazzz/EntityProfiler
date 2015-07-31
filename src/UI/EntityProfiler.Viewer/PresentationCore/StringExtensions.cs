@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -43,7 +44,7 @@ namespace EntityProfiler.Viewer.PresentationCore
             return securityQualifiers.Aggregate(connectionString, (current, qualifier)
                 => Regex.Replace(current, qualifier + "\\s*=([^;]*)(?:$|;)", qualifier + "=********;", RegexOptions.IgnoreCase));
         }
-        
+
         internal static string GetFriendlyName(this Type type)
         {
             if (type == typeof(int))
@@ -73,6 +74,35 @@ namespace EntityProfiler.Viewer.PresentationCore
         internal static string ToSingleWordsSpace(this string text)
         {
             return Regex.Replace(text, @"\s+", " ");
+        }
+        
+        private static readonly char[] _keepEndingChars = { '\"', '\'', ')', ']', '*', '@', '&' };
+        internal static string PostfixLongLiteral(this string text, int maxLength = 128, string suffix = "...")
+        {
+            text = Regex.Replace(text, @"\s+", " ");
+            if (maxLength < 3)
+                throw new ArgumentOutOfRangeException("maxLength");
+
+            var parts = text.Split(' ');
+            var result = string.Empty;
+            foreach (var part in parts)
+            {
+                var partLength = part.Length;
+                if (partLength > maxLength)
+                {
+                    var end = suffix;
+                    var penultimateChar = part[partLength - 2];
+                    if (_keepEndingChars.Contains(penultimateChar))
+                        end += penultimateChar;
+                    var lastChar = part[partLength - 1];
+                    if (_keepEndingChars.Contains(lastChar))
+                        end += lastChar;
+                    result += part.Substring(0, maxLength - end.Length) + end + " ";
+                    continue;
+                }
+                result += part + " ";
+            }
+            return result;
         }
 
         public const string EllipsisChars = "...";

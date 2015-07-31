@@ -21,3 +21,7 @@ http://sqlserverconnectiontools.codeplex.com/
 
 WPF ExceptionViewer
 http://www.codeproject.com/Tips/469452/WPF-ExceptionViewer
+
+
+.NET SQL Parser and Formatter Tool and SSMS Plugin
+https://github.com/benlaan/sqlformat
