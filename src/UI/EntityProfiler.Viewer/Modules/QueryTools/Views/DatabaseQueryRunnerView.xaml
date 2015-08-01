@@ -87,22 +87,20 @@
         </Grid.RowDefinitions>
 
         <!--header-->
-        <Grid Grid.Row="0">
-            <controls1:ToolPaneToolBar>
-                <Button x:Name="ExecuteQuery" ToolTip="Execute">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="../../../Resources/images/startwithoutdebugging_6556.png" />
-                        <TextBlock Text="Execute" Margin="4,0,0,0" />
-                    </StackPanel>
-                </Button>
-                <Button x:Name="CancelExecutingQuery" ToolTip="Cancel executing query">
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="../../../Resources/images/Symbols_Stop_16xLG.png" />
-                        <TextBlock Text="Cancel" Margin="4,0,0,0" />
-                    </StackPanel>
-                </Button>
-            </controls1:ToolPaneToolBar>
-        </Grid>
+        <controls1:ToolPaneToolBar Grid.Row="0">
+            <Button x:Name="ExecuteQuery" ToolTip="Execute">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../../../Resources/images/startwithoutdebugging_6556.png" />
+                    <TextBlock Text="Execute" Margin="4,0,0,0" />
+                </StackPanel>
+            </Button>
+            <Button x:Name="CancelExecutingQuery" ToolTip="Cancel executing query">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../../../Resources/images/Symbols_Stop_16xLG.png" />
+                    <TextBlock Text="Cancel" Margin="4,0,0,0" />
+                </StackPanel>
+            </Button>
+        </controls1:ToolPaneToolBar>
 
         <!--Top content-->
         <Grid Grid.Row="1">
@@ -110,7 +108,7 @@
         </Grid>
         <!--Horizontal content sppliter-->
         <GridSplitter Grid.Row="2" Height="8" ResizeDirection="Rows" HorizontalAlignment="Stretch"
-                      BorderThickness="0,0,0,1" />
+                      BorderThickness="0,1,0,0" />
         <!--Bottom content-->
         <Grid Grid.Row="3">
             <TabControl x:Name="ResultSetsTabControl"

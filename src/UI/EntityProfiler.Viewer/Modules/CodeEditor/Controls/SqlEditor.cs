@@ -65,7 +65,7 @@ namespace EntityProfiler.Viewer.Modules.CodeEditor.Controls
             Text = newValue;
         }
 
-        private const string ParameterRelplaceFormat = @"{2}{0}{2} /*{1}*/";
+        private const string ParameterReplaceFormat = @"{2}{0}{2} /*{1}*/";
 
         protected virtual void SetCommandParameters(IDictionary<string, object> newValue, IDictionary<string, object> oldValue)
         {
@@ -83,7 +83,7 @@ namespace EntityProfiler.Viewer.Modules.CodeEditor.Controls
                 if (!DotnetTypeMap.TypeMapValueWapper.TryGetValue(prop.Value.GetType(), out valueWapper))
                     valueWapper = DotnetTypeMap.DefaultValueWapper;
                 
-                var paramText = string.Format(ParameterRelplaceFormat, prop.Value, prop.Key, valueWapper);
+                var paramText = string.Format(ParameterReplaceFormat, prop.Value, prop.Key, valueWapper);
                 commandText = commandText.Replace(prop.Key, paramText);
             }
             SetCommandText(commandText, CommandText);

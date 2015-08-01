@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:cal="http://www.caliburnproject.org"
+             xmlns:controls="clr-namespace:Gemini.Modules.ToolBars.Controls;assembly=Gemini"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="500">
     <UserControl.Resources>
@@ -12,16 +13,8 @@
         </Style>
     </UserControl.Resources>
     <DockPanel LastChildFill="True">
-        <ToolBar DockPanel.Dock="Top" ToolBarTray.IsLocked="True" Padding="6,2,0,2" BorderBrush="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
-            <ToolBar.Resources>
-                <Style TargetType="{x:Type Path}">
-                    <Setter Property="Fill" Value="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ButtonBase}}}"/>
-                    <Setter Property="Width" Value="12"/>
-                    <Setter Property="Height" Value="12"/>
-                    <Setter Property="Margin" Value="4"/>
-                    <Setter Property="Stretch" Value="Uniform"/>
-                </Style>
-            </ToolBar.Resources>
+        <controls:ToolPaneToolBar DockPanel.Dock="Top" ToolBarTray.IsLocked="True" Padding="6,0,0,2" 
+                                  BorderBrush="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Show output from: " VerticalAlignment="Center"/>
                 <ComboBox x:Name="OutputSource" DisplayMemberPath="Value" SelectedValuePath="Key" 
@@ -37,7 +30,7 @@
             <ToggleButton x:Name="toggleWordWrap">
                 <Image Source="../Resources/images/WordWrap_6774.png" Stretch="None"/>
             </ToggleButton>
-        </ToolBar>
+        </controls:ToolPaneToolBar>
         <TextBox x:Name="outputText"
                  Background="Transparent"
                  IsReadOnly="True"

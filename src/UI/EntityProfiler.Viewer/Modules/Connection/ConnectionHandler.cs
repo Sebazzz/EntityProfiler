@@ -33,13 +33,19 @@ namespace EntityProfiler.Viewer.Modules.Connection
         Pause
     }
 
-    [Export(typeof(IConnectionHandler))]
+    [Export(typeof (IConnectionHandler))]
     public class ConnectionHandler : IConnectionHandler, INotifyPropertyChanged, IDisposable, IHandle<MessageEvent>
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IRestartableMessageListener _messageListener;
-        private bool _isBusy;
+        private OneTimeAction _connectAttempt;
         private ConnectionRequestState _connectionRequestState;
+        private bool _isBusy;
+        private int _maxRetry;
+        private bool _requestStop;
+        private OneTimeAction _resetStatusBarAction;
+        private int _retryCount;
+        private int _retryInterval;
 
         [ImportingConstructor]
         public ConnectionHandler(
@@ -104,13 +110,13 @@ namespace EntityProfiler.Viewer.Modules.Connection
         {
             Log.Information("Start session request.");
             IsBusy = true;
-            PublishSessionState(ConnectionRequestState.Start).ConfigureAwait(false);
+            PublishSessionState(ConnectionRequestState.Start);
 
             await MessageListenerRestart(true);
 
             ConnectionRequestState = ConnectionRequestState.Start;
 
-            PublishSessionState(ConnectionRequestState.Start, true).ConfigureAwait(false);
+            PublishSessionState(ConnectionRequestState.Start, true);
             IsBusy = false;
             CommandManager.InvalidateRequerySuggested();
         }
@@ -119,11 +125,11 @@ namespace EntityProfiler.Viewer.Modules.Connection
         {
             Log.Information("Pause session request.");
             IsBusy = true;
-            PublishSessionState(ConnectionRequestState.Pause).ConfigureAwait(false);
+            PublishSessionState(ConnectionRequestState.Pause);
 
             ConnectionRequestState = ConnectionRequestState.Pause;
 
-            PublishSessionState(ConnectionRequestState.Pause, true).ConfigureAwait(false);
+            PublishSessionState(ConnectionRequestState.Pause, true);
             IsBusy = false;
             CommandManager.InvalidateRequerySuggested();
 
@@ -134,13 +140,13 @@ namespace EntityProfiler.Viewer.Modules.Connection
         {
             Log.Information("Stop session request.");
             IsBusy = true;
-            PublishSessionState(ConnectionRequestState.Stop).ConfigureAwait(false);
+            PublishSessionState(ConnectionRequestState.Stop);
 
             await MessageListenerStop();
 
             ConnectionRequestState = ConnectionRequestState.Stop;
 
-            PublishSessionState(ConnectionRequestState.Stop, true).ConfigureAwait(false);
+            PublishSessionState(ConnectionRequestState.Stop, true);
             IsBusy = false;
             CommandManager.InvalidateRequerySuggested();
         }
@@ -171,6 +177,8 @@ namespace EntityProfiler.Viewer.Modules.Connection
             }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         private async Task MessageListenerRestart(bool force = false)
         {
             if (_requestStop && !force)
@@ -194,7 +202,7 @@ namespace EntityProfiler.Viewer.Modules.Connection
         private async Task MessageListenerStop()
         {
             Log.Information("MessageListenerStop request.");
-            
+
             await Notify("Stoping...");
 
             _retryCount = 0;
@@ -203,13 +211,12 @@ namespace EntityProfiler.Viewer.Modules.Connection
             _messageListener.Dispose();
         }
 
-        private int _retryCount;
-        private OneTimeAction _connectAttempt;
         private void HandleError(Exception exception)
         {
             Log.Error(exception, "Connecting error, retrying...");
-            Notify("Connecting error... [" + exception.GetType().FullName + "] retrying...");
-            _connectAttempt = OneTimeAction.Execute(RetryInterval, () => MessageListenerRestart()).CancelExisting(_connectAttempt);
+            _connectAttempt =
+                OneTimeAction.Execute(RetryInterval, async () => await MessageListenerRestart())
+                    .CancelExisting(_connectAttempt);
         }
 
         private void HandleConnectedMessage(ConnectedMessage connectedMessage)
@@ -219,29 +226,24 @@ namespace EntityProfiler.Viewer.Modules.Connection
             Notify("Connected to v" + connectedMessage.Version);
         }
 
-        private OneTimeAction _resetStatusBarAction;
-        private bool _requestStop;
-        private int _retryInterval;
-        private int _maxRetry;
-
         private void HandleQueryMessage(QueryMessage queryMessage)
         {
             var commandText = queryMessage.Query.CommandText.Replace(Environment.NewLine, " ")
                 .ToSingleWordsSpace().Ellipsis(64, EllipsisFormat.Word | EllipsisFormat.End);
 
-            Log.Information("QueryMessage received {queryContextId}: {queryContextDescription}, Total time(ms): {queryTotalTime}",
+            Log.Information(
+                "QueryMessage received {queryContextId}: {queryContextDescription}, Total time(ms): {queryTotalTime}",
                 queryMessage.Context.Identifier,
-                queryMessage.Context.Description, 
+                queryMessage.Context.Description,
                 queryMessage.Performance.TotalTime);
 
             Notify(commandText);
 
-            _resetStatusBarAction = OneTimeAction.Execute(1750, () => Notify("Ready")).CancelExisting(_resetStatusBarAction);
+            _resetStatusBarAction =
+                OneTimeAction.Execute(1750, () => Notify("Ready")).CancelExisting(_resetStatusBarAction);
 
             SessionData.Current.HandleQueryMessage(queryMessage);
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
@@ -250,9 +252,10 @@ namespace EntityProfiler.Viewer.Modules.Connection
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private Task PublishSessionState(ConnectionRequestState connectionRequestState, bool stateChangeEnd = false)
+        private void PublishSessionState(ConnectionRequestState connectionRequestState, bool stateChangeEnd = false)
         {
-            return _eventAggregator.PublishOnUIThreadAsync(new ConnectionHandlerStateMessage(connectionRequestState, stateChangeEnd));
+            _eventAggregator.PublishOnUIThreadAsync(new ConnectionHandlerStateMessage(connectionRequestState,
+                stateChangeEnd)).ConfigureAwait(false);
         }
 
         private Task Notify(string message)

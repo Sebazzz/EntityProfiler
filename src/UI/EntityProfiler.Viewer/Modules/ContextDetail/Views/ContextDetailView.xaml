@@ -10,16 +10,15 @@
              xmlns:cal="http://www.caliburnproject.org"
              xmlns:controls1="clr-namespace:EntityProfiler.Viewer.Modules.CodeEditor.Controls"
              xmlns:gemini="clr-namespace:Gemini.Modules.ToolBars.Controls;assembly=Gemini"
+             xmlns:framework="http://schemas.timjones.tw/gemini"
              mc:Ignorable="d"
              d:DesignHeight="400" d:DesignWidth="600"
-             Background="{DynamicResource DefaultBackgroundColorBrush}">
+             Background="{DynamicResource DefaultBackgroundColorBrush}"
+             x:Name="ContextDetailViewControl">
     <UserControl.Resources>
         <connection:SessionData x:Key="SessionData" />
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-        <presentationCore:BooleanToGridLengthConverter x:Key="BooleanToGridLengthConverter" TrueValue="*"
-                                                       FalseValue="0" />
-        <presentationCore:BooleanToOpacityConverter x:Key="TooltipOpenToOpacityConverter" TrueValue=".25"
-                                                    FalseValue="1" />
+        <presentationCore:BooleanToOpacityConverter x:Key="SpyTooltipOpenToOpacityConverter" TrueValue="1"
+                                                    FalseValue=".45" />
         <presentationCore:ConnectionStringSecurityConverter x:Key="ConnectionStringSecurityConverter" />
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="Foreground" Value="{DynamicResource DefaultForegroundColorBrush}" />
@@ -54,7 +53,8 @@
                      IsSynchronizedWithCurrentItem="True"
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      Style="{StaticResource QueryListBox}"
-                     VirtualizingStackPanel.VirtualizationMode="Recycling">
+                     VirtualizingStackPanel.VirtualizationMode="Recycling"
+                     SelectionMode="Single">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="2,4" ScrollViewer.VerticalScrollBarVisibility="Disabled">
@@ -65,22 +65,30 @@
                             </Grid.Resources>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" MinWidth="35" />
+                                <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <TextBlock Text="{Binding Path=Index, StringFormat='#{0}', Mode=OneWay}" FontWeight="Bold"
+                            <TextBlock Grid.Column="0" Text="{Binding Path=Index, StringFormat='#{0}', Mode=OneWay}"
+                                       FontWeight="Bold"
                                        VerticalAlignment="Top" />
-                            <controls:HighlightTextBlock Grid.Column="1" Margin="2,2,4,2"
-                                                         HighlightText="{Binding Path=QueryPart}"
-                                                         TextTrimming="CharacterEllipsis" TextWrapping="Wrap"
-                                                         VerticalAlignment="Top" MaxHeight="36"
-                                                         ToolTipService.Placement="RelativePoint"
-                                                         ToolTipService.HorizontalOffset="-6"
-                                                         ToolTipService.VerticalOffset="-6"
-                                                         ToolTipService.HasDropShadow="False"
-                                                         ToolTipService.ShowDuration="{x:Static Member=System:Int32.MaxValue}"
-                                                         Opacity="{Binding ElementName=QueryToolTip, Path=IsOpen, Converter={StaticResource TooltipOpenToOpacityConverter}}">
-                                <controls:HighlightTextBlock.ToolTip>
+                            <Grid Grid.Column="1"
+                                  VerticalAlignment="Stretch"
+                                  Margin="0,0,15,0"
+                                  Width="22" Background="Transparent"
+                                  ToolTipService.Placement="RelativePoint"
+                                  ToolTipService.HorizontalOffset="30.5"
+                                  ToolTipService.VerticalOffset="-5.5"
+                                  ToolTipService.HasDropShadow="False"
+                                  ToolTipService.ShowDuration="{x:Static Member=System:Int32.MaxValue}"
+                                  ToolTipOpening="FrameworkElement_OnToolTipOpening"
+                                  ToolTipClosing="FrameworkElement_OnToolTipClosing">
+                                <Path
+                                    Data="M10.666505,3.3609998C12.010147,3.3609998 13.1,4.4507994 13.1,5.7944998 13.1,7.1382002 12.010147,8.2279996 10.666505,8.2279996 9.3228025,8.2279996 8.2329998,7.1382002 8.2329998,5.7944998 8.2329998,4.4507994 9.3228025,3.3609998 10.666505,3.3609998z M10.666551,2.1053791C8.6301889,2.1053791 6.9777417,3.7575578 6.9777417,5.7940301 6.9777417,7.8316917 8.6301889,9.4826507 10.666551,9.4826507 12.703022,9.4826507 14.355298,7.8316917 14.355298,5.7940301 14.355298,3.7575578 12.703022,2.1053791 10.666551,2.1053791z M10.666551,0C16.557167,-4.2820034E-08 21.333,5.7940301 21.333,5.7940301 21.333,5.7940301 16.557167,11.588 10.666551,11.588 4.776053,11.588 0,5.7940301 0,5.7940301 0,5.7940301 4.776053,-4.2820034E-08 10.666551,0z"
+                                    Stretch="Uniform" Fill="{DynamicResource DefaultForegroundColorBrush}"
+                                    Margin="2,7,2,0" VerticalAlignment="Top" HorizontalAlignment="Center"
+                                    Opacity="{Binding ElementName=QueryToolTip, Path=IsOpen, Converter={StaticResource SpyTooltipOpenToOpacityConverter}}" />
+                                <Grid.ToolTip>
                                     <ToolTip x:Name="QueryToolTip" StaysOpen="True">
                                         <VirtualizingStackPanel VirtualizationMode="Recycling" IsVirtualizing="True">
                                             <controls:HighlightTextBlock Margin="2,2,4,2"
@@ -90,9 +98,14 @@
                                                                          VerticalAlignment="Top" />
                                         </VirtualizingStackPanel>
                                     </ToolTip>
-                                </controls:HighlightTextBlock.ToolTip>
-                            </controls:HighlightTextBlock>
-                            <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Top">
+                                </Grid.ToolTip>
+                            </Grid>
+                            <controls:HighlightTextBlock Grid.Column="2" Margin="2,2,4,2"
+                                                         HighlightText="{Binding Path=QueryPart}"
+                                                         TextTrimming="CharacterEllipsis" TextWrapping="Wrap"
+                                                         VerticalAlignment="Top" MaxHeight="36"
+                                                         Opacity="{Binding ElementName=ContextDetailViewControl, Path=QueriesSummaryOpacity}" />
+                            <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Top">
                                 <TextBlock Text="{Binding Path=Model.NumberOfQueries, Mode=OneWay}" FontWeight="Bold" />
                                 <TextBlock Text="|" Opacity="0.4" />
                                 <TextBlock
@@ -104,17 +117,17 @@
             </ListBox>
         </Grid>
         <GridSplitter Grid.Row="2" Height="8" ResizeDirection="Rows" HorizontalAlignment="Stretch"
-                      BorderThickness="0,0,0,1" />
+                      BorderThickness="0,1,0,0" />
         <!--Bottom content-->
         <Grid Grid.Row="3">
-            <TabControl BorderThickness="0,1,0,0">
+            <TabControl BorderThickness="0,1,0,0" Padding="0">
                 <TabControl.Resources>
                     <Style TargetType="TabItem" BasedOn="{StaticResource {x:Type TabItem}}">
                         <Setter Property="MinWidth" Value="80" />
                     </Style>
                 </TabControl.Resources>
                 <TabItem Header="SQL">
-                    <Grid>
+                    <Grid x:Name="QueryResultsGrid">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
@@ -122,24 +135,24 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1.66*" />
                             <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition
-                                Width="{Binding HasParameters, Converter={StaticResource BooleanToGridLengthConverter}}" />
+                            <ColumnDefinition x:Name="ParametersGridColumn" Width="*" />
                         </Grid.ColumnDefinitions>
-                        <gemini:ToolPaneToolBar Background="Transparent">
+                        <gemini:ToolPaneToolBar Grid.ColumnSpan="3" Background="Transparent" 
+                                                BorderThickness="0,0,0,1"
+                                                BorderBrush="{DynamicResource DocumentElementBorder}">
                             <Button x:Name="OpenInQueryRunner" ToolTip="Open to execute">
-                                <Image Source="../../../Resources/images/QueryResultsNewRow.png"/>
+                                <Image Source="../../../Resources/images/QueryResultsNewRow.png" />
                             </Button>
                         </gemini:ToolPaneToolBar>
                         <controls1:SqlEditor x:Name="SqlEditor"
-                                             Grid.Row="1" Grid.Column="0" Padding="0,1,0,0" 
+                                             Grid.Row="1" Grid.Column="0" Padding="0,1,0,0"
                                              CommandText="{Binding CommandText, Mode=OneWay}"
                                              CommandParameters="{Binding SelectedRecordLookup}" />
-                        <GridSplitter Grid.Row="1" Grid.Column="1" Width="8" ResizeDirection="Columns"
+                        <GridSplitter x:Name="QueryResultsGridSplitter" 
+                                      Grid.Row="1" Grid.Column="1" Width="8" ResizeDirection="Columns"
                                       HorizontalAlignment="Stretch"
-                                      BorderThickness="0,0,1,0" Margin="0,-2"
-                                      Visibility="{Binding HasParameters, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                        <Grid Grid.Row="1" Grid.Column="2"
-                              Visibility="{Binding HasParameters, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                      BorderThickness="1,0,0,0"/>
+                        <Grid Grid.Row="1" Grid.Column="2">
                             <DataGrid x:Name="ParametersDataGrid"
                                       SelectedItem="{Binding SelectedParametersRecord}"
                                       AutoGenerateColumns="False"

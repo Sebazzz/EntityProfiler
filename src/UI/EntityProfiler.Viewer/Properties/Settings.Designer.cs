@@ -223,5 +223,17 @@ namespace EntityProfiler.Viewer.Properties {
                 this["Profiler_CallStack_AllowAnyVsInstance"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Profiler_Session_AutoSelectedDataContext {
+            get {
+                return ((bool)(this["Profiler_Session_AutoSelectedDataContext"]));
+            }
+            set {
+                this["Profiler_Session_AutoSelectedDataContext"] = value;
+            }
+        }
     }
 }

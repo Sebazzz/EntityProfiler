@@ -2,6 +2,7 @@
 {
     public interface IContextDetailView : ISqlEditorView, IParametersDataGridView
     {
-
+        bool HasParameters { get; set; }
+        void ScrollIntoSelectedQuery();
     }
 }

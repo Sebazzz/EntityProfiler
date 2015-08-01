@@ -16,7 +16,7 @@ namespace EntityProfiler.Viewer.Modules.Connection.ViewModels
     {
         private string _description;
         private ContextIdentifier _identifier;
-        private IObservableCollection<QueryMessageViewModel> _queries;
+        private BindableCollection<QueryMessageViewModel> _queries;
         private bool _isHidden;
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace EntityProfiler.Viewer.Modules.Connection.ViewModels
             }
         }
 
-        public IObservableCollection<QueryMessageViewModel> Queries
+        public BindableCollection<QueryMessageViewModel> Queries
         {
             get { return _queries; }
             private set
@@ -290,6 +290,15 @@ namespace EntityProfiler.Viewer.Modules.Connection.ViewModels
 
     public static class HelperExtensions
     {
+        public static void AddOnTop(this IObservableCollection<QueryMessageViewModel> collection, QueryMessage message)
+        {
+            collection.Insert(0, new QueryMessageViewModel
+            {
+                Index = collection.Count,
+                Model = message
+            });
+        }
+
         public static void Add(this IObservableCollection<QueryMessageViewModel> collection, QueryMessage message)
         {
             collection.Add(new QueryMessageViewModel

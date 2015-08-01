@@ -53,5 +53,8 @@
     <Setting Name="Profiler_CallStack_AllowAnyVsInstance" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="Profiler_Session_AutoSelectedDataContext" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

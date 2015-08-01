@@ -28,6 +28,7 @@ namespace EntityProfiler.Viewer.Modules.ContextDetail
         private bool _hasParameters;
         private IContextDetailView _view;
         private Record _selectedParametersRecord;
+        private bool _toogle;
 
         [ImportingConstructor]
         public ContextDetailViewModel(IEnvInteropService envInteropService, ICodeEditorFactory codeEditorFactory)
@@ -77,9 +78,13 @@ namespace EntityProfiler.Viewer.Modules.ContextDetail
                 if (value == _hasParameters) return;
                 _hasParameters = value;
                 NotifyOfPropertyChange();
+                if (_view != null)
+                {
+                    _view.HasParameters = _hasParameters;
+                }
             }
         }
-
+        
         public string ConnectionString
         {
             get
@@ -200,7 +205,10 @@ namespace EntityProfiler.Viewer.Modules.ContextDetail
                     {
                         if (list.ContainsKey("@Name"))
                         {
-                            list.Add(list["@Name"].ToString(), item.Value);
+                            var key = list["@Name"].ToString();
+                            if(!key.StartsWith("@"))
+                                key = "@" + key;
+                            list.Add(key, item.Value);
                             list.Remove("@Name");
                         }
                         return list;

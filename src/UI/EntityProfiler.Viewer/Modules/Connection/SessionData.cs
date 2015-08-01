@@ -5,12 +5,16 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 using Caliburn.Micro;
 using EntityProfiler.Common.Annotations;
 using EntityProfiler.Common.Protocol;
 using EntityProfiler.Interceptor.Reader.Core;
 using EntityProfiler.Viewer.Modules.Connection.ViewModels;
+using ExecutionContext = EntityProfiler.Common.Protocol.ExecutionContext;
 
 namespace EntityProfiler.Viewer.Modules.Connection
 {
@@ -24,6 +28,9 @@ namespace EntityProfiler.Viewer.Modules.Connection
         private BindableCollection<DataContextViewModel> _dataContexts;
         private DataContextViewModel _selectedDataContext;
         private QueryMessageViewModel _selectedQuery;
+        private bool _autoSelectedDataContext;
+
+        private readonly DispatcherTimer _notificationTimer;
 
         [Obsolete("This is a design-time only constructor, use static Current instead.")]
         public SessionData()
@@ -34,7 +41,15 @@ namespace EntityProfiler.Viewer.Modules.Connection
         {
             _sessionId = sessionId;
             _messageFilter = new DuplicateQueryDetectionMessageFilter();
-            PropertyChanged += OnPropertyChanged;
+            _notificationTimer = new DispatcherTimer(DispatcherPriority.Normal,
+                Dispatcher.FromThread(Thread.CurrentThread)) {Interval = TimeSpan.FromMilliseconds(300)};
+            _notificationTimer.Tick += NotificationTimerOnTick;
+        }
+
+        private void NotificationTimerOnTick(object sender, EventArgs eventArgs)
+        {
+            _notificationTimer.Stop();
+            UpdateUI();
         }
 
         public static SessionData Current
@@ -92,6 +107,11 @@ namespace EntityProfiler.Viewer.Modules.Connection
                 _selectedDataContext = value;
                 OnPropertyChanged();
                 OnPropertyChanged("Queries");
+
+                if (_notificationTimer.IsEnabled)
+                    return;
+
+                SelectFirstQuery();
             }
         }
 
@@ -102,6 +122,17 @@ namespace EntityProfiler.Viewer.Modules.Connection
             {
                 if (Equals(value, _selectedQuery)) return;
                 _selectedQuery = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool AutoSelectedDataContext
+        {
+            get { return _autoSelectedDataContext; }
+            set
+            {
+                if (value == _autoSelectedDataContext) return;
+                _autoSelectedDataContext = value;
                 OnPropertyChanged();
             }
         }
@@ -137,14 +168,14 @@ namespace EntityProfiler.Viewer.Modules.Connection
             {
                 var isSelected = SelectedDataContext == dataContextViewModel;
                 var indexOf = VisibleDataContexts.IndexOf(dataContextViewModel);
-                var count = VisibleDataContexts.Count -1;
+                var count = VisibleDataContexts.Count - 1;
                 dataContextViewModel.IsHidden = true;
                 InvalidateDataContextsVisibility();
                 if (isSelected)
                 {
-                    SelectedDataContext = indexOf == count ?
-                        VisibleDataContexts.LastOrDefault() :
-                        VisibleDataContexts.Skip(indexOf).FirstOrDefault();
+                    SelectedDataContext = indexOf == count
+                        ? VisibleDataContexts.LastOrDefault()
+                        : VisibleDataContexts.Skip(indexOf).FirstOrDefault();
                 }
             }
         }
@@ -155,37 +186,64 @@ namespace EntityProfiler.Viewer.Modules.Connection
             OnPropertyChanged("HiddenDataContexts");
             OnPropertyChanged("HasHiddenDataContexts");
         }
-
+        
         internal void HandleQueryMessage(QueryMessage queryMessage)
         {
             // find data context
             var dataContext = GetOrCreateDataContext(queryMessage.Context);
-
             var queries = dataContext.Queries;
-            if (queries.Count == 0)
+
+            if (queries.IsNotifying)
+                queries.IsNotifying = false;
+
+            Application.Current.Dispatcher.Invoke(() =>
             {
-                queries.Add(queryMessage);
+                if (queries.Count == 0)
+                {
+                    queries.AddOnTop(queryMessage);
+                }
+                else
+                {
+                    // try to merge with last
+                    var lastQueryMessage = queries[queries.Count - 1].Model;
+                    var merged = _messageFilter.FilterTwo(lastQueryMessage, queryMessage) as QueryMessage;
+
+                    if (merged == null)
+                    {
+                        queries.AddOnTop(queryMessage);
+                    }
+                    else
+                    {
+                        queries[queries.Count - 1].Model = merged;
+                    }
+                }
+
+                // auto-select if no data context has been selected
+                if (AutoSelectedDataContext && SelectedDataContext == null)
+                {
+                    SelectedDataContext = dataContext;
+                }
+            });
+            
+            _notificationTimer.Start();
+        }
+
+        private void UpdateUI()
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                Queries.IsNotifying = true;
+                Queries.Refresh();
+                SelectFirstQuery();
+            });
+        }
+
+        private void SelectFirstQuery()
+        {
+            if (SelectedQuery != null && Queries.Contains(SelectedQuery))
                 return;
-            }
 
-            // try to merge with last
-            var lastQueryMessage = queries[queries.Count - 1].Model;
-            var merged = _messageFilter.FilterTwo(lastQueryMessage, queryMessage) as QueryMessage;
-
-            if (merged == null)
-            {
-                queries.Add(queryMessage);
-            }
-            else
-            {
-                queries[queries.Count - 1].Model = merged;
-            }
-
-            // auto-select if no data context has been selected
-            if (SelectedDataContext == null)
-            {
-                SelectedDataContext = dataContext;
-            }
+            SelectedQuery = Queries.FirstOrDefault();
         }
 
         private DataContextViewModel GetOrCreateDataContext(ExecutionContext context)
@@ -206,18 +264,7 @@ namespace EntityProfiler.Viewer.Modules.Connection
 
             return result;
         }
-
-        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            switch (e.PropertyName)
-            {
-                case "SelectedDataContext":
-                    // select the last query
-                    SelectedQuery = SelectedDataContext != null ? SelectedDataContext.Queries.LastOrDefault() : null;
-                    break;
-            }
-        }
-
+        
         protected override Freezable CreateInstanceCore()
         {
             return Current;
