@@ -51,6 +51,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{612AC3
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityProfiler.UI", "src\EntityProfiler.UI\EntityProfiler.UI.csproj", "{98AFA9DF-5312-4831-97A2-DF8CDE739C9B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Libs", "_Libs", "{3024FE24-E699-4D94-ACF3-4261907340D1}"
+	ProjectSection(SolutionItems) = preProject
+		src\Libs\Xceed.Wpf.AvalonDock.Themes.VS2013.dll = src\Libs\Xceed.Wpf.AvalonDock.Themes.VS2013.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
