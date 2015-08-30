@@ -5,10 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Threading;
 using Caliburn.Micro;
 using EntityProfiler.Common.Annotations;
 using EntityProfiler.Common.Protocol;
@@ -30,7 +27,7 @@ namespace EntityProfiler.Viewer.Modules.Connection
         private QueryMessageViewModel _selectedQuery;
         private bool _autoSelectedDataContext;
 
-        private readonly DispatcherTimer _notificationTimer;
+        // private readonly DispatcherTimer _notificationTimer;
 
         [Obsolete("This is a design-time only constructor, use static Current instead.")]
         public SessionData()
@@ -41,16 +38,15 @@ namespace EntityProfiler.Viewer.Modules.Connection
         {
             _sessionId = sessionId;
             _messageFilter = new DuplicateQueryDetectionMessageFilter();
-            _notificationTimer = new DispatcherTimer(DispatcherPriority.Normal,
-                Dispatcher.FromThread(Thread.CurrentThread)) {Interval = TimeSpan.FromMilliseconds(300)};
-            _notificationTimer.Tick += NotificationTimerOnTick;
+            // _notificationTimer = new DispatcherTimer(DispatcherPriority.Normal, Dispatcher.FromThread(Thread.CurrentThread)) {Interval = TimeSpan.FromMilliseconds(300)};
+            // _notificationTimer.Tick += NotificationTimerOnTick;
         }
 
-        private void NotificationTimerOnTick(object sender, EventArgs eventArgs)
+        /*private void NotificationTimerOnTick(object sender, EventArgs eventArgs)
         {
             _notificationTimer.Stop();
             UpdateUI();
-        }
+        }*/
 
         public static SessionData Current
         {
@@ -108,8 +104,8 @@ namespace EntityProfiler.Viewer.Modules.Connection
                 OnPropertyChanged();
                 OnPropertyChanged("Queries");
 
-                if (_notificationTimer.IsEnabled)
-                    return;
+                /*if (_notificationTimer.IsEnabled)
+                    return;*/
 
                 SelectFirstQuery();
             }
@@ -193,8 +189,8 @@ namespace EntityProfiler.Viewer.Modules.Connection
             var dataContext = GetOrCreateDataContext(queryMessage.Context);
             var queries = dataContext.Queries;
 
-            if (queries.IsNotifying)
-                queries.IsNotifying = false;
+            //if (queries.IsNotifying)
+            //    queries.IsNotifying = false;
 
             Application.Current.Dispatcher.Invoke(() =>
             {
@@ -223,12 +219,14 @@ namespace EntityProfiler.Viewer.Modules.Connection
                 {
                     SelectedDataContext = dataContext;
                 }
+
+                SelectFirstQuery();
             });
             
-            _notificationTimer.Start();
+            // _notificationTimer.Start();
         }
 
-        private void UpdateUI()
+        /*private void UpdateUI()
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
@@ -236,7 +234,7 @@ namespace EntityProfiler.Viewer.Modules.Connection
                 Queries.Refresh();
                 SelectFirstQuery();
             });
-        }
+        }*/
 
         private void SelectFirstQuery()
         {

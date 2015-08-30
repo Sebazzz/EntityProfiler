@@ -31,16 +31,19 @@
                 <Image Source="../Resources/images/WordWrap_6774.png" Stretch="None"/>
             </ToggleButton>
         </controls:ToolPaneToolBar>
-        <TextBox x:Name="outputText"
+        <FlowDocumentScrollViewer x:Name="outputText"
                  Background="Transparent"
-                 IsReadOnly="True"
-                 IsReadOnlyCaretVisible="True"
                  VerticalAlignment="Stretch"
                  HorizontalAlignment="Stretch"
-                 AcceptsReturn="True"
                  FontFamily="Consolas"
                  BorderThickness="0"
                  ScrollViewer.VerticalScrollBarVisibility="Auto" 
-                 ContextMenu="{StaticResource TextBoxContextMenu}"/>
+                 ContextMenu="{StaticResource TextBoxContextMenu}">
+            <FlowDocumentScrollViewer.Resources>
+                <Style TargetType="Run">
+                    <Setter Property="Foreground" Value="{DynamicResource DefaultForegroundColorBrush}"/>
+                </Style>
+            </FlowDocumentScrollViewer.Resources>
+        </FlowDocumentScrollViewer>
     </DockPanel>
 </UserControl>

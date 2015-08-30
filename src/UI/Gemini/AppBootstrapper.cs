@@ -18,7 +18,7 @@ namespace Gemini
 
         public AppBootstrapper()
         {
-            this.Initialize();
+            Initialize();
         }
 
 		/// <summary>

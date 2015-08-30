@@ -19,7 +19,6 @@ namespace EntityProfiler.Viewer.PresentationCore
     {
         private string _fontFamilyName = "Consolas";
         private double _fontSize = 12;
-        private List<double> _fontSizes;
         private bool _showLineNumbers = true;
 
         public ExtendedTextEditorOptions()
@@ -270,30 +269,26 @@ namespace EntityProfiler.Viewer.PresentationCore
         {
             get
             {
-                if (_fontSizes == null)
+                return new List<double>
                 {
-                    _fontSizes = new List<double>
-                    {
-                        5.0,
-                        5.5,
-                        6.0,
-                        6.5,
-                        7.0,
-                        7.5,
-                        8.0,
-                        8.5,
-                        9.0,
-                        9.5,
-                        10.0,
-                        12.0,
-                        14.0,
-                        16.0,
-                        18.0,
-                        20.0,
-                        24.0
-                    };
-                }
-                return _fontSizes;
+                    5.0,
+                    5.5,
+                    6.0,
+                    6.5,
+                    7.0,
+                    7.5,
+                    8.0,
+                    8.5,
+                    9.0,
+                    9.5,
+                    10.0,
+                    12.0,
+                    14.0,
+                    16.0,
+                    18.0,
+                    20.0,
+                    24.0
+                };
             }
         }
 

@@ -4,6 +4,7 @@ using System.ComponentModel.Composition;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Windows;
 using Caliburn.Micro;
 using EntityProfiler.Viewer.Modules.Output.Views;
 using Gemini.Framework;
@@ -70,7 +71,10 @@ namespace EntityProfiler.Viewer.Modules.Output.ViewModels
         public void Clear()
         {
             if (_view != null)
-                Execute.OnUIThread(() => _view.Clear());
+            {
+                _view.Clear();
+                //Execute.OnUIThread(() => _view.Clear());
+            }
             _stringBuilder.Clear();
         }
 
@@ -82,14 +86,21 @@ namespace EntityProfiler.Viewer.Modules.Output.ViewModels
         public void Append(string text)
         {
             _stringBuilder.Append(text);
-            OnTextChanged();
+            // OnTextChanged();
+
+            if (_view != null)
+            {
+                _view.AppendText(text);
+            }
         }
 
-        private void OnTextChanged()
+        /*private void OnTextChanged()
         {
             if (_view != null)
+            {
                 Execute.OnUIThread(() => _view.SetText(_stringBuilder.ToString()));
-        }
+            }
+        }*/
 
         protected override void OnViewLoaded(object view)
         {
