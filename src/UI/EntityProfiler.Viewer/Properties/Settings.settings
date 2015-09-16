@@ -1,0 +1,60 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="EntityProfiler.Viewer.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="WindowTop" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="WindowLeft" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="WindowHeight" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">500</Value>
+    </Setting>
+    <Setting Name="WindowWidth" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">600</Value>
+    </Setting>
+    <Setting Name="WindowState" Type="System.Windows.WindowState" Scope="User">
+      <Value Profile="(Default)">Normal</Value>
+    </Setting>
+    <Setting Name="ApplicationSession" Type="EntityProfiler.Viewer.Models.ApplicationSession" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="OutputWordWrap" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Connection_AutoStartWhenInitialized" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Connection_RetryConnectInterval" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="Connection_MaxRetryConnect" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="Connection_ConfirmOnCloseConnected" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Output_DisableLog" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Output_MinLogLevel" Type="Serilog.Events.LogEventLevel" Scope="User">
+      <Value Profile="(Default)">Information</Value>
+    </Setting>
+    <Setting Name="TextEditor_SqlEditorOptions" Type="EntityProfiler.Viewer.PresentationCore.ExtendedTextEditorOptions" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="TextEditor_CodeEditorOptions" Type="EntityProfiler.Viewer.PresentationCore.ExtendedTextEditorOptions" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Profiler_CallStack_OpenFilesInVisualStudio" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Profiler_CallStack_AllowAnyVsInstance" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="Profiler_Session_AutoSelectedDataContext" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

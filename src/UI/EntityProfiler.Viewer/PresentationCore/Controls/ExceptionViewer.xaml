@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="EntityProfiler.Viewer.PresentationCore.Controls.ExceptionViewer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:EntityProfiler.Viewer.PresentationCore.Controls"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300"
+             x:Name="ExceptionViewerControl">
+    <Grid Name="mainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"
+                              Name="treeCol"
+                              MaxWidth="400"
+                              MinWidth="90" />
+            <ColumnDefinition Width="8" />
+            <ColumnDefinition Width="*"
+                              Name="textCol"
+                              MinWidth="90" />
+        </Grid.ColumnDefinitions>
+        <TreeView Name="treeView1"
+                  SelectedItemChanged="treeView1_SelectedItemChanged"
+                  Foreground="{Binding Foreground, ElementName=ExceptionViewerControl}"
+                  BorderBrush="{Binding ControlsBorderBrush,ElementName=ExceptionViewerControl}"
+                  BorderThickness="0"
+                  Background="Transparent" Padding="2" />
+        <GridSplitter Grid.Row="0" Grid.Column="1"
+                      ResizeDirection="Columns"
+                      BorderBrush="{Binding ControlsBorderBrush,ElementName=ExceptionViewerControl}"
+                      BorderThickness="1,0" HorizontalAlignment="Stretch" />
+        <FlowDocumentScrollViewer Grid.Row="0" Grid.Column="2"
+                                  Name="docViewer"
+                                  HorizontalScrollBarVisibility="Auto"
+                                  VerticalScrollBarVisibility="Auto"
+                                  Foreground="{Binding Foreground, ElementName=ExceptionViewerControl}" 
+                                  Padding="2" />
+        <Border Grid.Column="0" Grid.Row="1"
+                Grid.ColumnSpan="3" BorderThickness="0,1,0,0"
+                BorderBrush="{Binding ControlsBorderBrush,ElementName=ExceptionViewerControl}" Padding="6">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <CheckBox Content="_Wrap text"
+                          Height="16"
+                          HorizontalAlignment="Right"
+                          Margin="0,0,23,0"
+                          Name="chkWrap"
+                          VerticalAlignment="Center"
+                          Checked="chkWrap_Checked"
+                          Unchecked="chkWrap_Unchecked"
+                          IsChecked="True"
+                          Foreground="{Binding Foreground, ElementName=ExceptionViewerControl}" />
+                <Button Content="_Copy All"
+                        Name="btnCopy"
+                        Click="btnCopy_Click"
+                        Padding="15,0"
+                        VerticalAlignment="Center"
+                        Height="23" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

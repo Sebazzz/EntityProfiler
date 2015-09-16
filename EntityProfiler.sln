@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AA89ECBA-C448-46A6-BA11-A94276ED0D62}"
 EndProject
@@ -24,13 +24,37 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityProfiler.Tests.Integr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityProfiler.Interceptor", "src\EntityProfiler.Interceptor\EntityProfiler.Interceptor.csproj", "{83990564-B6FE-4D63-9E4E-D1833B2A70F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityProfiler.UI", "src\EntityProfiler.UI\EntityProfiler.UI.csproj", "{98AFA9DF-5312-4831-97A2-DF8CDE739C9B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityProfiler.Interceptor.Reader", "src\EntityProfiler.Interceptor.Reader\EntityProfiler.Interceptor.Reader.csproj", "{C4A86FA8-5EB8-4C2C-9E3B-A197ABA743CB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{1C788679-A3F2-40C0-95AA-FACE5BE0AEAF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityProfiler.Tools.MessageGenerator", "tools\EntityProfiler.Tools.MessageGenerator\EntityProfiler.Tools.MessageGenerator.csproj", "{83775F7C-15A1-40A7-B089-AB81A8E5225E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{EF843DE1-EED8-4F4F-9416-EFC94DD4EAF8}"
+EndProject
+Project("{FF286327-C783-4F7A-AB73-9BCBAD0D4460}") = "EntityProfiler.Interceptor", "NuGet\EntityProfiler.Interceptor\EntityProfiler.Interceptor.nuproj", "{7E318E7E-862B-4843-9B23-E96FD28C4A8E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{11DCF2F2-938C-4BF1-BD24-DA99475FB03F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{ADD809B6-0C61-4767-8B97-A0E7E4BD1595}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityProfiler.Viewer", "src\UI\EntityProfiler.Viewer\EntityProfiler.Viewer.csproj", "{A26DB36B-967C-4BA6-B4B5-D767F651477E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gemini", "src\UI\Gemini\Gemini.csproj", "{13DBFC87-C152-4A86-94B0-D9944BEEF647}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{612AC3A8-3B8C-4618-B046-EF15981276D2}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityProfiler.UI", "src\EntityProfiler.UI\EntityProfiler.UI.csproj", "{98AFA9DF-5312-4831-97A2-DF8CDE739C9B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Libs", "_Libs", "{3024FE24-E699-4D94-ACF3-4261907340D1}"
+	ProjectSection(SolutionItems) = preProject
+		src\Libs\Xceed.Wpf.AvalonDock.Themes.VS2013.dll = src\Libs\Xceed.Wpf.AvalonDock.Themes.VS2013.dll
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,10 +78,6 @@ Global
 		{83990564-B6FE-4D63-9E4E-D1833B2A70F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83990564-B6FE-4D63-9E4E-D1833B2A70F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83990564-B6FE-4D63-9E4E-D1833B2A70F7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{98AFA9DF-5312-4831-97A2-DF8CDE739C9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{98AFA9DF-5312-4831-97A2-DF8CDE739C9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{98AFA9DF-5312-4831-97A2-DF8CDE739C9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{98AFA9DF-5312-4831-97A2-DF8CDE739C9B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C4A86FA8-5EB8-4C2C-9E3B-A197ABA743CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C4A86FA8-5EB8-4C2C-9E3B-A197ABA743CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4A86FA8-5EB8-4C2C-9E3B-A197ABA743CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -66,17 +86,41 @@ Global
 		{83775F7C-15A1-40A7-B089-AB81A8E5225E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83775F7C-15A1-40A7-B089-AB81A8E5225E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83775F7C-15A1-40A7-B089-AB81A8E5225E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E318E7E-862B-4843-9B23-E96FD28C4A8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E318E7E-862B-4843-9B23-E96FD28C4A8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E318E7E-862B-4843-9B23-E96FD28C4A8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E318E7E-862B-4843-9B23-E96FD28C4A8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A26DB36B-967C-4BA6-B4B5-D767F651477E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A26DB36B-967C-4BA6-B4B5-D767F651477E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A26DB36B-967C-4BA6-B4B5-D767F651477E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A26DB36B-967C-4BA6-B4B5-D767F651477E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13DBFC87-C152-4A86-94B0-D9944BEEF647}.Release|Any CPU.Build.0 = Release|Any CPU
+		{98AFA9DF-5312-4831-97A2-DF8CDE739C9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98AFA9DF-5312-4831-97A2-DF8CDE739C9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98AFA9DF-5312-4831-97A2-DF8CDE739C9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98AFA9DF-5312-4831-97A2-DF8CDE739C9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{EE3D0594-F346-41D9-BACF-4C8F12AE8AE6} = {AA89ECBA-C448-46A6-BA11-A94276ED0D62}
+		{EE3D0594-F346-41D9-BACF-4C8F12AE8AE6} = {ADD809B6-0C61-4767-8B97-A0E7E4BD1595}
 		{F4C693B1-DC34-4159-8BC0-8575C646FF93} = {6E79D10F-8DAD-4CA6-9DE5-815086C9B716}
 		{AFCEE2BE-D3C2-4778-BBEB-E393C3E9876A} = {6E79D10F-8DAD-4CA6-9DE5-815086C9B716}
-		{83990564-B6FE-4D63-9E4E-D1833B2A70F7} = {AA89ECBA-C448-46A6-BA11-A94276ED0D62}
-		{98AFA9DF-5312-4831-97A2-DF8CDE739C9B} = {AA89ECBA-C448-46A6-BA11-A94276ED0D62}
-		{C4A86FA8-5EB8-4C2C-9E3B-A197ABA743CB} = {AA89ECBA-C448-46A6-BA11-A94276ED0D62}
+		{83990564-B6FE-4D63-9E4E-D1833B2A70F7} = {ADD809B6-0C61-4767-8B97-A0E7E4BD1595}
+		{C4A86FA8-5EB8-4C2C-9E3B-A197ABA743CB} = {ADD809B6-0C61-4767-8B97-A0E7E4BD1595}
 		{83775F7C-15A1-40A7-B089-AB81A8E5225E} = {1C788679-A3F2-40C0-95AA-FACE5BE0AEAF}
+		{7E318E7E-862B-4843-9B23-E96FD28C4A8E} = {EF843DE1-EED8-4F4F-9416-EFC94DD4EAF8}
+		{11DCF2F2-938C-4BF1-BD24-DA99475FB03F} = {AA89ECBA-C448-46A6-BA11-A94276ED0D62}
+		{ADD809B6-0C61-4767-8B97-A0E7E4BD1595} = {AA89ECBA-C448-46A6-BA11-A94276ED0D62}
+		{A26DB36B-967C-4BA6-B4B5-D767F651477E} = {11DCF2F2-938C-4BF1-BD24-DA99475FB03F}
+		{13DBFC87-C152-4A86-94B0-D9944BEEF647} = {11DCF2F2-938C-4BF1-BD24-DA99475FB03F}
+		{98AFA9DF-5312-4831-97A2-DF8CDE739C9B} = {ADD809B6-0C61-4767-8B97-A0E7E4BD1595}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VD_Solution = <?xml version="1.0" encoding="utf-16"?>|§r|§n<DocumentsSolution xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">|§r|§n  <m_persistedPinnedDocumentGroupLabels />|§r|§n</DocumentsSolution>
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="EntityProfiler.Viewer.Modules.Connection.Views.ConnectionSettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Thickness x:Key="ControlsMargin">5</Thickness>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="Margin" Value="{StaticResource ControlsMargin}" />
+        </Style>
+        <Style TargetType="{x:Type xctk:IntegerUpDown}">
+            <Setter Property="Margin" Value="{StaticResource ControlsMargin}" />
+            <Setter Property="MinWidth" Value="70" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+        </Style>
+    </UserControl.Resources>
+    <StackPanel>
+
+        <CheckBox x:Name="AutoStartWhenInitialized"
+                  Content="Start when initialized"
+                  Margin="{StaticResource ControlsMargin}" />
+        <GroupBox Header="Connection fail settings"
+                  BorderBrush="{x:Static SystemColors.ActiveBorderBrush}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Retry connect interval:" />
+                <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+                    <xctk:IntegerUpDown x:Name="RetryConnectInterval"
+                                        Minimum="500" Increment="500"
+                                        Value="{Binding RetryConnectInterval, Mode=TwoWay}" />
+                    <TextBlock Text="(ms)" Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </StackPanel>
+
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Max retries:" />
+                <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+                    <xctk:IntegerUpDown x:Name="MaxRetryConnect"
+                                    Minimum="0" Increment="10"
+                                    Value="{Binding MaxRetryConnect, Mode=TwoWay}" />
+                    <TextBlock Text="0 = forever" Foreground="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                </StackPanel>
+            </Grid>
+
+        </GroupBox>
+
+    </StackPanel>
+
+</UserControl>

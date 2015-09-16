@@ -1,0 +1,377 @@
+﻿2015-07-31 15:57:52.996 -03:00 [Error] An unhandled exception occurred
+System.Configuration.ConfigurationErrorsException: O sistema de configuração falhou ao inicializar ---> System.Configuration.ConfigurationErrorsException: Seção de configuração não reconhecida userSettings/EntityProfiler.Viewer.Properties.Settings. (C:\Users\Julian\AppData\Local\Entity_Profiler_initiativ\EntityProfiler.Viewer.exe_StrongName_2k553ekblecsqhp2xznurbqsmxjzqsod\1.0.0.0\user.config line 9)
+   em System.Configuration.ConfigurationSchemaErrors.ThrowIfErrors(Boolean ignoreLocal)
+   em System.Configuration.BaseConfigurationRecord.ThrowIfParseErrors(ConfigurationSchemaErrors schemaErrors)
+   em System.Configuration.BaseConfigurationRecord.ThrowIfInitErrors()
+   em System.Configuration.ClientConfigurationSystem.OnConfigRemoved(Object sender, InternalConfigEventArgs e)
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em System.Configuration.ClientConfigurationSystem.OnConfigRemoved(Object sender, InternalConfigEventArgs e)
+   em System.Configuration.Internal.InternalConfigRoot.OnConfigRemoved(InternalConfigEventArgs e)
+   em System.Configuration.Internal.InternalConfigRoot.RemoveConfigImpl(String configPath, BaseConfigurationRecord configRecord)
+   em System.Configuration.BaseConfigurationRecord.GetSectionRecursive(String configKey, Boolean getLkg, Boolean checkPermission, Boolean getRuntimeObject, Boolean requestIsHere, Object& result, Object& resultRuntimeObject)
+   em System.Configuration.BaseConfigurationRecord.GetSection(String configKey)
+   em System.Configuration.ClientConfigurationSystem.System.Configuration.Internal.IInternalConfigSystem.GetSection(String sectionName)
+   em System.Configuration.ConfigurationManager.GetSection(String sectionName)
+   em System.Configuration.ClientSettingsStore.ReadSettings(String sectionName, Boolean isUserScoped)
+   em System.Configuration.LocalFileSettingsProvider.GetPropertyValues(SettingsContext context, SettingsPropertyCollection properties)
+   em System.Configuration.SettingsBase.GetPropertiesFromProvider(SettingsProvider provider)
+   em System.Configuration.SettingsBase.GetPropertyValueByName(String propertyName)
+   em System.Configuration.SettingsBase.get_Item(String propertyName)
+   em System.Configuration.ApplicationSettingsBase.GetPropertyValue(String propertyName)
+   em System.Configuration.ApplicationSettingsBase.get_Item(String propertyName)
+   em EntityProfiler.Viewer.Properties.Settings.get_TextEditor_CodeEditorOptions()
+   em EntityProfiler.Viewer.App.InitilizeSettings()
+   em EntityProfiler.Viewer.App..ctor()
+   em EntityProfiler.Viewer.App.Main()
+2015-07-31 16:03:01.106 -03:00 [Error] An unhandled exception occurred
+System.Configuration.ConfigurationErrorsException: O sistema de configuração falhou ao inicializar ---> System.Configuration.ConfigurationErrorsException: Seção de configuração não reconhecida userSettings/EntityProfiler.Viewer.Properties.Settings. (C:\Users\Julian\AppData\Local\Entity_Profiler_initiativ\EntityProfiler.Viewer.exe_StrongName_2k553ekblecsqhp2xznurbqsmxjzqsod\1.0.0.0\user.config line 9)
+   em System.Configuration.ConfigurationSchemaErrors.ThrowIfErrors(Boolean ignoreLocal)
+   em System.Configuration.BaseConfigurationRecord.ThrowIfParseErrors(ConfigurationSchemaErrors schemaErrors)
+   em System.Configuration.BaseConfigurationRecord.ThrowIfInitErrors()
+   em System.Configuration.ClientConfigurationSystem.OnConfigRemoved(Object sender, InternalConfigEventArgs e)
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em System.Configuration.ClientConfigurationSystem.OnConfigRemoved(Object sender, InternalConfigEventArgs e)
+   em System.Configuration.Internal.InternalConfigRoot.OnConfigRemoved(InternalConfigEventArgs e)
+   em System.Configuration.Internal.InternalConfigRoot.RemoveConfigImpl(String configPath, BaseConfigurationRecord configRecord)
+   em System.Configuration.BaseConfigurationRecord.GetSectionRecursive(String configKey, Boolean getLkg, Boolean checkPermission, Boolean getRuntimeObject, Boolean requestIsHere, Object& result, Object& resultRuntimeObject)
+   em System.Configuration.BaseConfigurationRecord.GetSection(String configKey)
+   em System.Configuration.ClientConfigurationSystem.System.Configuration.Internal.IInternalConfigSystem.GetSection(String sectionName)
+   em System.Configuration.ConfigurationManager.GetSection(String sectionName)
+   em System.Configuration.ClientSettingsStore.ReadSettings(String sectionName, Boolean isUserScoped)
+   em System.Configuration.LocalFileSettingsProvider.GetPropertyValues(SettingsContext context, SettingsPropertyCollection properties)
+   em System.Configuration.SettingsBase.GetPropertiesFromProvider(SettingsProvider provider)
+   em System.Configuration.SettingsBase.GetPropertyValueByName(String propertyName)
+   em System.Configuration.SettingsBase.get_Item(String propertyName)
+   em System.Configuration.ApplicationSettingsBase.GetPropertyValue(String propertyName)
+   em System.Configuration.ApplicationSettingsBase.get_Item(String propertyName)
+   em EntityProfiler.Viewer.Properties.Settings.get_TextEditor_CodeEditorOptions()
+   em EntityProfiler.Viewer.App.InitilizeSettings()
+   em EntityProfiler.Viewer.App..ctor()
+   em EntityProfiler.Viewer.App.Main()
+2015-07-31 16:10:19.980 -03:00 [Error] An unhandled exception occurred
+System.Configuration.ConfigurationErrorsException: O sistema de configuração falhou ao inicializar ---> System.Configuration.ConfigurationErrorsException: Seção de configuração não reconhecida userSettings/EntityProfiler.Viewer.Properties.Settings. (C:\Users\Julian\AppData\Local\Entity_Profiler_initiativ\EntityProfiler.Viewer.exe_StrongName_2k553ekblecsqhp2xznurbqsmxjzqsod\1.0.0.0\user.config line 9)
+   em System.Configuration.ConfigurationSchemaErrors.ThrowIfErrors(Boolean ignoreLocal)
+   em System.Configuration.BaseConfigurationRecord.ThrowIfParseErrors(ConfigurationSchemaErrors schemaErrors)
+   em System.Configuration.BaseConfigurationRecord.ThrowIfInitErrors()
+   em System.Configuration.ClientConfigurationSystem.OnConfigRemoved(Object sender, InternalConfigEventArgs e)
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em System.Configuration.ClientConfigurationSystem.OnConfigRemoved(Object sender, InternalConfigEventArgs e)
+   em System.Configuration.Internal.InternalConfigRoot.OnConfigRemoved(InternalConfigEventArgs e)
+   em System.Configuration.Internal.InternalConfigRoot.RemoveConfigImpl(String configPath, BaseConfigurationRecord configRecord)
+   em System.Configuration.BaseConfigurationRecord.GetSectionRecursive(String configKey, Boolean getLkg, Boolean checkPermission, Boolean getRuntimeObject, Boolean requestIsHere, Object& result, Object& resultRuntimeObject)
+   em System.Configuration.BaseConfigurationRecord.GetSection(String configKey)
+   em System.Configuration.ClientConfigurationSystem.System.Configuration.Internal.IInternalConfigSystem.GetSection(String sectionName)
+   em System.Configuration.ConfigurationManager.GetSection(String sectionName)
+   em System.Configuration.ClientSettingsStore.ReadSettings(String sectionName, Boolean isUserScoped)
+   em System.Configuration.LocalFileSettingsProvider.GetPropertyValues(SettingsContext context, SettingsPropertyCollection properties)
+   em System.Configuration.SettingsBase.GetPropertiesFromProvider(SettingsProvider provider)
+   em System.Configuration.SettingsBase.GetPropertyValueByName(String propertyName)
+   em System.Configuration.SettingsBase.get_Item(String propertyName)
+   em System.Configuration.ApplicationSettingsBase.GetPropertyValue(String propertyName)
+   em System.Configuration.ApplicationSettingsBase.get_Item(String propertyName)
+   em EntityProfiler.Viewer.Properties.Settings.get_TextEditor_CodeEditorOptions()
+   em EntityProfiler.Viewer.App.InitilizeSettings()
+   em EntityProfiler.Viewer.App..ctor()
+   em EntityProfiler.Viewer.App.Main()
+2015-07-31 16:28:18.844 -03:00 [Error] An unhandled exception occurred
+System.Configuration.ConfigurationErrorsException: O sistema de configuração falhou ao inicializar ---> System.Configuration.ConfigurationErrorsException: Seção de configuração não reconhecida userSettings/EntityProfiler.Viewer.Properties.Settings. (C:\Users\Julian\AppData\Local\Entity_Profiler_initiativ\EntityProfiler.Viewer.exe_StrongName_2k553ekblecsqhp2xznurbqsmxjzqsod\1.0.0.0\user.config line 9)
+   em System.Configuration.ConfigurationSchemaErrors.ThrowIfErrors(Boolean ignoreLocal)
+   em System.Configuration.BaseConfigurationRecord.ThrowIfParseErrors(ConfigurationSchemaErrors schemaErrors)
+   em System.Configuration.BaseConfigurationRecord.ThrowIfInitErrors()
+   em System.Configuration.ClientConfigurationSystem.OnConfigRemoved(Object sender, InternalConfigEventArgs e)
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em System.Configuration.ClientConfigurationSystem.OnConfigRemoved(Object sender, InternalConfigEventArgs e)
+   em System.Configuration.Internal.InternalConfigRoot.OnConfigRemoved(InternalConfigEventArgs e)
+   em System.Configuration.Internal.InternalConfigRoot.RemoveConfigImpl(String configPath, BaseConfigurationRecord configRecord)
+   em System.Configuration.BaseConfigurationRecord.GetSectionRecursive(String configKey, Boolean getLkg, Boolean checkPermission, Boolean getRuntimeObject, Boolean requestIsHere, Object& result, Object& resultRuntimeObject)
+   em System.Configuration.BaseConfigurationRecord.GetSection(String configKey)
+   em System.Configuration.ClientConfigurationSystem.System.Configuration.Internal.IInternalConfigSystem.GetSection(String sectionName)
+   em System.Configuration.ConfigurationManager.GetSection(String sectionName)
+   em System.Configuration.ClientSettingsStore.ReadSettings(String sectionName, Boolean isUserScoped)
+   em System.Configuration.LocalFileSettingsProvider.GetPropertyValues(SettingsContext context, SettingsPropertyCollection properties)
+   em System.Configuration.SettingsBase.GetPropertiesFromProvider(SettingsProvider provider)
+   em System.Configuration.SettingsBase.GetPropertyValueByName(String propertyName)
+   em System.Configuration.SettingsBase.get_Item(String propertyName)
+   em System.Configuration.ApplicationSettingsBase.GetPropertyValue(String propertyName)
+   em System.Configuration.ApplicationSettingsBase.get_Item(String propertyName)
+   em EntityProfiler.Viewer.Properties.Settings.get_TextEditor_CodeEditorOptions()
+   em EntityProfiler.Viewer.App.InitilizeSettings()
+   em EntityProfiler.Viewer.App..ctor()
+   em EntityProfiler.Viewer.App.Main()
+2015-07-31 16:31:18.526 -03:00 [Error] An unhandled exception occurred
+System.Configuration.ConfigurationErrorsException: O sistema de configuração falhou ao inicializar ---> System.Configuration.ConfigurationErrorsException: Seção de configuração não reconhecida userSettings/EntityProfiler.Viewer.Properties.Settings. (C:\Users\Julian\AppData\Local\Entity_Profiler_initiativ\EntityProfiler.Viewer.exe_StrongName_2k553ekblecsqhp2xznurbqsmxjzqsod\1.0.0.0\user.config line 9)
+   em System.Configuration.ConfigurationSchemaErrors.ThrowIfErrors(Boolean ignoreLocal)
+   em System.Configuration.BaseConfigurationRecord.ThrowIfParseErrors(ConfigurationSchemaErrors schemaErrors)
+   em System.Configuration.BaseConfigurationRecord.ThrowIfInitErrors()
+   em System.Configuration.ClientConfigurationSystem.OnConfigRemoved(Object sender, InternalConfigEventArgs e)
+   --- Fim do rastreamento de pilha de exceções internas ---
+   em System.Configuration.ClientConfigurationSystem.OnConfigRemoved(Object sender, InternalConfigEventArgs e)
+   em System.Configuration.Internal.InternalConfigRoot.OnConfigRemoved(InternalConfigEventArgs e)
+   em System.Configuration.Internal.InternalConfigRoot.RemoveConfigImpl(String configPath, BaseConfigurationRecord configRecord)
+   em System.Configuration.BaseConfigurationRecord.GetSectionRecursive(String configKey, Boolean getLkg, Boolean checkPermission, Boolean getRuntimeObject, Boolean requestIsHere, Object& result, Object& resultRuntimeObject)
+   em System.Configuration.BaseConfigurationRecord.GetSection(String configKey)
+   em System.Configuration.ClientConfigurationSystem.System.Configuration.Internal.IInternalConfigSystem.GetSection(String sectionName)
+   em System.Configuration.ConfigurationManager.GetSection(String sectionName)
+   em System.Configuration.ClientSettingsStore.ReadSettings(String sectionName, Boolean isUserScoped)
+   em System.Configuration.LocalFileSettingsProvider.GetPropertyValues(SettingsContext context, SettingsPropertyCollection properties)
+   em System.Configuration.SettingsBase.GetPropertiesFromProvider(SettingsProvider provider)
+   em System.Configuration.SettingsBase.GetPropertyValueByName(String propertyName)
+   em System.Configuration.SettingsBase.get_Item(String propertyName)
+   em System.Configuration.ApplicationSettingsBase.GetPropertyValue(String propertyName)
+   em System.Configuration.ApplicationSettingsBase.get_Item(String propertyName)
+   em EntityProfiler.Viewer.Properties.Settings.get_TextEditor_CodeEditorOptions()
+   em EntityProfiler.Viewer.App.InitilizeSettings()
+   em EntityProfiler.Viewer.App..ctor()
+   em EntityProfiler.Viewer.App.Main()
+2015-07-31 16:32:12.697 -03:00 [Error] Connecting error, retrying...
+System.Net.Sockets.SocketException (0x80004005): Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente 127.0.0.1:64234
+   em System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   em System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   em System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   em EntityProfiler.Interceptor.Reader.Protocol.TcpClientFactory.CreateTcpClient() na E:\PAULOZZI_DATA\GitHub\EntityProfiler\src\EntityProfiler.Interceptor.Reader\Protocol\TcpClientFactory.cs:linha 13
+   em EntityProfiler.Interceptor.Reader.Protocol.TcpMessageListener.ClientThread() na E:\PAULOZZI_DATA\GitHub\EntityProfiler\src\EntityProfiler.Interceptor.Reader\Protocol\TcpMessageListener.cs:linha 86
+2015-07-31 16:32:24.792 -03:00 [Error] Connecting error, retrying...
+System.Net.Sockets.SocketException (0x80004005): Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente 127.0.0.1:64234
+   em System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   em System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   em System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   em EntityProfiler.Interceptor.Reader.Protocol.TcpClientFactory.CreateTcpClient() na E:\PAULOZZI_DATA\GitHub\EntityProfiler\src\EntityProfiler.Interceptor.Reader\Protocol\TcpClientFactory.cs:linha 13
+   em EntityProfiler.Interceptor.Reader.Protocol.TcpMessageListener.ClientThread() na E:\PAULOZZI_DATA\GitHub\EntityProfiler\src\EntityProfiler.Interceptor.Reader\Protocol\TcpMessageListener.cs:linha 86
+2015-07-31 16:32:26.851 -03:00 [Error] Connecting error, retrying...
+System.Net.Sockets.SocketException (0x80004005): Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente 127.0.0.1:64234
+   em System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   em System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   em System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   em EntityProfiler.Interceptor.Reader.Protocol.TcpClientFactory.CreateTcpClient() na E:\PAULOZZI_DATA\GitHub\EntityProfiler\src\EntityProfiler.Interceptor.Reader\Protocol\TcpClientFactory.cs:linha 13
+   em EntityProfiler.Interceptor.Reader.Protocol.TcpMessageListener.ClientThread() na E:\PAULOZZI_DATA\GitHub\EntityProfiler\src\EntityProfiler.Interceptor.Reader\Protocol\TcpMessageListener.cs:linha 86
+2015-07-31 16:32:27.851 -03:00 [Error] Connecting error, retrying...
+System.Net.Sockets.SocketException (0x80004005): Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente 127.0.0.1:64234
+   em System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   em System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   em System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   em EntityProfiler.Interceptor.Reader.Protocol.TcpClientFactory.CreateTcpClient() na E:\PAULOZZI_DATA\GitHub\EntityProfiler\src\EntityProfiler.Interceptor.Reader\Protocol\TcpClientFactory.cs:linha 13
+   em EntityProfiler.Interceptor.Reader.Protocol.TcpMessageListener.ClientThread() na E:\PAULOZZI_DATA\GitHub\EntityProfiler\src\EntityProfiler.Interceptor.Reader\Protocol\TcpMessageListener.cs:linha 86
+2015-07-31 16:39:02.296 -03:00 [Error] An unhandled exception occurred
+System.Exception: Could not locate any instances of contract Gemini.Framework.Services.IMainWindow.
+   em EntityProfiler.Viewer.AppBootstrapper.GetInstance(Type serviceType, String key)
+   em Caliburn.Micro.BootstrapperBase.DisplayRootViewFor(Type viewModelType, IDictionary`2 settings)
+   em Caliburn.Micro.BootstrapperBase.DisplayRootViewFor[TViewModel](IDictionary`2 settings)
+   em EntityProfiler.Viewer.AppBootstrapper.OnStartup(Object sender, StartupEventArgs e)
+   em System.Windows.Application.OnStartup(StartupEventArgs e)
+   em System.Windows.Application.<_ctor>b__0(Object unused)
+   em System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   em System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+2015-07-31 16:39:02.647 -03:00 [Error] An unhandled exception occurred
+System.Exception: Could not locate any instances of contract Gemini.Framework.Services.IMainWindow.
+   em EntityProfiler.Viewer.AppBootstrapper.GetInstance(Type serviceType, String key)
+   em Caliburn.Micro.BootstrapperBase.DisplayRootViewFor(Type viewModelType, IDictionary`2 settings)
+   em Caliburn.Micro.BootstrapperBase.DisplayRootViewFor[TViewModel](IDictionary`2 settings)
+   em EntityProfiler.Viewer.AppBootstrapper.OnStartup(Object sender, StartupEventArgs e)
+   em System.Windows.Application.OnStartup(StartupEventArgs e)
+   em System.Windows.Application.<_ctor>b__0(Object unused)
+   em System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   em System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+   em System.Windows.Threading.DispatcherOperation.InvokeImpl()
+   em System.Windows.Threading.DispatcherOperation.InvokeInSecurityContext(Object state)
+   em System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   em System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   em System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   em System.Windows.Threading.DispatcherOperation.Invoke()
+   em System.Windows.Threading.Dispatcher.ProcessQueue()
+   em System.Windows.Threading.Dispatcher.WndProcHook(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   em MS.Win32.HwndWrapper.WndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   em MS.Win32.HwndSubclass.DispatcherCallbackOperation(Object o)
+   em System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   em System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+   em System.Windows.Threading.Dispatcher.LegacyInvokeImpl(DispatcherPriority priority, TimeSpan timeout, Delegate method, Object args, Int32 numArgs)
+   em MS.Win32.HwndSubclass.SubclassWndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam)
+   em MS.Win32.UnsafeNativeMethods.DispatchMessage(MSG& msg)
+   em System.Windows.Threading.Dispatcher.PushFrameImpl(DispatcherFrame frame)
+   em System.Windows.Threading.Dispatcher.PushFrame(DispatcherFrame frame)
+   em System.Windows.Application.RunDispatcher(Object ignore)
+   em System.Windows.Application.RunInternal(Window window)
+   em System.Windows.Application.Run(Window window)
+   em System.Windows.Application.Run()
+   em EntityProfiler.Viewer.App.Main()
+2015-07-31 19:20:49.183 -03:00 [Error] An unhandled exception occurred
+System.Exception: Could not locate any instances of contract Gemini.Framework.Services.IMainWindow.
+   em EntityProfiler.Viewer.AppBootstrapper.GetInstance(Type serviceType, String key)
+   em Caliburn.Micro.BootstrapperBase.DisplayRootViewFor(Type viewModelType, IDictionary`2 settings)
+   em Caliburn.Micro.BootstrapperBase.DisplayRootViewFor[TViewModel](IDictionary`2 settings)
+   em EntityProfiler.Viewer.AppBootstrapper.OnStartup(Object sender, StartupEventArgs e)
+   em System.Windows.Application.OnStartup(StartupEventArgs e)
+   em System.Windows.Application.<_ctor>b__0(Object unused)
+   em System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   em System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+2015-07-31 19:20:49.521 -03:00 [Error] An unhandled exception occurred
+System.Exception: Could not locate any instances of contract Gemini.Framework.Services.IMainWindow.
+   em EntityProfiler.Viewer.AppBootstrapper.GetInstance(Type serviceType, String key)
+   em Caliburn.Micro.BootstrapperBase.DisplayRootViewFor(Type viewModelType, IDictionary`2 settings)
+   em Caliburn.Micro.BootstrapperBase.DisplayRootViewFor[TViewModel](IDictionary`2 settings)
+   em EntityProfiler.Viewer.AppBootstrapper.OnStartup(Object sender, StartupEventArgs e)
+   em System.Windows.Application.OnStartup(StartupEventArgs e)
+   em System.Windows.Application.<_ctor>b__0(Object unused)
+   em System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   em System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+   em System.Windows.Threading.DispatcherOperation.InvokeImpl()
+   em System.Windows.Threading.DispatcherOperation.InvokeInSecurityContext(Object state)
+   em System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   em System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   em System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   em System.Windows.Threading.DispatcherOperation.Invoke()
+   em System.Windows.Threading.Dispatcher.ProcessQueue()
+   em System.Windows.Threading.Dispatcher.WndProcHook(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   em MS.Win32.HwndWrapper.WndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   em MS.Win32.HwndSubclass.DispatcherCallbackOperation(Object o)
+   em System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   em System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+   em System.Windows.Threading.Dispatcher.LegacyInvokeImpl(DispatcherPriority priority, TimeSpan timeout, Delegate method, Object args, Int32 numArgs)
+   em MS.Win32.HwndSubclass.SubclassWndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam)
+   em MS.Win32.UnsafeNativeMethods.DispatchMessage(MSG& msg)
+   em System.Windows.Threading.Dispatcher.PushFrameImpl(DispatcherFrame frame)
+   em System.Windows.Threading.Dispatcher.PushFrame(DispatcherFrame frame)
+   em System.Windows.Application.RunDispatcher(Object ignore)
+   em System.Windows.Application.RunInternal(Window window)
+   em System.Windows.Application.Run(Window window)
+   em System.Windows.Application.Run()
+   em EntityProfiler.Viewer.App.Main()
+2015-07-31 19:20:53.678 -03:00 [Error] An unhandled exception occurred
+System.Exception: Could not locate any instances of contract Gemini.Framework.Services.IMainWindow.
+   em EntityProfiler.Viewer.AppBootstrapper.GetInstance(Type serviceType, String key)
+   em Caliburn.Micro.BootstrapperBase.DisplayRootViewFor(Type viewModelType, IDictionary`2 settings)
+   em Caliburn.Micro.BootstrapperBase.DisplayRootViewFor[TViewModel](IDictionary`2 settings)
+   em EntityProfiler.Viewer.AppBootstrapper.OnStartup(Object sender, StartupEventArgs e)
+   em System.Windows.Application.OnStartup(StartupEventArgs e)
+   em System.Windows.Application.<_ctor>b__0(Object unused)
+   em System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   em System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+2015-07-31 19:20:54.019 -03:00 [Error] An unhandled exception occurred
+System.Exception: Could not locate any instances of contract Gemini.Framework.Services.IMainWindow.
+   em EntityProfiler.Viewer.AppBootstrapper.GetInstance(Type serviceType, String key)
+   em Caliburn.Micro.BootstrapperBase.DisplayRootViewFor(Type viewModelType, IDictionary`2 settings)
+   em Caliburn.Micro.BootstrapperBase.DisplayRootViewFor[TViewModel](IDictionary`2 settings)
+   em EntityProfiler.Viewer.AppBootstrapper.OnStartup(Object sender, StartupEventArgs e)
+   em System.Windows.Application.OnStartup(StartupEventArgs e)
+   em System.Windows.Application.<_ctor>b__0(Object unused)
+   em System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   em System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+   em System.Windows.Threading.DispatcherOperation.InvokeImpl()
+   em System.Windows.Threading.DispatcherOperation.InvokeInSecurityContext(Object state)
+   em System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   em System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   em System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   em System.Windows.Threading.DispatcherOperation.Invoke()
+   em System.Windows.Threading.Dispatcher.ProcessQueue()
+   em System.Windows.Threading.Dispatcher.WndProcHook(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   em MS.Win32.HwndWrapper.WndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   em MS.Win32.HwndSubclass.DispatcherCallbackOperation(Object o)
+   em System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   em System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+   em System.Windows.Threading.Dispatcher.LegacyInvokeImpl(DispatcherPriority priority, TimeSpan timeout, Delegate method, Object args, Int32 numArgs)
+   em MS.Win32.HwndSubclass.SubclassWndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam)
+   em MS.Win32.UnsafeNativeMethods.DispatchMessage(MSG& msg)
+   em System.Windows.Threading.Dispatcher.PushFrameImpl(DispatcherFrame frame)
+   em System.Windows.Threading.Dispatcher.PushFrame(DispatcherFrame frame)
+   em System.Windows.Application.RunDispatcher(Object ignore)
+   em System.Windows.Application.RunInternal(Window window)
+   em System.Windows.Application.Run(Window window)
+   em System.Windows.Application.Run()
+   em EntityProfiler.Viewer.App.Main()
+2015-07-31 19:21:35.518 -03:00 [Error] Connecting error, retrying...
+System.Net.Sockets.SocketException (0x80004005): Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente 127.0.0.1:64234
+   em System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   em System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   em System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   em EntityProfiler.Interceptor.Reader.Protocol.TcpClientFactory.CreateTcpClient() na E:\PAULOZZI_DATA\GitHub\EntityProfiler\src\EntityProfiler.Interceptor.Reader\Protocol\TcpClientFactory.cs:linha 13
+   em EntityProfiler.Interceptor.Reader.Protocol.TcpMessageListener.ClientThread() na E:\PAULOZZI_DATA\GitHub\EntityProfiler\src\EntityProfiler.Interceptor.Reader\Protocol\TcpMessageListener.cs:linha 86
+2015-07-31 19:21:40.594 -03:00 [Error] Connecting error, retrying...
+System.Net.Sockets.SocketException (0x80004005): Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente 127.0.0.1:64234
+   em System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   em System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   em System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   em EntityProfiler.Interceptor.Reader.Protocol.TcpClientFactory.CreateTcpClient() na E:\PAULOZZI_DATA\GitHub\EntityProfiler\src\EntityProfiler.Interceptor.Reader\Protocol\TcpClientFactory.cs:linha 13
+   em EntityProfiler.Interceptor.Reader.Protocol.TcpMessageListener.ClientThread() na E:\PAULOZZI_DATA\GitHub\EntityProfiler\src\EntityProfiler.Interceptor.Reader\Protocol\TcpMessageListener.cs:linha 86
+2015-07-31 19:21:42.613 -03:00 [Error] Connecting error, retrying...
+System.Net.Sockets.SocketException (0x80004005): Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente 127.0.0.1:64234
+   em System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   em System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   em System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   em EntityProfiler.Interceptor.Reader.Protocol.TcpClientFactory.CreateTcpClient() na E:\PAULOZZI_DATA\GitHub\EntityProfiler\src\EntityProfiler.Interceptor.Reader\Protocol\TcpClientFactory.cs:linha 13
+   em EntityProfiler.Interceptor.Reader.Protocol.TcpMessageListener.ClientThread() na E:\PAULOZZI_DATA\GitHub\EntityProfiler\src\EntityProfiler.Interceptor.Reader\Protocol\TcpMessageListener.cs:linha 86
+2015-07-31 19:21:43.615 -03:00 [Error] Connecting error, retrying...
+System.Net.Sockets.SocketException (0x80004005): Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente 127.0.0.1:64234
+   em System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   em System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   em System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   em EntityProfiler.Interceptor.Reader.Protocol.TcpClientFactory.CreateTcpClient() na E:\PAULOZZI_DATA\GitHub\EntityProfiler\src\EntityProfiler.Interceptor.Reader\Protocol\TcpClientFactory.cs:linha 13
+   em EntityProfiler.Interceptor.Reader.Protocol.TcpMessageListener.ClientThread() na E:\PAULOZZI_DATA\GitHub\EntityProfiler\src\EntityProfiler.Interceptor.Reader\Protocol\TcpMessageListener.cs:linha 86
+2015-07-31 19:21:45.677 -03:00 [Error] Connecting error, retrying...
+System.Net.Sockets.SocketException (0x80004005): Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente 127.0.0.1:64234
+   em System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   em System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   em System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   em EntityProfiler.Interceptor.Reader.Protocol.TcpClientFactory.CreateTcpClient() na E:\PAULOZZI_DATA\GitHub\EntityProfiler\src\EntityProfiler.Interceptor.Reader\Protocol\TcpClientFactory.cs:linha 13
+   em EntityProfiler.Interceptor.Reader.Protocol.TcpMessageListener.ClientThread() na E:\PAULOZZI_DATA\GitHub\EntityProfiler\src\EntityProfiler.Interceptor.Reader\Protocol\TcpMessageListener.cs:linha 86
+2015-07-31 19:26:16.384 -03:00 [Error] An unhandled exception occurred
+System.Exception: Could not locate any instances of contract Gemini.Framework.Services.IMainWindow.
+   em EntityProfiler.Viewer.AppBootstrapper.GetInstance(Type serviceType, String key)
+   em Caliburn.Micro.BootstrapperBase.DisplayRootViewFor(Type viewModelType, IDictionary`2 settings)
+   em Caliburn.Micro.BootstrapperBase.DisplayRootViewFor[TViewModel](IDictionary`2 settings)
+   em EntityProfiler.Viewer.AppBootstrapper.OnStartup(Object sender, StartupEventArgs e)
+   em System.Windows.Application.OnStartup(StartupEventArgs e)
+   em System.Windows.Application.<_ctor>b__0(Object unused)
+   em System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   em System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+2015-07-31 19:26:16.723 -03:00 [Error] An unhandled exception occurred
+System.Exception: Could not locate any instances of contract Gemini.Framework.Services.IMainWindow.
+   em EntityProfiler.Viewer.AppBootstrapper.GetInstance(Type serviceType, String key)
+   em Caliburn.Micro.BootstrapperBase.DisplayRootViewFor(Type viewModelType, IDictionary`2 settings)
+   em Caliburn.Micro.BootstrapperBase.DisplayRootViewFor[TViewModel](IDictionary`2 settings)
+   em EntityProfiler.Viewer.AppBootstrapper.OnStartup(Object sender, StartupEventArgs e)
+   em System.Windows.Application.OnStartup(StartupEventArgs e)
+   em System.Windows.Application.<_ctor>b__0(Object unused)
+   em System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   em System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+   em System.Windows.Threading.DispatcherOperation.InvokeImpl()
+   em System.Windows.Threading.DispatcherOperation.InvokeInSecurityContext(Object state)
+   em System.Threading.ExecutionContext.RunInternal(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   em System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state, Boolean preserveSyncCtx)
+   em System.Threading.ExecutionContext.Run(ExecutionContext executionContext, ContextCallback callback, Object state)
+   em System.Windows.Threading.DispatcherOperation.Invoke()
+   em System.Windows.Threading.Dispatcher.ProcessQueue()
+   em System.Windows.Threading.Dispatcher.WndProcHook(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   em MS.Win32.HwndWrapper.WndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam, Boolean& handled)
+   em MS.Win32.HwndSubclass.DispatcherCallbackOperation(Object o)
+   em System.Windows.Threading.ExceptionWrapper.InternalRealCall(Delegate callback, Object args, Int32 numArgs)
+   em System.Windows.Threading.ExceptionWrapper.TryCatchWhen(Object source, Delegate callback, Object args, Int32 numArgs, Delegate catchHandler)
+   em System.Windows.Threading.Dispatcher.LegacyInvokeImpl(DispatcherPriority priority, TimeSpan timeout, Delegate method, Object args, Int32 numArgs)
+   em MS.Win32.HwndSubclass.SubclassWndProc(IntPtr hwnd, Int32 msg, IntPtr wParam, IntPtr lParam)
+   em MS.Win32.UnsafeNativeMethods.DispatchMessage(MSG& msg)
+   em System.Windows.Threading.Dispatcher.PushFrameImpl(DispatcherFrame frame)
+   em System.Windows.Threading.Dispatcher.PushFrame(DispatcherFrame frame)
+   em System.Windows.Application.RunDispatcher(Object ignore)
+   em System.Windows.Application.RunInternal(Window window)
+   em System.Windows.Application.Run(Window window)
+   em System.Windows.Application.Run()
+   em EntityProfiler.Viewer.App.Main()
+2015-07-31 19:59:58.938 -03:00 [Error] Connecting error, retrying...
+System.Net.Sockets.SocketException (0x80004005): Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente 127.0.0.1:64234
+   em System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   em System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   em System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   em EntityProfiler.Interceptor.Reader.Protocol.TcpClientFactory.CreateTcpClient() na E:\PAULOZZI_DATA\GitHub\EntityProfiler\src\EntityProfiler.Interceptor.Reader\Protocol\TcpClientFactory.cs:linha 13
+   em EntityProfiler.Interceptor.Reader.Protocol.TcpMessageListener.ClientThread() na E:\PAULOZZI_DATA\GitHub\EntityProfiler\src\EntityProfiler.Interceptor.Reader\Protocol\TcpMessageListener.cs:linha 86
+2015-07-31 20:00:11.047 -03:00 [Error] Connecting error, retrying...
+System.Net.Sockets.SocketException (0x80004005): Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente 127.0.0.1:64234
+   em System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   em System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   em System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   em EntityProfiler.Interceptor.Reader.Protocol.TcpClientFactory.CreateTcpClient() na E:\PAULOZZI_DATA\GitHub\EntityProfiler\src\EntityProfiler.Interceptor.Reader\Protocol\TcpClientFactory.cs:linha 13
+   em EntityProfiler.Interceptor.Reader.Protocol.TcpMessageListener.ClientThread() na E:\PAULOZZI_DATA\GitHub\EntityProfiler\src\EntityProfiler.Interceptor.Reader\Protocol\TcpMessageListener.cs:linha 86
+2015-07-31 20:00:18.090 -03:00 [Error] Connecting error, retrying...
+System.Net.Sockets.SocketException (0x80004005): Nenhuma conexão pôde ser feita porque a máquina de destino as recusou ativamente 127.0.0.1:64234
+   em System.Net.Sockets.Socket.DoConnect(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   em System.Net.Sockets.Socket.Connect(EndPoint remoteEP)
+   em System.Net.Sockets.TcpClient.Connect(IPEndPoint remoteEP)
+   em EntityProfiler.Interceptor.Reader.Protocol.TcpClientFactory.CreateTcpClient() na E:\PAULOZZI_DATA\GitHub\EntityProfiler\src\EntityProfiler.Interceptor.Reader\Protocol\TcpClientFactory.cs:linha 13
+   em EntityProfiler.Interceptor.Reader.Protocol.TcpMessageListener.ClientThread() na E:\PAULOZZI_DATA\GitHub\EntityProfiler\src\EntityProfiler.Interceptor.Reader\Protocol\TcpMessageListener.cs:linha 86

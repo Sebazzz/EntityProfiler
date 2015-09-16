@@ -1,0 +1,17 @@
+﻿<Application x:Class="EntityProfiler.Viewer.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:gemini="http://schemas.timjones.tw/gemini"
+             xmlns:viewer="clr-namespace:EntityProfiler.Viewer">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <viewer:AppBootstrapper x:Key="bootstrapper" />
+                    <!--<gemini:AppBootstrapper x:Key="bootstrapper" />-->
+                </ResourceDictionary>
+                <ResourceDictionary Source="Themes/Theme.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

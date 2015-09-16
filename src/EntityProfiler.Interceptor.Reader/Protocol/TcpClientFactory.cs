@@ -1,11 +1,14 @@
-﻿namespace EntityProfiler.Interceptor.Reader.Protocol {
-    using System.Net;
-    using System.Net.Sockets;
-    using Common.Protocol;
+﻿using System.Net;
+using System.Net.Sockets;
+using EntityProfiler.Common.Protocol;
 
-    internal class TcpClientFactory : ITcpClientFactory {
-        public TcpClient CreateTcpClient() {
-            TcpClient client = new TcpClient();
+namespace EntityProfiler.Interceptor.Reader.Protocol
+{
+    internal class TcpClientFactory : ITcpClientFactory
+    {
+        public TcpClient CreateTcpClient()
+        {
+            var client = new TcpClient();
 
             client.Connect(new IPEndPoint(IPAddress.Loopback, Constants.Portnumber));
 

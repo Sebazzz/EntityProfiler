@@ -1,4 +1,6 @@
-﻿namespace EntityProfiler.Common.Protocol {
+﻿using System.ComponentModel;
+
+namespace EntityProfiler.Common.Protocol {
     using System;
     using System.Diagnostics;
     using System.Reflection;
@@ -43,7 +45,7 @@
         /// Gets the file path - if available. If the file path is not available <c>null</c> is returned.
         /// </summary>
         public string FilePath { get; set; }
-
+        
         /// <summary>
         /// Returns a string that represents the current object.
         /// </summary>
