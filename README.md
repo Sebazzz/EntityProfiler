@@ -10,6 +10,9 @@ An initiative for creating an open-source Entity Framework profiler.
 - Duplicate or SELECT 1+N query detection: shows the number of duplicated queries.
 - Stack Trace reduction: removes confusing and unneccesary frames from Entity Framework from the top of the call stack.
 - Works with ASP.NET and desktop apps.
+- Allows to run and view the queries results (inside).
+- Call stack to code navigation. Open in Visual Studio or on the integrated editor.
+- SQL variables replacement to the literal value (with comments).
 
 ## How to use it
 Install the EntityProfiler.Interceptor NuGet package or install manually:
